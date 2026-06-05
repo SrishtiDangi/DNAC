@@ -101,6 +101,8 @@ function Overview() {
                   width: "100%",
                   height: "160px",
                   objectFit: "contain",
+                  padding: "10px",
+                  background: "white",
                   background: "#f8fafc",
                   padding: "12px",
                   display: "block",

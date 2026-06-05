@@ -5,26 +5,34 @@ function CallFlow() {
     { name: "Telecom", bg: "#EAF2F8", size: "15px" },
     { name: "Voice Gateway", bg: "#FDEBD0", size: "15px" },
     { name: "CUCM", bg: "#D6EAF8", size: "16px", weight: "800" },
-    { name: "PBX / IP Phone", bg: "#E8F4F8", size: "14px" },
+    { name: "IP Endpoints", bg: "#E8F4F8", size: "14px" },
     { name: "CMS", bg: "#EDE7F6", size: "14px" },
   ];
 
   return (
     <section style={{ padding: "50px 0" }}>
-
       {/* HEADER */}
       <div
         style={{
           display: "flex",
-          alignItems: "center",
           justifyContent: "center",
-          gap: "10px",
-          marginBottom: "35px",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "14px",
+          marginBottom: "40px",
           color: "#2C3E50",
         }}
       >
         <FaPhoneAlt size={28} />
-        <h2 style={{ fontSize: "26px", fontWeight: "800", letterSpacing: "0.5px" }}>
+
+        <h2
+          style={{
+            fontSize: "26px",
+            fontWeight: "800",
+            letterSpacing: "0.5px",
+            margin: 0,
+          }}
+        >
           Enterprise Call Routing Flow
         </h2>
       </div>
@@ -33,8 +41,10 @@ function CallFlow() {
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
+          justifyContent: "center",
           alignItems: "center",
+          flexWrap: "wrap",
+          gap: "12px",
         }}
       >
         {flow.map((item, index) => (
@@ -42,8 +52,8 @@ function CallFlow() {
             key={index}
             style={{
               display: "flex",
-              flexDirection: "column",
               alignItems: "center",
+              gap: "12px",
             }}
           >
             {/* NODE */}
@@ -51,15 +61,24 @@ function CallFlow() {
               style={{
                 background: item.bg,
                 border: "2px solid rgba(0,0,0,0.08)",
-                padding: "16px 26px",
+                padding: "16px 24px",
                 borderRadius: "16px",
-                minWidth: "240px",
+                minWidth: "180px",
                 textAlign: "center",
                 color: "#2C3E50",
                 fontSize: item.size,
                 fontWeight: item.weight || "600",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
                 transition: "0.3s ease",
+                cursor: "pointer",
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(-4px) scale(1.03)";
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(0px) scale(1)";
               }}
             >
               {item.name}
@@ -67,30 +86,40 @@ function CallFlow() {
 
             {/* ARROW */}
             {index !== flow.length - 1 && (
-              <div className="flowArrow">↓</div>
+              <div className="flowArrow">➜</div>
             )}
           </div>
         ))}
       </div>
 
-      {/* ARROW ANIMATION */}
+      {/* CSS */}
       <style>
         {`
           .flowArrow {
-            font-size: 20px;
+            font-size: 24px;
             color: #2C3E50;
-            margin: 6px 0;
-            animation: flowDown 1.3s infinite ease-in-out;
+            font-weight: bold;
+            animation: slideArrow 1.4s infinite;
           }
 
-          @keyframes flowDown {
-            0% { transform: translateY(-6px); opacity: 0.2; }
-            50% { transform: translateY(4px); opacity: 1; }
-            100% { transform: translateY(10px); opacity: 0.2; }
+          @keyframes slideArrow {
+            0% {
+              transform: translateX(-6px);
+              opacity: 0.3;
+            }
+
+            50% {
+              transform: translateX(6px);
+              opacity: 1;
+            }
+
+            100% {
+              transform: translateX(12px);
+              opacity: 0.3;
+            }
           }
         `}
       </style>
-
     </section>
   );
 }

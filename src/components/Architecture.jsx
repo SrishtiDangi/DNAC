@@ -10,7 +10,13 @@ function Architecture() {
   ];
 
   return (
-    <section style={{ padding: "60px 0" }}>
+    <section
+    style={{
+        padding: "60px 0",
+        position: "relative",
+        overflow: "hidden",
+        }}
+>
 
       {/* HEADER REVEAL */}
       <Reveal>
@@ -59,6 +65,16 @@ function Architecture() {
               boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
             }}
           >
+            <div
+            style={{
+                width: "12px",
+                height: "12px",
+                borderRadius: "50%",
+                background: "#2ECC71",
+                margin: "0 auto 10px",
+                boxShadow: "0 0 10px #2ECC71",
+  }}
+/>
             <FaServer size={40} color="#C0392B" />
 
             <h3 style={{ margin: "10px 0 5px", fontSize: "18px", fontWeight: "800" }}>
@@ -68,6 +84,16 @@ function Architecture() {
             <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
               Database & Configuration
             </p>
+            <div
+            style={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "50%",
+                background: "#2ECC71",
+                margin: "10px auto 0",
+                boxShadow: "0 0 10px #2ECC71",
+                }}
+/>
           </div>
         </Reveal>
 
@@ -112,10 +138,10 @@ function Architecture() {
         <Reveal>
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "12px",
-              alignItems: "center",
+              display: "grid",
+              gridTemplateColumns: "repeat(2, 260px)",
+              gap: "15px",
+              justifyContent: "center",
             }}
           >
             {subscribers.map((s, i) => (
@@ -139,6 +165,25 @@ function Architecture() {
                   e.currentTarget.style.transform = "translateY(0px)";
                 }}
               >
+                <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "10px",
+                    }}
+                >
+                    <FaServer color={s.border} />
+                    <div
+                    style={{
+                        width: "10px",
+                        height: "10px",
+                        borderRadius: "50%",
+                        background: "#2ECC71",
+                        boxShadow: "0 0 8px #2ECC71",
+                    }}
+                    />
+                </div>
                 <h4 style={{ margin: "5px 0", fontSize: "16px", fontWeight: "800", color: "#2C3E50" }}>
                   {s.title}
                 </h4>
