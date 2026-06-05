@@ -29,51 +29,53 @@ function CMS() {
   ];
 
   return (
-    <section style={{ padding: "40px 0" }}>
+    <section style={{ padding: "60px 0" }}>
 
       {/* TITLE */}
       <h2
         style={{
           textAlign: "center",
-          marginBottom: "30px",
+          marginBottom: "40px",
           color: "#2C3E50",
-          fontSize: "24px",
-          fontWeight: "800",
+          fontSize: "26px",
+          fontWeight: "900",
+          letterSpacing: "0.5px",
         }}
       >
         CMS Integration
       </h2>
 
-      {/* GRID WRAPPER */}
+      {/* WRAPPER */}
       <div
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "20px",
+          gap: "25px",
         }}
       >
 
-        {/* TOP ROW (2 CARDS) */}
+        {/* TOP 2 CARDS */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(2, 250px)",
-            gap: "20px",
+            gridTemplateColumns: "repeat(2, 260px)",
+            gap: "25px",
             justifyContent: "center",
           }}
         >
           {features.slice(0, 2).map((item, i) => (
             <div
               key={i}
-              className="card"
               style={{
-                background: item.bg,
+                background: `linear-gradient(135deg, ${item.bg}, #ffffff)`,
                 border: `2px solid ${item.border}`,
-                borderRadius: "14px",
-                padding: "20px",
+                borderRadius: "16px",
+                padding: "22px",
                 textAlign: "center",
-                boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+                boxShadow: "0 10px 22px rgba(0,0,0,0.08)",
+                transition: "0.3s ease",
+                cursor: "pointer",
               }}
             >
               <div style={{ color: item.color, marginBottom: "10px" }}>
@@ -82,10 +84,10 @@ function CMS() {
 
               <h3
                 style={{
-                  marginBottom: "8px",
+                  marginBottom: "6px",
                   color: item.color,
                   fontSize: "18px",
-                  fontWeight: "700",
+                  fontWeight: "800",
                 }}
               >
                 {item.title}
@@ -98,17 +100,18 @@ function CMS() {
           ))}
         </div>
 
-        {/* BOTTOM CENTER CARD */}
+        {/* CENTER BOTTOM CARD */}
         <div
-          className="card"
           style={{
-            background: features[2].bg,
+            background: `linear-gradient(135deg, ${features[2].bg}, #ffffff)`,
             border: `2px solid ${features[2].border}`,
-            borderRadius: "14px",
-            padding: "20px",
+            borderRadius: "16px",
+            padding: "24px",
             textAlign: "center",
-            boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
-            width: "250px",
+            boxShadow: "0 10px 22px rgba(0,0,0,0.08)",
+            width: "260px",
+            transition: "0.3s ease",
+            cursor: "pointer",
           }}
         >
           <div style={{ color: features[2].color, marginBottom: "10px" }}>
@@ -117,10 +120,10 @@ function CMS() {
 
           <h3
             style={{
-              marginBottom: "8px",
+              marginBottom: "6px",
               color: features[2].color,
               fontSize: "18px",
-              fontWeight: "700",
+              fontWeight: "800",
             }}
           >
             {features[2].title}

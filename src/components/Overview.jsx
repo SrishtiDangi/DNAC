@@ -56,6 +56,7 @@ function Overview() {
           gap: "10px",
           marginBottom: "30px",
           color: "#34495E",
+          textAlign: "center",
         }}
       >
         <FaCloud size={28} />
@@ -73,6 +74,7 @@ function Overview() {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
           gap: "20px",
+          textAlign: "center",
         }}
       >
         {services.map((item, i) => (
@@ -97,8 +99,10 @@ function Overview() {
                 alt={item.title}
                 style={{
                   width: "100%",
-                  height: "140px",
-                  objectFit: "cover",
+                  height: "160px",
+                  objectFit: "contain",
+                  background: "#f8fafc",
+                  padding: "12px",
                   display: "block",
                 }}
               />
@@ -111,6 +115,7 @@ function Overview() {
                   left: 0,
                   width: "100%",
                   height: "20px",
+                  borderRadius: "0 0 14px 14px",
                   background: "linear-gradient(to bottom, transparent, #fff)",
                 }}
               />

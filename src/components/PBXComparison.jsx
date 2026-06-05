@@ -3,48 +3,56 @@ import { FaPhone, FaCloud } from "react-icons/fa";
 
 function PBXComparison() {
   return (
-    <section style={{ padding: "50px 0" }}>
+    <section style={{ padding: "60px 0" }}>
+
       {/* HEADER */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "10px",
-          marginBottom: "35px",
+          marginBottom: "40px",
           color: "#34495E",
         }}
       >
-        <h2 style={{ fontSize: "24px", fontWeight: "800" }}>
+        <h2 style={{ fontSize: "26px", fontWeight: "900" }}>
           PBX vs CUCM
         </h2>
       </div>
 
-      {/* CARDS */}
+      {/* WRAPPER */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "30px",
+          gap: "35px",
           flexWrap: "wrap",
         }}
       >
+
         {/* PBX */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           style={{
-            width: "340px",
+            width: "350px",
             background: "#FDEBD0",
-            borderRadius: "16px",
-            padding: "25px",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+            borderRadius: "18px",
+            padding: "28px",
+            boxShadow: "0 12px 28px rgba(0,0,0,0.10)",
             border: "2px solid #F5CBA7",
             textAlign: "center",
           }}
         >
-          <FaPhone size={40} color="#B9770E" />
+          <FaPhone size={42} color="#B9770E" />
 
-          <h3 style={{ margin: "12px 0", color: "#7E5109", fontSize: "20px" }}>
+          <h3
+            style={{
+              margin: "14px 0 18px 0",
+              color: "#7E5109",
+              fontSize: "20px",
+              fontWeight: "800",
+            }}
+          >
             Traditional PBX
           </h3>
 
@@ -59,12 +67,13 @@ function PBXComparison() {
               <div
                 key={i}
                 style={{
-                  background: "rgba(255,255,255,0.7)",
-                  padding: "10px",
-                  borderRadius: "10px",
+                  background: "rgba(255,255,255,0.75)",
+                  padding: "11px",
+                  borderRadius: "12px",
                   fontSize: "14px",
                   color: "#5D4037",
                   border: "1px solid #F5CBA7",
+                  fontWeight: "500",
                 }}
               >
                 {t}
@@ -77,18 +86,25 @@ function PBXComparison() {
         <motion.div
           whileHover={{ scale: 1.05 }}
           style={{
-            width: "340px",
+            width: "350px",
             background: "#D6EAF8",
-            borderRadius: "16px",
-            padding: "25px",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+            borderRadius: "18px",
+            padding: "28px",
+            boxShadow: "0 12px 28px rgba(0,0,0,0.10)",
             border: "2px solid #85C1E9",
             textAlign: "center",
           }}
         >
-          <FaCloud size={40} color="#1B4F72" />
+          <FaCloud size={42} color="#1B4F72" />
 
-          <h3 style={{ margin: "12px 0", color: "#1B4F72", fontSize: "20px" }}>
+          <h3
+            style={{
+              margin: "14px 0 18px 0",
+              color: "#1B4F72",
+              fontSize: "20px",
+              fontWeight: "800",
+            }}
+          >
             CUCM
           </h3>
 
@@ -103,12 +119,13 @@ function PBXComparison() {
               <div
                 key={i}
                 style={{
-                  background: "rgba(255,255,255,0.7)",
-                  padding: "10px",
-                  borderRadius: "10px",
+                  background: "rgba(255,255,255,0.75)",
+                  padding: "11px",
+                  borderRadius: "12px",
                   fontSize: "14px",
                   color: "#1B4F72",
                   border: "1px solid #85C1E9",
+                  fontWeight: "500",
                 }}
               >
                 {t}
@@ -116,6 +133,7 @@ function PBXComparison() {
             ))}
           </div>
         </motion.div>
+
       </div>
     </section>
   );

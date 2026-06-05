@@ -7,14 +7,12 @@ import CallFlow from "./components/CallFlow";
 import PBXComparison from "./components/PBXComparison";
 import Advantages from "./components/Advantages";
 import Footer from "./components/Footer";
-import Stats from "./components/Stats";
 import CMS from "./components/CMS";
 function App() {
   return (
     <>
       <Navbar />
       <Hero />
-      <Stats />
       <Overview />
       <Architecture />
       <RackOverview />

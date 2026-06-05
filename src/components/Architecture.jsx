@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import { FaNetworkWired, FaServer } from "react-icons/fa";
 
 function Architecture() {
@@ -9,119 +10,146 @@ function Architecture() {
   ];
 
   return (
-    <section style={{ padding: "40px 0" }}>
+    <section style={{ padding: "60px 0" }}>
 
-      {/* HEADER */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "10px",
-          marginBottom: "30px",
-          color: "#34495E",
-        }}
-      >
-        <FaNetworkWired size={28} />
-        <h2 style={{ fontSize: "22px", fontWeight: "800" }}>
-          Enterprise Cluster Architecture
-        </h2>
-      </div>
-
-      {/* MAIN WRAPPER (IMPORTANT FIX) */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-
-        {/* PUBLISHER */}
+      {/* HEADER REVEAL */}
+      <Reveal>
         <div
-          className="card"
           style={{
-            background: "#FADBD8",
-            border: "2px solid #C0392B",
-            textAlign: "center",
-            width: "270px",
-            padding: "14px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+            marginBottom: "40px",
+            color: "#2C3E50",
           }}
         >
-          <FaServer size={38} color="#C0392B" />
-          <h3 style={{ margin: "8px 0", fontSize: "18px" }}>
-            Publisher Server
-          </h3>
-          <p style={{ margin: 0, fontSize: "14px", color: "#555" }}>
-            Database & Configuration
-          </p>
-        </div>
+          <div
+            style={{
+              background: "#EAF2F8",
+              padding: "10px",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <FaNetworkWired size={22} />
+          </div>
 
-        {/* ARROW */}
+          <h2 style={{ fontSize: "24px", fontWeight: "900" }}>
+            Enterprise Cluster Architecture
+          </h2>
+        </div>
+      </Reveal>
+
+      {/* WRAPPER */}
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+
+        {/* PUBLISHER */}
+        <Reveal>
+          <div
+            style={{
+              width: "280px",
+              padding: "18px",
+              borderRadius: "16px",
+              textAlign: "center",
+              background: "linear-gradient(135deg, #FADBD8, #fff)",
+              border: "2px solid #C0392B",
+              boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+            }}
+          >
+            <FaServer size={40} color="#C0392B" />
+
+            <h3 style={{ margin: "10px 0 5px", fontSize: "18px", fontWeight: "800" }}>
+              Publisher Server
+            </h3>
+
+            <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
+              Database & Configuration
+            </p>
+          </div>
+        </Reveal>
+
         <div className="flowLine">↓</div>
 
         {/* INFRA */}
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            margin: "10px 0",
-          }}
-        >
-          {["MOH 1", "MOH 2", "TFTP 1", "TFTP 2"].map((t, i) => (
-            <div
-              key={i}
-              className="card"
-              style={{
-                background: "#FDEBD0",
-                border: "2px solid #B9770E",
-                width: "160px",
-                textAlign: "center",
-                padding: "12px",
-              }}
-            >
-              <h4 style={{ margin: "5px 0", fontSize: "15px", color: "#7E5109" }}>
+        <Reveal>
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              margin: "10px 0",
+            }}
+          >
+            {["MOH 1", "MOH 2", "TFTP 1", "TFTP 2"].map((t, i) => (
+              <div
+                key={i}
+                style={{
+                  width: "150px",
+                  padding: "12px",
+                  borderRadius: "14px",
+                  textAlign: "center",
+                  background: "#FDEBD0",
+                  border: "2px solid #B9770E",
+                  boxShadow: "0 6px 15px rgba(0,0,0,0.05)",
+                  fontSize: "14px",
+                  fontWeight: "600",
+                  color: "#7E5109",
+                }}
+              >
                 {t}
-              </h4>
-            </div>
-          ))}
-        </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
 
-        {/* ARROW */}
         <div className="flowLine">↓</div>
 
         {/* SUBSCRIBERS */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-            alignItems: "center",
-          }}
-        >
-          {subscribers.map((s, i) => (
-            <div
-              key={i}
-              className="card"
-              style={{
-                background: s.color,
-                border: `2px solid ${s.border}`,
-                width: "240px",
-                textAlign: "center",
-                padding: "14px",
-              }}
-            >
-              <h4 style={{ margin: "5px 0", fontSize: "16px", color: "#1B4F72" }}>
-                {s.title}
-              </h4>
-              <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
-                {s.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+        <Reveal>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "12px",
+              alignItems: "center",
+            }}
+          >
+            {subscribers.map((s, i) => (
+              <div
+                key={i}
+                style={{
+                  width: "260px",
+                  padding: "14px",
+                  borderRadius: "14px",
+                  textAlign: "center",
+                  background: `linear-gradient(135deg, ${s.color}, #fff)`,
+                  border: `2px solid ${s.border}`,
+                  boxShadow: "0 8px 18px rgba(0,0,0,0.06)",
+                  transition: "0.3s",
+                  cursor: "pointer",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.transform = "translateY(-5px)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.transform = "translateY(0px)";
+                }}
+              >
+                <h4 style={{ margin: "5px 0", fontSize: "16px", fontWeight: "800", color: "#2C3E50" }}>
+                  {s.title}
+                </h4>
+
+                <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
+                  {s.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
 
       </div>
 
@@ -129,15 +157,15 @@ function Architecture() {
       <style>
         {`
           .flowLine {
-            font-size: 20px;
-            color: #1B4F72;
-            margin: 10px 0;
+            font-size: 22px;
+            color: #2C3E50;
+            margin: 12px 0;
             animation: move 1.2s infinite ease-in-out;
           }
 
           @keyframes move {
-            0%   { transform: translateY(-4px); opacity: 0.3; }
-            50%  { transform: translateY(6px); opacity: 1; }
+            0% { transform: translateY(-4px); opacity: 0.3; }
+            50% { transform: translateY(6px); opacity: 1; }
             100% { transform: translateY(12px); opacity: 0.3; }
           }
         `}

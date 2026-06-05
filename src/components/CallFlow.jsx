@@ -10,21 +10,21 @@ function CallFlow() {
   ];
 
   return (
-    <section id="callflow" style={{ padding: "40px 0" }}>
+    <section style={{ padding: "50px 0" }}>
 
-      {/* TITLE */}
+      {/* HEADER */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           gap: "10px",
-          marginBottom: "30px",
-          color: "#34495E",
+          marginBottom: "35px",
+          color: "#2C3E50",
         }}
       >
-        <FaPhoneAlt size={30} />
-        <h2 style={{ fontSize: "24px", fontWeight: "800" }}>
+        <FaPhoneAlt size={28} />
+        <h2 style={{ fontSize: "26px", fontWeight: "800", letterSpacing: "0.5px" }}>
           Enterprise Call Routing Flow
         </h2>
       </div>
@@ -35,7 +35,6 @@ function CallFlow() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "12px",
         }}
       >
         {flow.map((item, index) => (
@@ -45,22 +44,22 @@ function CallFlow() {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: "10px",
             }}
           >
             {/* NODE */}
             <div
               style={{
                 background: item.bg,
-                border: "1px solid #D5DBDB",
-                padding: "16px 22px",
-                borderRadius: "14px",
-                minWidth: "220px",
+                border: "2px solid rgba(0,0,0,0.08)",
+                padding: "16px 26px",
+                borderRadius: "16px",
+                minWidth: "240px",
                 textAlign: "center",
                 color: "#2C3E50",
                 fontSize: item.size,
                 fontWeight: item.weight || "600",
-                boxShadow: "0 6px 15px rgba(0,0,0,0.08)",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+                transition: "0.3s ease",
               }}
             >
               {item.name}
@@ -78,15 +77,16 @@ function CallFlow() {
       <style>
         {`
           .flowArrow {
-            font-size: 18px;
+            font-size: 20px;
             color: #2C3E50;
-            animation: moveDown 1.2s infinite ease-in-out;
+            margin: 6px 0;
+            animation: flowDown 1.3s infinite ease-in-out;
           }
 
-          @keyframes moveDown {
-            0% { transform: translateY(-5px); opacity: 0.3; }
-            50% { transform: translateY(5px); opacity: 1; }
-            100% { transform: translateY(10px); opacity: 0.3; }
+          @keyframes flowDown {
+            0% { transform: translateY(-6px); opacity: 0.2; }
+            50% { transform: translateY(4px); opacity: 1; }
+            100% { transform: translateY(10px); opacity: 0.2; }
           }
         `}
       </style>

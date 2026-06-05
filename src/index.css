@@ -112,3 +112,11 @@ ul{
 li{
   margin-bottom:10px;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 90px;
+}
