@@ -11,6 +11,7 @@ function Architecture() {
 
   return (
     <section
+    id="architecture"
     style={{
         padding: "60px 0",
         position: "relative",

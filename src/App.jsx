@@ -14,6 +14,12 @@ import Footer from "./components/Footer";
 import CMS from "./components/CMS";
 import ClassOfService from "./components/ClassOfService";
 import Troubleshooting from "./components/Troubleshooting";
+import Ecosystem from "./components/Ecosystem";
+import GatewayPSTN from "./components/GatewayPSTN";
+import Security from "./components/Security";
+import Mobility from "./components/Mobility";
+import MediaResources from "./components/MediaResources";
+import HighAvailability from "./components/HighAvailibilty";
 
 function App() {
   return (
@@ -21,20 +27,26 @@ function App() {
       <Navbar />
       <Hero />
       <Overview />
+      <Ecosystem />
       <Architecture />
-      <RackOverview />
+      <GatewayPSTN />
+      <PhoneRegistration />
       <CallFlow />
-      <CMS/>
-      <PBXComparison />
-      <Advantages />
-      <Protocols />
-      <PhoneRegistration/>
       <DialPlan />
+      <RackOverview />
+      <CMS />
+      <PBXComparison />
+      <Protocols />
       <CodecQoS />
+      <MediaResources />
+      <Security />
+      <HighAvailability />
+      <Mobility />
       <ClassOfService />
       <Troubleshooting />
+      <Advantages />
       <Footer />
-    </>
+      </>
   );
 }
 

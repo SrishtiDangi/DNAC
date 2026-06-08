@@ -22,10 +22,24 @@ function Advantages() {
     },
   ];
 
+  const baseStyle = {
+    width: "240px",
+    padding: "24px 18px",
+    borderRadius: "16px",
+    textAlign: "center",
+    transition: "0.25s ease",
+    cursor: "pointer",
+    transform: "translateY(0)",
+    boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
+  };
+
+  const hoverStyle = {
+    transform: "translateY(-8px)",
+    boxShadow: "0 18px 35px rgba(0,0,0,0.15)",
+  };
+
   return (
-    <section style={{ padding: "60px 0" }}>
-      
-      {/* REVEAL WRAPPER ONLY FOR CONTENT */}
+    <section id="advantages" style={{ padding: "60px 0" }}>
       <Reveal>
         <h2
           style={{
@@ -51,13 +65,18 @@ function Advantages() {
             <div
               key={i}
               style={{
-                width: "240px",
-                padding: "24px 18px",
-                borderRadius: "16px",
+                ...baseStyle,
                 background: `linear-gradient(135deg, ${item.color}, #ffffff)`,
                 border: `2px solid ${item.border}`,
-                textAlign: "center",
-                transition: "0.3s",
+              }}
+              onMouseEnter={(e) => {
+                Object.assign(e.currentTarget.style, hoverStyle);
+              }}
+              onMouseLeave={(e) => {
+                Object.assign(e.currentTarget.style, baseStyle, {
+                  background: `linear-gradient(135deg, ${item.color}, #ffffff)`,
+                  border: `2px solid ${item.border}`,
+                });
               }}
             >
               <h3 style={{ fontSize: "18px", fontWeight: "800" }}>
@@ -70,7 +89,6 @@ function Advantages() {
           ))}
         </div>
       </Reveal>
-
     </section>
   );
 }

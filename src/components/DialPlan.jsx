@@ -1,5 +1,10 @@
 import Reveal from "./Reveal";
-import { FaRoute, FaPhoneAlt, FaSearch, FaProjectDiagram } from "react-icons/fa";
+import {
+  FaRoute,
+  FaPhoneAlt,
+  FaSearch,
+  FaProjectDiagram,
+} from "react-icons/fa";
 
 function DialPlan() {
   const flow = [
@@ -13,31 +18,16 @@ function DialPlan() {
   ];
 
   const wildcards = [
-    {
-      wildcard: "X",
-      match: "Any digit (0-9)",
-      example: "9XXX",
-    },
-    {
-      wildcard: "!",
-      match: "One or more digits",
-      example: "9!",
-    },
-    {
-      wildcard: "[x-y]",
-      match: "Digit range",
-      example: "[2-5]XXX",
-    },
-    {
-      wildcard: "@",
-      match: "North American Pattern",
-      example: "@",
-    },
+    { wildcard: "X", match: "Any digit (0-9)", example: "9XXX" },
+    { wildcard: "!", match: "One or more digits", example: "9!" },
+    { wildcard: "[x-y]", match: "Digit range", example: "[2-5]XXX" },
+    { wildcard: "@", match: "North American Pattern", example: "@" },
   ];
 
   return (
     <Reveal>
-      <section style={{ padding: "60px 0" }}>
+      <section style={{ padding: "60px 0" }} id="dial-plan">
+
         {/* HEADER */}
         <div
           style={{
@@ -50,13 +40,7 @@ function DialPlan() {
           }}
         >
           <FaRoute size={26} />
-          <h2
-            style={{
-              fontSize: "26px",
-              fontWeight: "900",
-              margin: 0,
-            }}
-          >
+          <h2 style={{ fontSize: "26px", fontWeight: "900", margin: 0 }}>
             Dial Plan & Call Routing Logic
           </h2>
         </div>
@@ -75,43 +59,19 @@ function DialPlan() {
           {flow.map((step, index) => (
             <div
               key={index}
-              style={{
-                display: "flex",
-                alignItems: "center",
-              }}
+              className="flowItem"
+              style={{ display: "flex", alignItems: "center" }}
             >
-              <div
-                style={{
-                  background: "#D6EAF8",
-                  border: "2px solid #85C1E9",
-                  padding: "14px 18px",
-                  borderRadius: "14px",
-                  minWidth: "120px",
-                  textAlign: "center",
-                  fontWeight: "700",
-                  color: "#2C3E50",
-                  boxShadow: "0 8px 18px rgba(0,0,0,0.08)",
-                }}
-              >
-                {step}
-              </div>
+              <div className="flowBox">{step}</div>
 
               {index !== flow.length - 1 && (
-                <div
-                  style={{
-                    fontSize: "24px",
-                    margin: "0 6px",
-                    color: "#34495E",
-                  }}
-                >
-                  →
-                </div>
+                <div className="arrow">→</div>
               )}
             </div>
           ))}
         </div>
 
-        {/* CSS VS PARTITION */}
+        {/* PARTITION + CSS */}
         <div
           style={{
             display: "flex",
@@ -122,33 +82,13 @@ function DialPlan() {
           }}
         >
           {/* PARTITION */}
-          <div
-            style={{
-              width: "320px",
-              background: "linear-gradient(135deg,#FADBD8,#fff)",
-              border: "2px solid #E6B0AA",
-              borderRadius: "18px",
-              padding: "20px",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
-            }}
-          >
+          <div className="card partition">
             <FaPhoneAlt size={28} color="#C0392B" />
 
-            <h3
-              style={{
-                marginTop: "12px",
-                marginBottom: "10px",
-                color: "#2C3E50",
-              }}
-            >
-              Partition
-            </h3>
+            <h3>Partition</h3>
+            <p>Defines WHAT numbers exist in CUCM.</p>
 
-            <p style={{ color: "#555" }}>
-              Defines WHAT numbers exist in CUCM.
-            </p>
-
-            <ul style={{ marginTop: "12px" }}>
+            <ul>
               <li>Internal Extensions</li>
               <li>Emergency Numbers</li>
               <li>Support Numbers</li>
@@ -156,33 +96,13 @@ function DialPlan() {
           </div>
 
           {/* CSS */}
-          <div
-            style={{
-              width: "320px",
-              background: "linear-gradient(135deg,#D5F5E3,#fff)",
-              border: "2px solid #82E0AA",
-              borderRadius: "18px",
-              padding: "20px",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
-            }}
-          >
+          <div className="card css">
             <FaSearch size={28} color="#1E8449" />
 
-            <h3
-              style={{
-                marginTop: "12px",
-                marginBottom: "10px",
-                color: "#2C3E50",
-              }}
-            >
-              Calling Search Space (CSS)
-            </h3>
+            <h3>Calling Search Space (CSS)</h3>
+            <p>Defines WHERE a device is allowed to call.</p>
 
-            <p style={{ color: "#555" }}>
-              Defines WHERE a device is allowed to call.
-            </p>
-
-            <ul style={{ marginTop: "12px" }}>
+            <ul>
               <li>Employee CSS</li>
               <li>Manager CSS</li>
               <li>Executive CSS</li>
@@ -191,100 +111,172 @@ function DialPlan() {
         </div>
 
         {/* NOTE */}
-        <div
-          style={{
-            maxWidth: "700px",
-            margin: "0 auto 50px",
-            background: "#E8DAEF",
-            border: "2px solid #D2B4DE",
-            padding: "18px",
-            borderRadius: "16px",
-            textAlign: "center",
-            fontWeight: "700",
-            color: "#4A235A",
-          }}
-        >
+        <div className="note">
           Partition = WHAT numbers exist <br />
           CSS = WHERE a device can call
         </div>
 
-        {/* WILDCARD TABLE */}
-        <div
-          style={{
-            background: "#fff",
-            borderRadius: "20px",
-            overflow: "hidden",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
-          }}
-        >
-          <div
-            style={{
-              padding: "18px",
-              background: "#D6EAF8",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
-          >
+        {/* TABLE */}
+        <div className="tableBox">
+          <div className="tableHeader">
             <FaProjectDiagram />
-            <h3 style={{ margin: 0 }}>
-              CUCM Route Pattern Wildcards
-            </h3>
+            <h3>CUCM Route Pattern Wildcards</h3>
           </div>
 
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
+          <table>
             <thead>
-              <tr
-                style={{
-                  background: "#F8F9FA",
-                }}
-              >
-                <th style={{ padding: "14px" }}>Wildcard</th>
-                <th style={{ padding: "14px" }}>Matches</th>
-                <th style={{ padding: "14px" }}>Example</th>
+              <tr>
+                <th>Wildcard</th>
+                <th>Matches</th>
+                <th>Example</th>
               </tr>
             </thead>
 
             <tbody>
               {wildcards.map((item, index) => (
                 <tr key={index}>
-                  <td
-                    style={{
-                      padding: "14px",
-                      textAlign: "center",
-                      fontWeight: "800",
-                    }}
-                  >
-                    {item.wildcard}
-                  </td>
-
-                  <td
-                    style={{
-                      padding: "14px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.match}
-                  </td>
-
-                  <td
-                    style={{
-                      padding: "14px",
-                      textAlign: "center",
-                    }}
-                  >
-                    {item.example}
-                  </td>
+                  <td>{item.wildcard}</td>
+                  <td>{item.match}</td>
+                  <td>{item.example}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        {/* STYLE */}
+        <style>{`
+          
+          /* FLOW ANIMATION */
+          .flowBox {
+            background: #D6EAF8;
+            border: 2px solid #85C1E9;
+            padding: 14px 18px;
+            border-radius: 14px;
+            min-width: 120px;
+            text-align: center;
+            font-weight: 700;
+            color: #2C3E50;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+          }
+
+          .flowBox:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+          }
+
+          .arrow {
+            font-size: 24px;
+            margin: 0 6px;
+            color: #34495E;
+            animation: move 1.2s infinite ease-in-out;
+          }
+
+          @keyframes move {
+            0% { transform: translateX(-4px); opacity: 0.5; }
+            50% { transform: translateX(4px); opacity: 1; }
+            100% { transform: translateX(8px); opacity: 0.5; }
+          }
+
+          /* CARDS */
+          .card {
+            width: 320px;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+          }
+
+          .card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+          }
+
+          .partition {
+            background: linear-gradient(135deg,#FADBD8,#fff);
+            border: 2px solid #E6B0AA;
+          }
+
+          .css {
+            background: linear-gradient(135deg,#D5F5E3,#fff);
+            border: 2px solid #82E0AA;
+          }
+
+          .card h3 {
+            margin: 12px 0 10px;
+            color: #2C3E50;
+          }
+
+          .card p {
+            color: #555;
+          }
+
+          .card ul {
+            margin-top: 12px;
+          }
+
+          /* NOTE */
+          .note {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            background: #E8DAEF;
+            border: 2px solid #D2B4DE;
+            padding: 18px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 700;
+            color: #4A235A;
+            transition: 0.3s;
+          }
+
+          .note:hover {
+            transform: scale(1.02);
+          }
+
+          /* TABLE */
+          .tableBox {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+          }
+
+          .tableHeader {
+            padding: 18px;
+            background: #D6EAF8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+
+          thead tr {
+            background: #F8F9FA;
+          }
+
+          td, th {
+            padding: 14px;
+            text-align: center;
+          }
+
+          tbody tr {
+            transition: 0.3s;
+          }
+
+          tbody tr:hover {
+            background: #F2F3F4;
+            transform: scale(1.01);
+          }
+
+        `}</style>
+
       </section>
     </Reveal>
   );

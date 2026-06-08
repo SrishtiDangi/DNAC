@@ -13,20 +13,33 @@ function RackComparison() {
     boxShadow: "0 10px 25px rgba(0,0,0,0.10)",
     border: `2px solid ${border}`,
     textAlign: "center",
+    transition: "0.25s ease",
+    cursor: "pointer",
   });
 
-  const tagStyle = (border) => ({
-    fontSize: "12px",
-    padding: "6px 10px",
-    borderRadius: "20px",
-    background: "rgba(255,255,255,0.8)",
-    border: `1px solid ${border}`,
-  });
+  const container = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
 
   return (
-    <section style={{ padding: "50px 0" }}>
+    <section style={{ padding: "50px 0" }} id="rack-overview">
 
-      {/* HEADER (UNIFIED STYLE) */}
+      {/* HEADER */}
       <div
         style={{
           display: "flex",
@@ -44,7 +57,11 @@ function RackComparison() {
       </div>
 
       {/* MAIN */}
-      <div
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         style={{
           display: "flex",
           justifyContent: "center",
@@ -56,8 +73,18 @@ function RackComparison() {
 
         {/* RACK A */}
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          variants={item}
           style={cardStyle("#FDEBD0", "#F5CBA7")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-8px) scale(1.03)";
+            e.currentTarget.style.boxShadow =
+              "0 18px 40px rgba(0,0,0,0.18)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0) scale(1)";
+            e.currentTarget.style.boxShadow =
+              "0 10px 25px rgba(0,0,0,0.10)";
+          }}
         >
           <FaServer size={38} color="#B9770E" />
 
@@ -87,7 +114,16 @@ function RackComparison() {
             }}
           >
             {rackA.map((item, i) => (
-              <span key={i} style={tagStyle("#F5CBA7")}>
+              <span
+                key={i}
+                style={{
+                  fontSize: "12px",
+                  padding: "6px 10px",
+                  borderRadius: "20px",
+                  background: "rgba(255,255,255,0.8)",
+                  border: "1px solid #F5CBA7",
+                }}
+              >
                 {item}
               </span>
             ))}
@@ -113,8 +149,18 @@ function RackComparison() {
 
         {/* RACK B */}
         <motion.div
-          whileHover={{ scale: 1.05 }}
+          variants={item}
           style={cardStyle("#D6EAF8", "#85C1E9")}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "translateY(-8px) scale(1.03)";
+            e.currentTarget.style.boxShadow =
+              "0 18px 40px rgba(0,0,0,0.18)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "translateY(0) scale(1)";
+            e.currentTarget.style.boxShadow =
+              "0 10px 25px rgba(0,0,0,0.10)";
+          }}
         >
           <FaServer size={38} color="#1F618D" />
 
@@ -144,14 +190,23 @@ function RackComparison() {
             }}
           >
             {rackB.map((item, i) => (
-              <span key={i} style={tagStyle("#85C1E9")}>
+              <span
+                key={i}
+                style={{
+                  fontSize: "12px",
+                  padding: "6px 10px",
+                  borderRadius: "20px",
+                  background: "rgba(255,255,255,0.8)",
+                  border: "1px solid #85C1E9",
+                }}
+              >
                 {item}
               </span>
             ))}
           </div>
         </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

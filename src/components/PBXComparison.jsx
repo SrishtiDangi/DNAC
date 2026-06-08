@@ -3,7 +3,10 @@ import { FaPhone, FaCloud } from "react-icons/fa";
 
 function PBXComparison() {
   return (
-    <section style={{ padding: "60px 0" }}>
+    <section 
+      style={{ padding: "60px 0" }}
+      id="pbx-comparison"
+    >
 
       {/* HEADER */}
       <div

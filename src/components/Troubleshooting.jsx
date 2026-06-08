@@ -21,7 +21,7 @@ function Troubleshooting() {
 
   return (
     <Reveal>
-      <section style={{ padding: "60px 0" }}>
+      <section style={{ padding: "60px 0" }} id="troubleshooting">
 
         {/* HEADER */}
         <div

@@ -63,7 +63,7 @@ function PhoneRegistration() {
 
   return (
     <Reveal>
-      <section style={{ padding: "60px 0" }}>
+      <section style={{ padding: "60px 0" }} id="phone-registration">
         {/* HEADER */}
         <div
           style={{
@@ -81,16 +81,7 @@ function PhoneRegistration() {
             IP Phone Registration Flow
           </h2>
 
-          <p
-            style={{
-              color: "#5D6D7E",
-              maxWidth: "700px",
-              margin: "10px auto 0",
-            }}
-          >
-            Complete CUCM phone registration process from boot-up
-            to successful endpoint registration.
-          </p>
+          
         </div>
 
         {/* FLOW */}
@@ -112,6 +103,7 @@ function PhoneRegistration() {
               }}
             >
               <div
+                className="regCard"
                 style={{
                   width: "140px",
                   minHeight: "140px",
@@ -173,6 +165,16 @@ function PhoneRegistration() {
             </div>
           ))}
         </div>
+
+        {/* ONLY HOVER CSS */}
+        <style>
+          {`
+            .regCard:hover {
+              transform: translateY(-10px) scale(1.05);
+              box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+            }
+          `}
+        </style>
       </section>
     </Reveal>
   );

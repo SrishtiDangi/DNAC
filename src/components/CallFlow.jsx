@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 
 function CallFlow() {
@@ -9,15 +10,39 @@ function CallFlow() {
     { name: "CMS", bg: "#EDE7F6", size: "14px" },
   ];
 
+  const ref = useRef([]);
+  const [visible, setVisible] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = entry.target.getAttribute("data-index");
+
+          if (entry.isIntersecting) {
+            setVisible((prev) => [...new Set([...prev, Number(index)])]);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    ref.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section style={{ padding: "50px 0" }}>
+    <section id="call-flow" style={{ padding: "50px 0" }}>
+
       {/* HEADER */}
       <div
         style={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          flexWrap: "wrap",
           gap: "14px",
           marginBottom: "40px",
           color: "#2C3E50",
@@ -29,7 +54,6 @@ function CallFlow() {
           style={{
             fontSize: "26px",
             fontWeight: "800",
-            letterSpacing: "0.5px",
             margin: 0,
           }}
         >
@@ -50,17 +74,27 @@ function CallFlow() {
         {flow.map((item, index) => (
           <div
             key={index}
+            data-index={index}
+            ref={(el) => (ref.current[index] = el)}
             style={{
               display: "flex",
               alignItems: "center",
               gap: "12px",
+
+              // 🍏 APPLE STYLE ANIMATION
+              opacity: visible.includes(index) ? 1 : 0,
+              transform: visible.includes(index)
+                ? "translateY(0px) scale(1)"
+                : "translateY(25px) scale(0.96)",
+
+              transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
             }}
           >
             {/* NODE */}
             <div
               style={{
                 background: item.bg,
-                border: "2px solid rgba(0,0,0,0.08)",
+                border: "1.5px solid rgba(0,0,0,0.08)",
                 padding: "16px 24px",
                 borderRadius: "16px",
                 minWidth: "180px",
@@ -68,17 +102,8 @@ function CallFlow() {
                 color: "#2C3E50",
                 fontSize: item.size,
                 fontWeight: item.weight || "600",
-                boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
-                transition: "0.3s ease",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.06)",
                 cursor: "pointer",
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(-4px) scale(1.03)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(0px) scale(1)";
               }}
             >
               {item.name}
@@ -86,40 +111,31 @@ function CallFlow() {
 
             {/* ARROW */}
             {index !== flow.length - 1 && (
-              <div className="flowArrow">➜</div>
+              <div
+                style={{
+                  fontSize: "22px",
+                  color: "#2C3E50",
+                  animation: "bounceArrow 1.2s infinite",
+                }}
+              >
+                ➜
+              </div>
             )}
           </div>
         ))}
       </div>
 
-      {/* CSS */}
+      {/* ARROW ANIMATION */}
       <style>
         {`
-          .flowArrow {
-            font-size: 24px;
-            color: #2C3E50;
-            font-weight: bold;
-            animation: slideArrow 1.4s infinite;
-          }
-
-          @keyframes slideArrow {
-            0% {
-              transform: translateX(-6px);
-              opacity: 0.3;
-            }
-
-            50% {
-              transform: translateX(6px);
-              opacity: 1;
-            }
-
-            100% {
-              transform: translateX(12px);
-              opacity: 0.3;
-            }
+          @keyframes bounceArrow {
+            0% { transform: translateX(-4px); opacity: 0.4; }
+            50% { transform: translateX(6px); opacity: 1; }
+            100% { transform: translateX(10px); opacity: 0.4; }
           }
         `}
       </style>
+
     </section>
   );
 }

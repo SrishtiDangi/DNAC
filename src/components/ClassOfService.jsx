@@ -11,7 +11,9 @@ function ClassOfService() {
 
   return (
     <Reveal>
-      <section style={{ padding: "60px 0" }}>
+      <section 
+      id="class-of-service"
+      style={{ padding: "60px 0" }}>
         
         <div
           style={{

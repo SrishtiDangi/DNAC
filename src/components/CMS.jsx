@@ -28,8 +28,18 @@ function CMS() {
     },
   ];
 
+  const base = {
+    transform: "translateY(0) scale(1)",
+    boxShadow: "0 10px 22px rgba(0,0,0,0.08)",
+  };
+
+  const hover = {
+    transform: "translateY(-10px) scale(1.05)",
+    boxShadow: "0 18px 40px rgba(0,0,0,0.18)",
+  };
+
   return (
-    <section style={{ padding: "60px 0" }}>
+    <section style={{ padding: "60px 0" }} id="cms">
 
       {/* TITLE */}
       <h2
@@ -39,13 +49,11 @@ function CMS() {
           color: "#2C3E50",
           fontSize: "26px",
           fontWeight: "900",
-          letterSpacing: "0.5px",
         }}
       >
         CMS Integration
       </h2>
 
-      {/* WRAPPER */}
       <div
         style={{
           display: "flex",
@@ -61,7 +69,6 @@ function CMS() {
             display: "grid",
             gridTemplateColumns: "repeat(2, 260px)",
             gap: "25px",
-            justifyContent: "center",
           }}
         >
           {features.slice(0, 2).map((item, i) => (
@@ -73,10 +80,16 @@ function CMS() {
                 borderRadius: "16px",
                 padding: "22px",
                 textAlign: "center",
-                boxShadow: "0 10px 22px rgba(0,0,0,0.08)",
-                transition: "0.3s ease",
                 cursor: "pointer",
+                transition: "0.3s ease",
+                ...base,
               }}
+              onMouseEnter={(e) =>
+                Object.assign(e.currentTarget.style, hover)
+              }
+              onMouseLeave={(e) =>
+                Object.assign(e.currentTarget.style, base)
+              }
             >
               <div style={{ color: item.color, marginBottom: "10px" }}>
                 {item.icon}
@@ -100,7 +113,7 @@ function CMS() {
           ))}
         </div>
 
-        {/* CENTER BOTTOM CARD */}
+        {/* BOTTOM CARD */}
         <div
           style={{
             background: `linear-gradient(135deg, ${features[2].bg}, #ffffff)`,
@@ -108,11 +121,17 @@ function CMS() {
             borderRadius: "16px",
             padding: "24px",
             textAlign: "center",
-            boxShadow: "0 10px 22px rgba(0,0,0,0.08)",
             width: "260px",
-            transition: "0.3s ease",
             cursor: "pointer",
+            transition: "0.3s ease",
+            ...base,
           }}
+          onMouseEnter={(e) =>
+            Object.assign(e.currentTarget.style, hover)
+          }
+          onMouseLeave={(e) =>
+            Object.assign(e.currentTarget.style, base)
+          }
         >
           <div style={{ color: features[2].color, marginBottom: "10px" }}>
             {features[2].icon}

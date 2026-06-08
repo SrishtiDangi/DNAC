@@ -1,4 +1,3 @@
-import Reveal from "./Reveal";
 import { FaVolumeUp, FaSignal } from "react-icons/fa";
 
 function CodecQoS() {
@@ -16,136 +15,146 @@ function CodecQoS() {
   ];
 
   return (
-    <Reveal>
-      <section style={{ padding: "60px 0" }}>
-        <div
+    <section
+      id="codecc"
+      style={{
+        padding: "60px 0",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "12px",
+          marginBottom: "40px",
+        }}
+      >
+        <FaVolumeUp size={28} color="#2C3E50" />
+        <h2
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "12px",
-            marginBottom: "40px",
+            fontSize: "26px",
+            fontWeight: "900",
+            margin: 0,
+            color: "#2C3E50",
           }}
         >
-          <FaVolumeUp size={26} color="#2C3E50" />
-          <h2 style={{ fontSize: "26px", fontWeight: "900", margin: 0 }}>
-            Codec & QoS Reference
-          </h2>
-        </div>
+          Codec & QoS Reference
+        </h2>
+      </div>
 
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit,minmax(350px,1fr))",
+          gap: "25px",
+        }}
+      >
+        {/* Codec Card */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit,minmax(350px,1fr))",
-            gap: "25px",
+            background: "#fff",
+            borderRadius: "20px",
+            overflow: "hidden",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
           }}
         >
-          {/* CODECS */}
           <div
             style={{
-              background: "#fff",
-              borderRadius: "20px",
-              overflow: "hidden",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+              background: "#D6EAF8",
+              padding: "18px",
+              fontWeight: "800",
             }}
           >
-            <div
-              style={{
-                background: "#D6EAF8",
-                padding: "18px",
-                fontWeight: "800",
-              }}
-            >
-              Voice Codecs
-            </div>
-
-            <table
-              style={{
-                width: "100%",
-                borderCollapse: "collapse",
-              }}
-            >
-              <thead>
-                <tr>
-                  <th style={{ padding: "12px" }}>Codec</th>
-                  <th style={{ padding: "12px" }}>Bitrate</th>
-                  <th style={{ padding: "12px" }}>MOS</th>
-                  <th style={{ padding: "12px" }}>Purpose</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {codecs.map((c, i) => (
-                  <tr key={i}>
-                    <td style={{ padding: "12px", textAlign: "center" }}>{c.codec}</td>
-                    <td style={{ padding: "12px", textAlign: "center" }}>{c.bitrate}</td>
-                    <td style={{ padding: "12px", textAlign: "center" }}>{c.mos}</td>
-                    <td style={{ padding: "12px", textAlign: "center" }}>{c.notes}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            Voice Codecs
           </div>
 
-          {/* QoS */}
-          <div
+          <table
             style={{
-              background: "#fff",
-              borderRadius: "20px",
-              overflow: "hidden",
-              boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+              width: "100%",
+              borderCollapse: "collapse",
             }}
           >
-            <div
-              style={{
-                background: "#FADBD8",
-                padding: "18px",
-                fontWeight: "800",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <FaSignal />
-              QoS DSCP Markings
-            </div>
+            <thead>
+              <tr>
+                <th style={{ padding: "12px" }}>Codec</th>
+                <th style={{ padding: "12px" }}>Bitrate</th>
+                <th style={{ padding: "12px" }}>MOS</th>
+                <th style={{ padding: "12px" }}>Purpose</th>
+              </tr>
+            </thead>
 
-            <table
-              style={{
-                width: "100%",
-                borderCollapse: "collapse",
-              }}
-            >
-              <thead>
-                <tr>
-                  <th style={{ padding: "12px" }}>Traffic</th>
-                  <th style={{ padding: "12px" }}>DSCP</th>
+            <tbody>
+              {codecs.map((c, i) => (
+                <tr key={i}>
+                  <td style={{ padding: "12px", textAlign: "center" }}>{c.codec}</td>
+                  <td style={{ padding: "12px", textAlign: "center" }}>{c.bitrate}</td>
+                  <td style={{ padding: "12px", textAlign: "center" }}>{c.mos}</td>
+                  <td style={{ padding: "12px", textAlign: "center" }}>{c.notes}</td>
                 </tr>
-              </thead>
-
-              <tbody>
-                {qos.map((q, i) => (
-                  <tr key={i}>
-                    <td style={{ padding: "12px", textAlign: "center" }}>
-                      {q.traffic}
-                    </td>
-                    <td
-                      style={{
-                        padding: "12px",
-                        textAlign: "center",
-                        fontWeight: "800",
-                      }}
-                    >
-                      {q.dscp}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </section>
-    </Reveal>
+
+        {/* QoS Card */}
+        <div
+          style={{
+            background: "#fff",
+            borderRadius: "20px",
+            overflow: "hidden",
+            boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+          }}
+        >
+          <div
+            style={{
+              background: "#FADBD8",
+              padding: "18px",
+              fontWeight: "800",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <FaSignal />
+            QoS DSCP Markings
+          </div>
+
+          <table
+            style={{
+              width: "100%",
+              borderCollapse: "collapse",
+            }}
+          >
+            <thead>
+              <tr>
+                <th style={{ padding: "12px" }}>Traffic</th>
+                <th style={{ padding: "12px" }}>DSCP</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {qos.map((q, i) => (
+                <tr key={i}>
+                  <td style={{ padding: "12px", textAlign: "center" }}>
+                    {q.traffic}
+                  </td>
+                  <td
+                    style={{
+                      padding: "12px",
+                      textAlign: "center",
+                      fontWeight: "800",
+                    }}
+                  >
+                    {q.dscp}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   );
 }
 

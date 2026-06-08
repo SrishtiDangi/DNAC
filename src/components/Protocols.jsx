@@ -42,7 +42,10 @@ function Protocols() {
 
   return (
     <Reveal>
-      <section style={{ padding: "60px 0" }}>
+      <section 
+        style={{ padding: "60px 0" }}
+        id="protocols"
+      >
         
         {/* HEADER */}
         <div

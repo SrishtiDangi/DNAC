@@ -34,20 +34,28 @@ function Overview() {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.18,
       },
     },
   };
 
   const card = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    hidden: { opacity: 0, y: 60, scale: 0.95 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
-    <section style={{ padding: "40px 0" }}>
-
-      {/* HEADER (same style everywhere) */}
+    <section id="overview" style={{ padding: "40px 0" }}>
+      
+      {/* HEADER */}
       <div
         style={{
           display: "flex",
@@ -69,7 +77,8 @@ function Overview() {
       <motion.div
         variants={container}
         initial="hidden"
-        animate="show"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
@@ -92,7 +101,7 @@ function Overview() {
               transition: "0.3s",
             }}
           >
-            {/* IMAGE WRAPPER */}
+            {/* IMAGE */}
             <div style={{ position: "relative" }}>
               <img
                 src={item.img}
@@ -101,15 +110,12 @@ function Overview() {
                   width: "100%",
                   height: "160px",
                   objectFit: "contain",
-                  padding: "10px",
-                  background: "white",
-                  background: "#f8fafc",
                   padding: "12px",
+                  background: "#f8fafc",
                   display: "block",
                 }}
               />
 
-              {/* smooth fade */}
               <div
                 style={{
                   position: "absolute",
@@ -117,8 +123,8 @@ function Overview() {
                   left: 0,
                   width: "100%",
                   height: "20px",
-                  borderRadius: "0 0 14px 14px",
-                  background: "linear-gradient(to bottom, transparent, #fff)",
+                  background:
+                    "linear-gradient(to bottom, transparent, #fff)",
                 }}
               />
             </div>

@@ -1,54 +1,72 @@
 import { useState, useEffect } from "react";
-
 import {
   FaHome,
-  FaChartBar,
   FaServer,
   FaNetworkWired,
   FaBox,
   FaPhone,
   FaCloud,
-  FaCheckCircle
+  FaCheckCircle,
 } from "react-icons/fa";
+
 function Navbar() {
   const links = [
     { id: "home", label: "Home" },
-    { id: "overview", label: "CUCM Services" },
+    { id: "overview", label: "Overview" },
+    { id: "ecosystem", label: "Ecosystem" },
     { id: "architecture", label: "Architecture" },
-    { id: "rack", label: "Rack Compare" },
-    { id: "callflow", label: "Call Flow" },
+    { id: "gateway-pstn", label: "Gateway" },
+    { id: "phone-registration", label: "Registration" },
+    { id: "call-flow", label: "Call Flow" },
+    { id: "dial-plan", label: "Dial Plan" },
+    { id: "rack-overview", label: "Rack" },
     { id: "cms", label: "CMS + PBX" },
+    { id: "protocols", label: "Protocols" },
+    { id: "codecc", label: "Codec & QoS" },
+    { id: "media-resources", label: "Media Resources" },
+    { id: "security", label: "Security" },
+    { id: "high-availability", label: "High Availability" },
+    { id: "mobility", label: "Mobility" },
+    { id: "class-of-service", label: "Class of Service" },
+    { id: "troubleshooting", label: "Troubleshooting" },
     { id: "advantages", label: "Advantages" },
   ];
+
   const [active, setActive] = useState("home");
+
   const icons = {
-  home: <FaHome />,
-  stats: <FaChartBar />,
-  overview: <FaServer />,
-  architecture: <FaNetworkWired />,
-  rack: <FaBox />,
-  callflow: <FaPhone />,
-  cms: <FaCloud />,
-  advantages: <FaCheckCircle />,
-};
-useEffect(() => {
-  const sections = links.map((l) => document.getElementById(l.id));
+    home: <FaHome />,
+    overview: <FaServer />,
+    architecture: <FaNetworkWired />,
+    "rack-overview": <FaBox />,
+    "call-flow": <FaPhone />,
+    cms: <FaCloud />,
+    advantages: <FaCheckCircle />,
+    "media-resources": <FaServer />,
+  };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    },
-    { threshold: 0.6 }
-  );
+  useEffect(() => {
+    const sections = links
+      .map((l) => document.getElementById(l.id))
+      .filter(Boolean);
 
-  sections.forEach((sec) => sec && observer.observe(sec));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+      }
+    );
 
-  return () => observer.disconnect();
-}, []);
+    sections.forEach((sec) => observer.observe(sec));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <nav
@@ -65,20 +83,17 @@ useEffect(() => {
         borderBottom: "1px solid #1e293b",
       }}
     >
-      {/* LOGO */}
       <h2
         style={{
           color: "white",
           margin: 0,
           fontSize: "18px",
           fontWeight: "800",
-          letterSpacing: "0.5px",
         }}
       >
         CUCM Dashboard
       </h2>
 
-      {/* LINKS */}
       <div
         style={{
           display: "flex",
@@ -87,37 +102,36 @@ useEffect(() => {
           justifyContent: "center",
         }}
       >
-        {links.map((item, i) => (
-          <a
-            key={i}
-            href={`#${item.id}`}
+        {links.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => {
+              setActive(item.id);
+
+              document.getElementById(item.id)?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
             style={{
-                color: active === item.id ? "white" : "#cbd5e1",
-                textDecoration: "none",
-                fontSize: "13px",
-                fontWeight: "600",
-                padding: "6px 10px",
-                borderRadius: "8px",
-                transition: "0.3s",
-                background: active === item.id ? "#1f2937" : "transparent",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-            }}
-            onMouseOver={(e) => {
-              e.target.style.background = "#1f2937";
-              e.target.style.color = "white";
-            }}
-            onMouseOut={(e) => {
-              e.target.style.background = "transparent";
-              e.target.style.color = "#cbd5e1";
+              color: active === item.id ? "white" : "#cbd5e1",
+              fontSize: "13px",
+              fontWeight: "600",
+              padding: "6px 10px",
+              borderRadius: "8px",
+              transition: "0.3s",
+              background:
+                active === item.id ? "#1f2937" : "transparent",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              border: "none",
+              cursor: "pointer",
             }}
           >
-            <>
             {icons[item.id]}
             {item.label}
-            </>
-          </a>
+          </button>
         ))}
       </div>
     </nav>
