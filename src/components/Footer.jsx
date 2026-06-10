@@ -1,4 +1,17 @@
+import { useEffect, useState } from "react";
+
 function Footer() {
+  const [footer, setFooter] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/footer")
+      .then((res) => res.json())
+      .then((data) => setFooter(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!footer) return null;
+
   return (
     <footer
       style={{
@@ -9,7 +22,6 @@ function Footer() {
         borderTop: "2px solid #D6EAF8",
       }}
     >
-      {/* TITLE */}
       <h3
         style={{
           margin: "0 0 10px 0",
@@ -19,10 +31,9 @@ function Footer() {
           letterSpacing: "0.5px",
         }}
       >
-        CUCM Infrastructure Dashboard
+        {footer.title}
       </h3>
 
-      {/* SUBTEXT */}
       <p
         style={{
           margin: 0,
@@ -30,10 +41,9 @@ function Footer() {
           color: "#5D6D7E",
         }}
       >
-        Built with React • Cisco UC Concepts • Enterprise VoIP Architecture
+        {footer.subtitle}
       </p>
 
-      {/* SMALL LINE */}
       <div
         style={{
           marginTop: "18px",
@@ -41,7 +51,7 @@ function Footer() {
           color: "#95A5A6",
         }}
       >
-        © {new Date().getFullYear()} All rights reserved
+        © {new Date().getFullYear()} {footer.copyright}
       </div>
     </footer>
   );

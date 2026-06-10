@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 import {
   FaServer,
@@ -8,43 +9,31 @@ import {
 } from "react-icons/fa";
 
 function HighAvailability() {
-  const items = [
-    {
-      icon: <FaServer size={28} />,
-      title: "Publisher",
-      desc: "Primary node handling configuration and database writes in CUCM cluster.",
-      color: "#D6EAF8",
-      border: "#3498DB",
-    },
-    {
-      icon: <FaDatabase size={28} />,
-      title: "Subscribers",
-      desc: "Handle call processing and provide redundancy and load balancing.",
-      color: "#E8F8F5",
-      border: "#2ECC71",
-    },
-    {
-      icon: <FaShieldAlt size={28} />,
-      title: "SRST",
-      desc: "Enables branch survivability during WAN or CUCM connectivity failure.",
-      color: "#FDEBD0",
-      border: "#F39C12",
-    },
-    {
-      icon: <FaSync size={28} />,
-      title: "DRS Backup",
-      desc: "Disaster Recovery System used for CUCM backup and restore operations.",
-      color: "#FADBD8",
-      border: "#E74C3C",
-    },
-    {
-      icon: <FaGlobe size={28} />,
-      title: "Geographic Redundancy",
-      desc: "Cluster deployment across multiple sites for maximum availability.",
-      color: "#E8DFF5",
-      border: "#8E44AD",
-    },
-  ];
+  const [data, setData] = useState(null);
+
+  const iconMap = {
+    server: <FaServer size={28} />,
+    database: <FaDatabase size={28} />,
+    shield: <FaShieldAlt size={28} />,
+    sync: <FaSync size={28} />,
+    globe: <FaGlobe size={28} />,
+  };
+
+  // ✅ FETCH BACKEND DATA
+  useEffect(() => {
+    fetch("http://localhost:5000/api/highAvailability")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading High Availability...
+      </section>
+    );
+  }
 
   const normal = (borderColor) => ({
     transform: "translateY(0) scale(1)",
@@ -67,7 +56,7 @@ function HighAvailability() {
   return (
     <Reveal>
       <section id="high-availability" style={{ padding: "60px 0" }}>
-        
+
         {/* HEADER */}
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
           <h2
@@ -77,11 +66,11 @@ function HighAvailability() {
               color: "#2C3E50",
             }}
           >
-            High Availability & Disaster Recovery
+            {data.title}
           </h2>
 
           <p style={{ fontSize: "14px", color: "#5D6D7E" }}>
-            CUCM redundancy, failover and business continuity architecture
+            {data.subtitle}
           </p>
         </div>
 
@@ -93,7 +82,7 @@ function HighAvailability() {
             gap: "22px",
           }}
         >
-          {items.map((item, i) => (
+          {data.items.map((item, i) => (
             <div
               key={i}
               style={{
@@ -119,7 +108,7 @@ function HighAvailability() {
               }}
             >
               <div style={{ marginBottom: "12px", color: "#2C3E50" }}>
-                {item.icon}
+                {iconMap[item.icon]}
               </div>
 
               <h3

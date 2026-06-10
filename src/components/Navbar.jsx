@@ -10,43 +10,32 @@ import {
 } from "react-icons/fa";
 
 function Navbar() {
-  const links = [
-    { id: "home", label: "Home" },
-    { id: "overview", label: "Overview" },
-    { id: "ecosystem", label: "Ecosystem" },
-    { id: "architecture", label: "Architecture" },
-    { id: "gateway-pstn", label: "Gateway" },
-    { id: "phone-registration", label: "Registration" },
-    { id: "call-flow", label: "Call Flow" },
-    { id: "dial-plan", label: "Dial Plan" },
-    { id: "rack-overview", label: "Rack" },
-    { id: "cms", label: "CMS + PBX" },
-    { id: "protocols", label: "Protocols" },
-    { id: "codecc", label: "Codec & QoS" },
-    { id: "media-resources", label: "Media Resources" },
-    { id: "security", label: "Security" },
-    { id: "high-availability", label: "High Availability" },
-    { id: "mobility", label: "Mobility" },
-    { id: "class-of-service", label: "Class of Service" },
-    { id: "troubleshooting", label: "Troubleshooting" },
-    { id: "advantages", label: "Advantages" },
-  ];
-
+  const [navData, setNavData] = useState(null);
   const [active, setActive] = useState("home");
 
-  const icons = {
+  const iconMap = {
     home: <FaHome />,
-    overview: <FaServer />,
-    architecture: <FaNetworkWired />,
-    "rack-overview": <FaBox />,
-    "call-flow": <FaPhone />,
-    cms: <FaCloud />,
-    advantages: <FaCheckCircle />,
-    "media-resources": <FaServer />,
+    server: <FaServer />,
+    network: <FaNetworkWired />,
+    box: <FaBox />,
+    phone: <FaPhone />,
+    cloud: <FaCloud />,
+    check: <FaCheckCircle />,
   };
 
+  // ✅ FETCH NAVBAR FROM BACKEND
   useEffect(() => {
-    const sections = links
+    fetch("http://localhost:5000/api/navbar")
+      .then((res) => res.json())
+      .then((data) => setNavData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  // ✅ SCROLL SPY (ACTIVE SECTION TRACK)
+  useEffect(() => {
+    if (!navData) return;
+
+    const sections = navData.links
       .map((l) => document.getElementById(l.id))
       .filter(Boolean);
 
@@ -66,7 +55,9 @@ function Navbar() {
     sections.forEach((sec) => observer.observe(sec));
 
     return () => observer.disconnect();
-  }, []);
+  }, [navData]);
+
+  if (!navData) return null;
 
   return (
     <nav
@@ -83,6 +74,7 @@ function Navbar() {
         borderBottom: "1px solid #1e293b",
       }}
     >
+      {/* BRAND */}
       <h2
         style={{
           color: "white",
@@ -91,9 +83,10 @@ function Navbar() {
           fontWeight: "800",
         }}
       >
-        CUCM Dashboard
+        {navData.brand}
       </h2>
 
+      {/* LINKS */}
       <div
         style={{
           display: "flex",
@@ -102,7 +95,7 @@ function Navbar() {
           justifyContent: "center",
         }}
       >
-        {links.map((item) => (
+        {navData.links.map((item) => (
           <button
             key={item.id}
             onClick={() => {
@@ -129,7 +122,7 @@ function Navbar() {
               cursor: "pointer",
             }}
           >
-            {icons[item.id]}
+            {iconMap[item.icon]}
             {item.label}
           </button>
         ))}

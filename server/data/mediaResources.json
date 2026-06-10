@@ -1,0 +1,41 @@
+{
+  "title": "Media Resources",
+  "subtitle": "Core CUCM media services used during call processing",
+  "items": [
+    {
+      "icon": "exchange",
+      "title": "Transcoder",
+      "desc": "Converts between incompatible codecs such as G.711 and G.729.",
+      "color": "#D6EAF8",
+      "border": "#3498DB"
+    },
+    {
+      "icon": "users",
+      "title": "Conference Bridge",
+      "desc": "Enables multi-party audio conferencing between endpoints.",
+      "color": "#E8F8F5",
+      "border": "#2ECC71"
+    },
+    {
+      "icon": "music",
+      "title": "Music on Hold",
+      "desc": "Streams audio to callers placed on hold.",
+      "color": "#FDEBD0",
+      "border": "#F39C12"
+    },
+    {
+      "icon": "bullhorn",
+      "title": "Annunciator",
+      "desc": "Plays prerecorded system announcements and prompts.",
+      "color": "#FADBD8",
+      "border": "#E74C3C"
+    },
+    {
+      "icon": "random",
+      "title": "MTP",
+      "desc": "Media Termination Point for SIP and H.323 interoperability.",
+      "color": "#E8DFF5",
+      "border": "#8E44AD"
+    }
+  ]
+}

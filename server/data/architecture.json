@@ -1,0 +1,40 @@
+{
+  "publisher": {
+    "title": "Publisher Server",
+    "desc": "Database & Configuration"
+  },
+
+  "infra": [
+    "MOH 1",
+    "MOH 2",
+    "TFTP 1",
+    "TFTP 2"
+  ],
+
+  "subscribers": [
+    {
+      "title": "Subscriber 1",
+      "desc": "Call Processing",
+      "color": "#D6EAF8",
+      "border": "#2E86C1"
+    },
+    {
+      "title": "Subscriber 2",
+      "desc": "Redundancy",
+      "color": "#E8F4F8",
+      "border": "#7D3C98"
+    },
+    {
+      "title": "Subscriber 3",
+      "desc": "High Availability",
+      "color": "#D5F5E3",
+      "border": "#1E8449"
+    },
+    {
+      "title": "Subscriber 4",
+      "desc": "Failover Node",
+      "color": "#FDEBD0",
+      "border": "#B9770E"
+    }
+  ]
+}

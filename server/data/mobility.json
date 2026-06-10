@@ -1,0 +1,34 @@
+{
+  "title": "Mobility Features",
+  "subtitle": "Enterprise mobility and remote communication capabilities",
+  "items": [
+    {
+      "title": "Cisco Jabber",
+      "desc": "Softphone, messaging and presence platform for enterprise users.",
+      "icon": "mobile",
+      "color": "#D6EAF8",
+      "border": "#3498DB"
+    },
+    {
+      "title": "Extension Mobility",
+      "desc": "Users can log in to any IP Phone and access their profile.",
+      "icon": "user",
+      "color": "#E8F8F5",
+      "border": "#2ECC71"
+    },
+    {
+      "title": "Single Number Reach",
+      "desc": "Ring desk phone and mobile phone simultaneously.",
+      "icon": "phone",
+      "color": "#FDEBD0",
+      "border": "#F39C12"
+    },
+    {
+      "title": "Mobile Connect",
+      "desc": "Extend enterprise calling experience to mobile devices.",
+      "icon": "laptop",
+      "color": "#EDE7F6",
+      "border": "#8E44AD"
+    }
+  ]
+}

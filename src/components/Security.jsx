@@ -1,37 +1,32 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 import { FaLock, FaUserShield, FaKey, FaDatabase } from "react-icons/fa";
 
 function Security() {
-  const items = [
-    {
-      title: "TLS",
-      desc: "Encrypts signaling traffic between endpoints and CUCM.",
-      icon: <FaLock size={28} />,
-      color: "#D6EAF8",
-      border: "#3498DB",
-    },
-    {
-      title: "SRTP",
-      desc: "Encrypts voice media streams for secure calls.",
-      icon: <FaUserShield size={28} />,
-      color: "#E8F8F5",
-      border: "#2ECC71",
-    },
-    {
-      title: "CAPF",
-      desc: "Certificate Authority Proxy Function for device certificates.",
-      icon: <FaKey size={28} />,
-      color: "#FDEBD0",
-      border: "#F39C12",
-    },
-    {
-      title: "LDAP",
-      desc: "Directory integration for centralized authentication.",
-      icon: <FaDatabase size={28} />,
-      color: "#EDE7F6",
-      border: "#8E44AD",
-    },
-  ];
+  const [data, setData] = useState(null);
+
+  const iconMap = {
+    lock: <FaLock size={28} />,
+    shield: <FaUserShield size={28} />,
+    key: <FaKey size={28} />,
+    database: <FaDatabase size={28} />,
+  };
+
+  // ✅ FETCH BACKEND
+  useEffect(() => {
+    fetch("http://localhost:5000/api/security")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Security Features...
+      </section>
+    );
+  }
 
   const normal = (borderColor) => ({
     transform: "translateY(0) scale(1)",
@@ -54,6 +49,7 @@ function Security() {
   return (
     <section style={{ padding: "60px 0" }} id="security">
 
+      {/* HEADER */}
       <Reveal>
         <div style={{ textAlign: "center", marginBottom: "40px" }}>
           <h2
@@ -63,11 +59,12 @@ function Security() {
               color: "#2C3E50",
             }}
           >
-            Security Features
+            {data.title}
           </h2>
         </div>
       </Reveal>
 
+      {/* GRID */}
       <div
         style={{
           display: "grid",
@@ -75,7 +72,7 @@ function Security() {
           gap: "20px",
         }}
       >
-        {items.map((item, i) => (
+        {data.items.map((item, i) => (
           <Reveal key={i}>
             <div
               style={{
@@ -100,12 +97,16 @@ function Security() {
                 Object.assign(e.currentTarget.style, hover(item.border));
               }}
             >
-              <div style={{ color: "#2C3E50" }}>{item.icon}</div>
+              <div style={{ color: "#2C3E50" }}>
+                {iconMap[item.icon]}
+              </div>
 
               <h3
                 style={{
                   color: "#2C3E50",
                   marginTop: "12px",
+                  fontSize: "18px",
+                  fontWeight: "800",
                 }}
               >
                 {item.title}

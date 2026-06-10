@@ -1,46 +1,42 @@
-[
-  {
-    "id": 1,
-    "title": "Cisco Jabber",
-    "color": "#E8F8F5",
-    "icon": "cloud"
-  },
-  {
-    "id": 2,
-    "title": "IP Phones",
-    "color": "#D6EAF8",
-    "icon": "phone"
-  },
-  {
-    "id": 3,
-    "title": "CUCM",
-    "subtitle": "Central Call Control",
-    "color": "#F8C8DC",
-    "icon": "server",
-    "main": true
-  },
-  {
-    "id": 4,
-    "title": "Unity Connection",
-    "color": "#FDEBD0",
-    "icon": "cloud"
-  },
-  {
-    "id": 5,
-    "title": "Expressway",
-    "color": "#D5F5E3",
-    "icon": "globe"
-  },
-  {
-    "id": 6,
-    "title": "Cisco CUBE",
-    "color": "#EDE7F6",
-    "icon": "server"
-  },
-  {
-    "id": 7,
-    "title": "PSTN",
-    "color": "#F9EBEA",
-    "icon": "globe"
-  }
-]
+{
+  "title": "CUCM Ecosystem",
+  "subtitle": "How CUCM integrates enterprise communication services",
+  "nodes": [
+    {
+      "id": "jabber",
+      "title": "Cisco Jabber",
+      "icon": "phone",
+      "color": "#E8F8F5"
+    },
+    {
+      "id": "phone",
+      "title": "IP Phones",
+      "icon": "phone",
+      "color": "#D6EAF8"
+    },
+    {
+      "id": "cucm",
+      "title": "CUCM",
+      "icon": "server",
+      "color": "gradient"
+    },
+    {
+      "id": "unity",
+      "title": "Unity Connection",
+      "icon": "cloud",
+      "color": "#FDEBD0"
+    },
+    {
+      "id": "expressway",
+      "title": "Expressway",
+      "icon": "globe",
+      "color": "#D5F5E3"
+    },
+    {
+      "id": "pstn",
+      "title": "PSTN",
+      "icon": "globe",
+      "color": "#F9EBEA"
+    }
+  ]
+}

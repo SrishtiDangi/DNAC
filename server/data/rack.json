@@ -1,0 +1,29 @@
+{
+  "title": "Rack Comparison",
+  "items": [
+    {
+      "name": "Rack A",
+      "type": "Primary",
+      "color": {
+        "bg": "#FDEBD0",
+        "border": "#F5CBA7",
+        "icon": "#B9770E",
+        "text": "#7E5109",
+        "badge": "#F39C12"
+      },
+      "features": ["Voice Gateway", "CMS", "2 PBX", "16 PRI Lines"]
+    },
+    {
+      "name": "Rack B",
+      "type": "Secondary",
+      "color": {
+        "bg": "#D6EAF8",
+        "border": "#85C1E9",
+        "icon": "#1F618D",
+        "text": "#1B4F72",
+        "badge": "#3498DB"
+      },
+      "features": ["Voice Gateway", "2 PBX", "16 PRI Lines"]
+    }
+  ]
+}

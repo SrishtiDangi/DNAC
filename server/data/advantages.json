@@ -1,0 +1,23 @@
+{
+  "title": "Key Business Benefits",
+  "items": [
+    {
+      "title": "High Availability",
+      "desc": "System remains operational even during failures",
+      "color": "#D6EAF8",
+      "border": "#85C1E9"
+    },
+    {
+      "title": "Scalability",
+      "desc": "Easily expand users and infrastructure",
+      "color": "#E8F8F5",
+      "border": "#76D7C4"
+    },
+    {
+      "title": "Redundancy",
+      "desc": "Backup systems ensure zero downtime",
+      "color": "#FDEBD0",
+      "border": "#F5CBA7"
+    }
+  ]
+}

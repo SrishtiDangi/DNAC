@@ -1,23 +1,25 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 import { FaTools } from "react-icons/fa";
 
 function Troubleshooting() {
-  const issues = [
-    ["Phone shows Configuring IP", "DHCP issue", "Check DHCP + Option 150"],
-    ["Phone shows Registering", "CUCM unreachable", "Verify TFTP & CUCM"],
-    ["One-way Audio", "RTP blocked", "Check firewall / QoS"],
-    ["Call drops after 30s", "SIP NAT issue", "Inspect SIP ALG"],
-    ["Fast Busy Outbound", "Route Pattern issue", "Verify Dial Plan"],
-    ["DB Replication Broken", "Publisher sync failure", "Run dbreplication status"],
-  ];
+  const [data, setData] = useState(null);
 
-  const commands = [
-    ["show status", "CUCM node health"],
-    ["show version active", "Running CUCM version"],
-    ["utils service list", "List all services"],
-    ["utils dbreplication status", "Replication health"],
-    ["file tail activelog", "View real-time logs"],
-  ];
+  // ✅ FETCH BACKEND DATA
+  useEffect(() => {
+    fetch("http://localhost:5000/api/troubleshooting")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Troubleshooting...
+      </section>
+    );
+  }
 
   return (
     <Reveal>
@@ -42,7 +44,7 @@ function Troubleshooting() {
               color: "#2C3E50",
             }}
           >
-            Troubleshooting Quick Reference
+            {data.title}
           </h2>
         </div>
 
@@ -64,15 +66,10 @@ function Troubleshooting() {
               color: "#2C3E50",
             }}
           >
-            Common Issues
+            {data.issuesTitle}
           </h3>
 
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ background: "#FCE4EC" }}>
                 <th style={{ padding: "12px" }}>Symptom</th>
@@ -82,11 +79,17 @@ function Troubleshooting() {
             </thead>
 
             <tbody>
-              {issues.map((row, i) => (
+              {data.issues.map((row, i) => (
                 <tr key={i}>
-                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>{row[0]}</td>
-                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>{row[1]}</td>
-                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>{row[2]}</td>
+                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>
+                    {row[0]}
+                  </td>
+                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>
+                    {row[1]}
+                  </td>
+                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>
+                    {row[2]}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -110,15 +113,10 @@ function Troubleshooting() {
               color: "#2C3E50",
             }}
           >
-            Useful CLI Commands
+            {data.commandsTitle}
           </h3>
 
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr style={{ background: "#EBF5FB" }}>
                 <th style={{ padding: "12px" }}>Command</th>
@@ -127,7 +125,7 @@ function Troubleshooting() {
             </thead>
 
             <tbody>
-              {commands.map((row, i) => (
+              {data.commands.map((row, i) => (
                 <tr key={i}>
                   <td
                     style={{
@@ -140,12 +138,7 @@ function Troubleshooting() {
                     {row[0]}
                   </td>
 
-                  <td
-                    style={{
-                      padding: "12px",
-                      borderTop: "1px solid #eee",
-                    }}
-                  >
+                  <td style={{ padding: "12px", borderTop: "1px solid #eee" }}>
                     {row[1]}
                   </td>
                 </tr>

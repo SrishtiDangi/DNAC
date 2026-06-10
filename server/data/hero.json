@@ -1,0 +1,6 @@
+{
+  "title": "Cisco Unified Communications Manager",
+  "description": "Enterprise VoIP Infrastructure Dashboard showcasing cluster architecture, PRI connectivity, rack deployment and call routing workflow.",
+  "icon": "server",
+  "background": "radial-gradient(circle at top, #F8C8DC 0%, #D6EAF8 50%, #E8DFF5 100%)"
+}

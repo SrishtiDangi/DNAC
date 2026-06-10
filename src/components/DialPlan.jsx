@@ -5,24 +5,16 @@ import {
   FaSearch,
   FaProjectDiagram,
 } from "react-icons/fa";
-
+import { useEffect, useState } from "react";
 function DialPlan() {
-  const flow = [
-    "User Dials",
-    "CSS Lookup",
-    "Partition Match",
-    "Route List",
-    "Route Group",
-    "Gateway",
-    "PSTN",
-  ];
-
-  const wildcards = [
-    { wildcard: "X", match: "Any digit (0-9)", example: "9XXX" },
-    { wildcard: "!", match: "One or more digits", example: "9!" },
-    { wildcard: "[x-y]", match: "Digit range", example: "[2-5]XXX" },
-    { wildcard: "@", match: "North American Pattern", example: "@" },
-  ];
+  const [dialplan, setDialplan] = useState(null);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/dialplan")
+    .then((res) => res.json())
+    .then((data) => setDialplan(data))
+    .catch((err) => console.log(err));
+}, []);
+if (!dialplan) return <div style={{padding:20}}>Loading...</div>;
 
   return (
     <Reveal>
@@ -56,7 +48,7 @@ function DialPlan() {
             marginBottom: "50px",
           }}
         >
-          {flow.map((step, index) => (
+          {dialplan?.flow?.map((step, index) => (
             <div
               key={index}
               className="flowItem"
@@ -64,7 +56,7 @@ function DialPlan() {
             >
               <div className="flowBox">{step}</div>
 
-              {index !== flow.length - 1 && (
+              {index !== (dialplan?.flow?.length??0) - 1 && (
                 <div className="arrow">→</div>
               )}
             </div>
@@ -85,13 +77,12 @@ function DialPlan() {
           <div className="card partition">
             <FaPhoneAlt size={28} color="#C0392B" />
 
-            <h3>Partition</h3>
-            <p>Defines WHAT numbers exist in CUCM.</p>
-
+            <h3>{dialplan?.cards?.[0]?.title}</h3>
+            <p>{dialplan?.cards?.[0]?.desc}</p>
             <ul>
-              <li>Internal Extensions</li>
-              <li>Emergency Numbers</li>
-              <li>Support Numbers</li>
+                {dialplan?.cards?.[0]?.items?.map((item,index)=>(
+                    <li key={index}>{item}</li>
+                    ))}
             </ul>
           </div>
 
@@ -99,21 +90,14 @@ function DialPlan() {
           <div className="card css">
             <FaSearch size={28} color="#1E8449" />
 
-            <h3>Calling Search Space (CSS)</h3>
-            <p>Defines WHERE a device is allowed to call.</p>
-
+            <h3>{dialplan?.cards?.[1]?.title}</h3>
+            <p>{dialplan?.cards?.[1]?.desc}</p>
             <ul>
-              <li>Employee CSS</li>
-              <li>Manager CSS</li>
-              <li>Executive CSS</li>
+                {dialplan?.cards?.[1]?.items?.map((item,index) => (
+                    <li key={index}>{item}</li>
+                    ))}
             </ul>
           </div>
-        </div>
-
-        {/* NOTE */}
-        <div className="note">
-          Partition = WHAT numbers exist <br />
-          CSS = WHERE a device can call
         </div>
 
         {/* TABLE */}
@@ -133,7 +117,7 @@ function DialPlan() {
             </thead>
 
             <tbody>
-              {wildcards.map((item, index) => (
+              {dialplan?.wildcards?.map((item, index) => (
                 <tr key={index}>
                   <td>{item.wildcard}</td>
                   <td>{item.match}</td>
@@ -218,23 +202,6 @@ function DialPlan() {
             margin-top: 12px;
           }
 
-          /* NOTE */
-          .note {
-            max-width: 700px;
-            margin: 0 auto 50px;
-            background: #E8DAEF;
-            border: 2px solid #D2B4DE;
-            padding: 18px;
-            border-radius: 16px;
-            text-align: center;
-            font-weight: 700;
-            color: #4A235A;
-            transition: 0.3s;
-          }
-
-          .note:hover {
-            transform: scale(1.02);
-          }
 
           /* TABLE */
           .tableBox {

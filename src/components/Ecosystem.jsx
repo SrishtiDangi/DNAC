@@ -9,36 +9,40 @@ import {
 import { useEffect, useState } from "react";
 
 function Ecosystem() {
-  const [ecosystem, setEcosystem] = useState([]);
+  const [ecosystem, setEcosystem] = useState(null);
+
   useEffect(() => {
-  fetch("http://localhost:5000/api/ecosystem")
-    .then((res) => res.json())
-    .then((data) => setEcosystem(data))
-    .catch((err) => console.log(err));
+    fetch("http://localhost:5000/api/ecosystem")
+      .then((res) => res.json())
+      .then((data) => setEcosystem(data))
+      .catch((err) => console.log(err));
   }, []);
+
+  if (!ecosystem) return null;
+
+  const iconMap = {
+    phone: <FaPhoneAlt size={28} />,
+    server: <FaServer size={28} />,
+    cloud: <FaCloud size={28} />,
+    globe: <FaGlobe size={28} />,
+  };
+
   const cardStyle = (bg) => ({
     background: bg,
     padding: "16px",
     borderRadius: "16px",
     textAlign: "center",
-    minWidth: "140px",
+    minWidth: "160px",
     boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
     fontWeight: "700",
     color: "#2C3E50",
   });
-  const iconMap = {
-    cloud: <FaCloud size={28} />,
-    phone: <FaPhoneAlt size={28} />,
-    server: <FaServer size={28} />,
-    globe: <FaGlobe size={28} />,
-};
 
   return (
-    <section 
-      style={{ padding: "60px 0" }}
+    <section
       id="ecosystem"
+      style={{ padding: "60px 0" }}
     >
-
       <Reveal>
         <div
           style={{
@@ -54,7 +58,7 @@ function Ecosystem() {
               marginBottom: "10px",
             }}
           >
-            CUCM Ecosystem
+            {ecosystem.title}
           </h2>
 
           <p
@@ -64,7 +68,7 @@ function Ecosystem() {
               margin: 0,
             }}
           >
-            How CUCM integrates enterprise communication services
+            {ecosystem.subtitle}
           </p>
         </div>
       </Reveal>
@@ -75,25 +79,18 @@ function Ecosystem() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "18px",
+            gap: "20px",
           }}
         >
-          {/* JABBER */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            style={cardStyle("#E8F8F5")}
-          >
-            {ecosystem[0] && (
-                <>
-                {iconMap[ecosystem[0].icon]}
-                <div style={{ marginTop: "8px" }}>
-                    {ecosystem[0].title}
-                </div>
-                </>
-            )}
-          </motion.div>
+          {/* TOP */}
+          <div style={cardStyle(ecosystem.nodes[0].color)}>
+            {iconMap[ecosystem.nodes[0].icon]}
+            <div style={{ marginTop: "8px" }}>
+              {ecosystem.nodes[0].title}
+            </div>
+          </div>
 
-          {/* PHONE - CUCM - UNITY */}
+          {/* MIDDLE */}
           <div
             style={{
               display: "flex",
@@ -103,21 +100,13 @@ function Ecosystem() {
               alignItems: "center",
             }}
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              style={cardStyle("#D6EAF8")}
-            >
-              {ecosystem[1] && (
-                <>
-                {iconMap[ecosystem[1].icon]}
-                <div style={{ marginTop: "8px" }}>
-                    {ecosystem[1].title}
-                </div>
-                </>
-            )}
-            </motion.div>
+            <div style={cardStyle(ecosystem.nodes[1].color)}>
+              {iconMap[ecosystem.nodes[1].icon]}
+              <div style={{ marginTop: "8px" }}>
+                {ecosystem.nodes[1].title}
+              </div>
+            </div>
 
-            {/* CENTER CUCM */}
             <motion.div
               animate={{
                 y: [0, -8, 0],
@@ -134,27 +123,11 @@ function Ecosystem() {
                 minWidth: "180px",
                 textAlign: "center",
                 border: "2px solid #E91E63",
-                position: "relative",
                 boxShadow:
                   "0 15px 30px rgba(0,0,0,0.12)",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  width: "120px",
-                  height: "120px",
-                  background:
-                    "rgba(248,200,220,0.45)",
-                  filter: "blur(50px)",
-                  borderRadius: "50%",
-                  top: "-10px",
-                  left: "25px",
-                  zIndex: -1,
-                }}
-              />
-
-              <FaServer size={34} />
+              {iconMap[ecosystem.nodes[2].icon]}
 
               <h3
                 style={{
@@ -162,36 +135,19 @@ function Ecosystem() {
                   fontSize: "18px",
                 }}
               >
-                CUCM
+                {ecosystem.nodes[2].title}
               </h3>
-
-              <p
-                style={{
-                  margin: 0,
-                  fontSize: "12px",
-                  color: "#555",
-                }}
-              >
-                Central Call Control
-              </p>
             </motion.div>
 
-           <motion.div
-           whileHover={{ scale: 1.05 }}
-           style={cardStyle("#FDEBD0")}
-           >
-            {ecosystem[2] && (
-                <>
-                {iconMap[ecosystem[2].icon]}
-                <div style={{ marginTop: "8px" }}>
-                    {ecosystem[2].title}
-                </div>
-                </>
-            )}
-            </motion.div>
+            <div style={cardStyle(ecosystem.nodes[3].color)}>
+              {iconMap[ecosystem.nodes[3].icon]}
+              <div style={{ marginTop: "8px" }}>
+                {ecosystem.nodes[3].title}
+              </div>
+            </div>
           </div>
 
-          {/* EXPRESSWAY + CUBE */}
+          {/* LOWER */}
           <div
             style={{
               display: "flex",
@@ -200,49 +156,20 @@ function Ecosystem() {
               justifyContent: "center",
             }}
           >
-            <motion.div
-            whileHover={{ scale: 1.05 }}
-            style={cardStyle("#D5F5E3")}
-            >
-                {ecosystem[3] && (
-                    <>
-                    {iconMap[ecosystem[3].icon]}
-                    <div style={{ marginTop: "8px" }}>
-                        {ecosystem[3].title}
-                    </div>
-                    </>
-                )}
-            </motion.div>
+            <div style={cardStyle(ecosystem.nodes[4].color)}>
+              {iconMap[ecosystem.nodes[4].icon]}
+              <div style={{ marginTop: "8px" }}>
+                {ecosystem.nodes[4].title}
+              </div>
+            </div>
 
-            <motion.div
-            whileHover={{ scale: 1.05 }}
-            style={cardStyle("#EDE7F6")}
-            >
-                {ecosystem[4] && (
-                    <>
-                    {iconMap[ecosystem[4].icon]}
-                    <div style={{ marginTop: "8px" }}>
-                        {ecosystem[4].title}
-                    </div>
-                    </>
-                )}
-            </motion.div>
+            <div style={cardStyle(ecosystem.nodes[5].color)}>
+              {iconMap[ecosystem.nodes[5].icon]}
+              <div style={{ marginTop: "8px" }}>
+                {ecosystem.nodes[5].title}
+              </div>
+            </div>
           </div>
-
-          {/* PSTN */}
-          <motion.div
-          whileHover={{ scale: 1.05 }}
-          style={cardStyle("#F9EBEA")}
-          >
-            {ecosystem[5] && (
-                <>
-                {iconMap[ecosystem[5].icon]}
-                <div style={{ marginTop: "8px" }}>
-                    {ecosystem[5].title}
-                </div>
-                </>
-            )}
-          </motion.div>
         </div>
       </Reveal>
     </section>

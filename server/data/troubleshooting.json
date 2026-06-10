@@ -1,0 +1,20 @@
+{
+  "title": "Troubleshooting Quick Reference",
+  "issuesTitle": "Common Issues",
+  "commandsTitle": "Useful CLI Commands",
+  "issues": [
+    ["Phone shows Configuring IP", "DHCP issue", "Check DHCP + Option 150"],
+    ["Phone shows Registering", "CUCM unreachable", "Verify TFTP & CUCM"],
+    ["One-way Audio", "RTP blocked", "Check firewall / QoS"],
+    ["Call drops after 30s", "SIP NAT issue", "Inspect SIP ALG"],
+    ["Fast Busy Outbound", "Route Pattern issue", "Verify Dial Plan"],
+    ["DB Replication Broken", "Publisher sync failure", "Run dbreplication status"]
+  ],
+  "commands": [
+    ["show status", "CUCM node health"],
+    ["show version active", "Running CUCM version"],
+    ["utils service list", "List all services"],
+    ["utils dbreplication status", "Replication health"],
+    ["file tail activelog", "View real-time logs"]
+  ]
+}

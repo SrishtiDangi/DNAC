@@ -1,7 +1,38 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FaServer } from "react-icons/fa";
+import {
+  FaServer,
+  FaHome,
+  FaNetworkWired,
+  FaBox,
+  FaPhone,
+  FaCloud,
+  FaCheckCircle,
+} from "react-icons/fa";
 
 function Hero() {
+  const [heroData, setHeroData] = useState(null);
+
+  const iconMap = {
+    home: <FaHome />,
+    server: <FaServer />,
+    network: <FaNetworkWired />,
+    box: <FaBox />,
+    phone: <FaPhone />,
+    cloud: <FaCloud />,
+    check: <FaCheckCircle />,
+  };
+
+  // ✅ FETCH HERO DATA FROM BACKEND
+  useEffect(() => {
+    fetch("http://localhost:5000/api/hero")
+      .then((res) => res.json())
+      .then((data) => setHeroData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!heroData) return null;
+
   return (
     <section
       id="home"
@@ -13,8 +44,7 @@ function Hero() {
         alignItems: "center",
         textAlign: "center",
         padding: "0 8%",
-        background:
-          "radial-gradient(circle at top, #F8C8DC 0%, #D6EAF8 50%, #E8DFF5 100%)",
+        background: heroData.background,
         borderRadius: "40px",
         position: "relative",
         overflow: "hidden",
@@ -58,7 +88,7 @@ function Hero() {
               boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
             }}
           >
-            <FaServer size={50} color="#34495E" />
+            {iconMap[heroData.icon]}
           </div>
         </motion.div>
 
@@ -72,7 +102,7 @@ function Hero() {
             color: "#2C3E50",
           }}
         >
-          Cisco Unified Communications Manager
+          {heroData.title}
         </h1>
 
         {/* DESCRIPTION */}
@@ -85,12 +115,8 @@ function Hero() {
             color: "#5D6D7E",
           }}
         >
-          Enterprise VoIP Infrastructure Dashboard showcasing cluster architecture,
-          PRI connectivity, rack deployment and call routing workflow.
+          {heroData.description}
         </p>
-
-        
-        
       </motion.div>
     </section>
   );

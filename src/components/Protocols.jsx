@@ -1,52 +1,34 @@
+import { useState, useEffect } from "react";
 import { FaNetworkWired } from "react-icons/fa";
 import Reveal from "./Reveal";
 
 function Protocols() {
-  const protocols = [
-    {
-      protocol: "SIP",
-      type: "Signaling",
-      purpose: "IP Call Setup & Control",
-    },
-    {
-      protocol: "SCCP",
-      type: "Cisco Proprietary",
-      purpose: "IP Phone Control",
-    },
-    {
-      protocol: "H.323",
-      type: "Signaling",
-      purpose: "Legacy VoIP Communication",
-    },
-    {
-      protocol: "RTP / SRTP",
-      type: "Media",
-      purpose: "Voice Media Transport",
-    },
-    {
-      protocol: "MGCP",
-      type: "Gateway Control",
-      purpose: "PSTN Gateway Management",
-    },
-    {
-      protocol: "LDAP",
-      type: "Directory",
-      purpose: "User Synchronization",
-    },
-    {
-      protocol: "TFTP",
-      type: "File Transfer",
-      purpose: "Phone Configuration Download",
-    },
-  ];
+  const [data, setData] = useState(null);
+
+  const iconMap = {
+    network: <FaNetworkWired size={28} />,
+  };
+
+  // ✅ FETCH FROM BACKEND
+  useEffect(() => {
+    fetch("http://localhost:5000/api/protocols")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Protocols...
+      </section>
+    );
+  }
 
   return (
     <Reveal>
-      <section 
-        style={{ padding: "60px 0" }}
-        id="protocols"
-      >
-        
+      <section style={{ padding: "60px 0" }} id="protocols">
+
         {/* HEADER */}
         <div
           style={{
@@ -58,14 +40,9 @@ function Protocols() {
             color: "#2C3E50",
           }}
         >
-          <FaNetworkWired size={28} />
-          <h2
-            style={{
-              fontSize: "26px",
-              fontWeight: "900",
-            }}
-          >
-            Key CUCM Protocols
+          {iconMap[data.icon]}
+          <h2 style={{ fontSize: "26px", fontWeight: "900" }}>
+            {data.title}
           </h2>
         </div>
 
@@ -74,38 +51,35 @@ function Protocols() {
           style={{
             maxWidth: "950px",
             margin: "0 auto",
+            alignItems: "center",
+            alignContent:"center",
             background: "#fff",
             borderRadius: "18px",
             overflow: "hidden",
             boxShadow: "0 12px 25px rgba(0,0,0,0.08)",
-            border: "2px solid #D6EAF8",
+            border: `2px solid ${data.borderColor}`,
           }}
         >
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
+
+            {/* HEADER ROW */}
             <thead>
-              <tr
-                style={{
-                  background: "#F8C8DC",
-                }}
-              >
-                <th style={header}>Protocol</th>
-                <th style={header}>Type</th>
-                <th style={header}>Purpose</th>
+              <tr style={{ background: data.headerColor }}>
+                {data.columns.map((col, i) => (
+                  <th key={i} style={header}>
+                    {col}
+                  </th>
+                ))}
               </tr>
             </thead>
 
+            {/* BODY ROWS */}
             <tbody>
-              {protocols.map((item, i) => (
+              {data.rows.map((item, i) => (
                 <tr
                   key={i}
                   style={{
-                    background:
-                      i % 2 === 0 ? "#fff" : "#F9FBFD",
+                    background: i % 2 === 0 ? "#fff" : "#F9FBFD",
                   }}
                 >
                   <td style={cell}>{item.protocol}</td>
@@ -123,7 +97,7 @@ function Protocols() {
 
 const header = {
   padding: "16px",
-  textAlign: "left",
+  textAlign: "center",
   color: "#2C3E50",
   fontWeight: "800",
 };

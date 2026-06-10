@@ -1,20 +1,31 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 import { FaUserShield } from "react-icons/fa";
 
 function ClassOfService() {
-  const users = [
-    ["Lobby Phone", "Emergency Only"],
-    ["Standard Employee", "Internal + Local"],
-    ["Manager", "Internal + Local + Long Distance"],
-    ["Executive", "Unrestricted Access"],
-  ];
+  const [data, setData] = useState(null);
+
+  // ✅ FETCH BACKEND DATA
+  useEffect(() => {
+    fetch("http://localhost:5000/api/classOfService")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Class of Service...
+      </section>
+    );
+  }
 
   return (
     <Reveal>
-      <section 
-      id="class-of-service"
-      style={{ padding: "60px 0" }}>
-        
+      <section id="class-of-service" style={{ padding: "60px 0" }}>
+
+        {/* HEADER */}
         <div
           style={{
             display: "flex",
@@ -34,10 +45,11 @@ function ClassOfService() {
               color: "#2C3E50",
             }}
           >
-            Class of Service
+            {data.title}
           </h2>
         </div>
 
+        {/* TABLE */}
         <div
           style={{
             background: "#fff",
@@ -54,36 +66,30 @@ function ClassOfService() {
               borderCollapse: "collapse",
             }}
           >
+            {/* HEADER ROW */}
             <thead>
-              <tr
-                style={{
-                  background: "#D6EAF8",
-                }}
-              >
-                <th
-                  style={{
-                    padding: "16px",
-                    textAlign: "left",
-                  }}
-                >
-                  User Type
-                </th>
-
-                <th
-                  style={{
-                    padding: "16px",
-                    textAlign: "left",
-                  }}
-                >
-                  Calling Privileges
-                </th>
+              <tr style={{ background: "#D6EAF8" }}>
+                {data.header.map((h, i) => (
+                  <th
+                    key={i}
+                    style={{
+                      padding: "16px",
+                      textAlign: "center",
+                      fontWeight: "800",
+                      color: "#2C3E50",
+                    }}
+                  >
+                    {h}
+                  </th>
+                ))}
               </tr>
             </thead>
 
+            {/* BODY */}
             <tbody>
-              {users.map((user, index) => (
+              {data.rows.map((row, i) => (
                 <tr
-                  key={index}
+                  key={i}
                   style={{
                     borderTop: "1px solid #EAEAEA",
                   }}
@@ -94,7 +100,7 @@ function ClassOfService() {
                       fontWeight: "700",
                     }}
                   >
-                    {user[0]}
+                    {row[0]}
                   </td>
 
                   <td
@@ -103,7 +109,7 @@ function ClassOfService() {
                       color: "#555",
                     }}
                   >
-                    {user[1]}
+                    {row[1]}
                   </td>
                 </tr>
               ))}

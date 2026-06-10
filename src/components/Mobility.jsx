@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 import {
   FaMobileAlt,
@@ -7,50 +8,37 @@ import {
 } from "react-icons/fa";
 
 function Mobility() {
-  const features = [
-    {
-      title: "Cisco Jabber",
-      desc: "Softphone, messaging and presence platform for enterprise users.",
-      icon: <FaMobileAlt size={30} />,
-      color: "#D6EAF8",
-      border: "#3498DB",
-    },
-    {
-      title: "Extension Mobility",
-      desc: "Users can log in to any IP Phone and access their profile.",
-      icon: <FaUserCheck size={30} />,
-      color: "#E8F8F5",
-      border: "#2ECC71",
-    },
-    {
-      title: "Single Number Reach",
-      desc: "Ring desk phone and mobile phone simultaneously.",
-      icon: <FaPhoneAlt size={30} />,
-      color: "#FDEBD0",
-      border: "#F39C12",
-    },
-    {
-      title: "Mobile Connect",
-      desc: "Extend enterprise calling experience to mobile devices.",
-      icon: <FaLaptopHouse size={30} />,
-      color: "#EDE7F6",
-      border: "#8E44AD",
-    },
-  ];
+  const [data, setData] = useState(null);
+
+  const iconMap = {
+    mobile: <FaMobileAlt size={30} />,
+    user: <FaUserCheck size={30} />,
+    phone: <FaPhoneAlt size={30} />,
+    laptop: <FaLaptopHouse size={30} />,
+  };
+
+  // ✅ FETCH BACKEND DATA
+  useEffect(() => {
+    fetch("http://localhost:5000/api/mobility")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Mobility Features...
+      </section>
+    );
+  }
 
   return (
-    <section 
-      style={{ padding: "60px 0" }}
-      id="mobility"
-    >
+    <section style={{ padding: "60px 0" }} id="mobility">
+
       {/* HEADER */}
       <Reveal>
-        <div
-          style={{
-            textAlign: "center",
-            marginBottom: "40px",
-          }}
-        >
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
           <h2
             style={{
               fontSize: "26px",
@@ -59,7 +47,7 @@ function Mobility() {
               marginBottom: "10px",
             }}
           >
-            Mobility Features
+            {data.title}
           </h2>
 
           <p
@@ -69,7 +57,7 @@ function Mobility() {
               margin: 0,
             }}
           >
-            Enterprise mobility and remote communication capabilities
+            {data.subtitle}
           </p>
         </div>
       </Reveal>
@@ -82,7 +70,7 @@ function Mobility() {
           gap: "20px",
         }}
       >
-        {features.map((item, index) => (
+        {data.items.map((item, index) => (
           <Reveal key={index}>
             <div
               style={{
@@ -96,21 +84,14 @@ function Mobility() {
                 cursor: "pointer",
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(-6px)";
+                e.currentTarget.style.transform = "translateY(-6px)";
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.transform =
-                  "translateY(0px)";
+                e.currentTarget.style.transform = "translateY(0px)";
               }}
             >
-              <div
-                style={{
-                  color: "#2C3E50",
-                  marginBottom: "12px",
-                }}
-              >
-                {item.icon}
+              <div style={{ color: "#2C3E50", marginBottom: "12px" }}>
+                {iconMap[item.icon]}
               </div>
 
               <h3

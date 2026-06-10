@@ -1,0 +1,33 @@
+{
+  "title": "Security Features",
+  "items": [
+    {
+      "title": "TLS",
+      "desc": "Encrypts signaling traffic between endpoints and CUCM.",
+      "icon": "lock",
+      "color": "#D6EAF8",
+      "border": "#3498DB"
+    },
+    {
+      "title": "SRTP",
+      "desc": "Encrypts voice media streams for secure calls.",
+      "icon": "shield",
+      "color": "#E8F8F5",
+      "border": "#2ECC71"
+    },
+    {
+      "title": "CAPF",
+      "desc": "Certificate Authority Proxy Function for device certificates.",
+      "icon": "key",
+      "color": "#FDEBD0",
+      "border": "#F39C12"
+    },
+    {
+      "title": "LDAP",
+      "desc": "Directory integration for centralized authentication.",
+      "icon": "database",
+      "color": "#EDE7F6",
+      "border": "#8E44AD"
+    }
+  ]
+}

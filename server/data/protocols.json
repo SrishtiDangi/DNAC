@@ -1,0 +1,44 @@
+{
+  "title": "Key CUCM Protocols",
+  "icon": "network",
+  "headerColor": "#F8C8DC",
+  "borderColor": "#D6EAF8",
+  "columns": ["Protocol", "Type", "Purpose"],
+  "rows": [
+    {
+      "protocol": "SIP",
+      "type": "Signaling",
+      "purpose": "IP Call Setup & Control"
+    },
+    {
+      "protocol": "SCCP",
+      "type": "Cisco Proprietary",
+      "purpose": "IP Phone Control"
+    },
+    {
+      "protocol": "H.323",
+      "type": "Signaling",
+      "purpose": "Legacy VoIP Communication"
+    },
+    {
+      "protocol": "RTP / SRTP",
+      "type": "Media",
+      "purpose": "Voice Media Transport"
+    },
+    {
+      "protocol": "MGCP",
+      "type": "Gateway Control",
+      "purpose": "PSTN Gateway Management"
+    },
+    {
+      "protocol": "LDAP",
+      "type": "Directory",
+      "purpose": "User Synchronization"
+    },
+    {
+      "protocol": "TFTP",
+      "type": "File Transfer",
+      "purpose": "Phone Configuration Download"
+    }
+  ]
+}

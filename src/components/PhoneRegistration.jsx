@@ -7,59 +7,24 @@ import {
   FaDatabase,
   FaCheckCircle,
 } from "react-icons/fa";
-
+import { useState, useEffect } from "react";
 function PhoneRegistration() {
-  const steps = [
-    {
-      title: "Phone",
-      desc: "Power On",
-      icon: <FaPhone />,
-      color: "#D6EAF8",
-      border: "#85C1E9",
-    },
-    {
-      title: "DHCP",
-      desc: "IP + Option 150",
-      icon: <FaNetworkWired />,
-      color: "#E8F8F5",
-      border: "#76D7C4",
-    },
-    {
-      title: "TFTP",
-      desc: "Downloads Config XML",
-      icon: <FaFileDownload />,
-      color: "#FDEBD0",
-      border: "#F5CBA7",
-    },
-    {
-      title: "CUCM",
-      desc: "Registration Request",
-      icon: <FaServer />,
-      color: "#FADBD8",
-      border: "#E6B0AA",
-    },
-    {
-      title: "DB Lookup",
-      desc: "Verify Device",
-      icon: <FaDatabase />,
-      color: "#E8DAEF",
-      border: "#D2B4DE",
-    },
-    {
-      title: "ACK",
-      desc: "Registration Accepted",
-      icon: <FaCheckCircle />,
-      color: "#D5F5E3",
-      border: "#82E0AA",
-    },
-    {
-      title: "Registered",
-      desc: "Ready For Calls",
-      icon: <FaCheckCircle />,
-      color: "#D4EFDF",
-      border: "#7DCEA0",
-    },
-  ];
+    const [steps, setSteps] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/phoneRegistration")
+        .then((res) => res.json())
+        .then((data) => setSteps(data))
+        .catch((err) => console.log(err));
+    }, []);
+    const iconMap = {
+        phone: <FaPhone />,
+        network: <FaNetworkWired />,
+        download: <FaFileDownload />,
+        server: <FaServer />,
+        database: <FaDatabase />,
+        check: <FaCheckCircle />,
+};
 
   return (
     <Reveal>
@@ -124,7 +89,7 @@ function PhoneRegistration() {
                     marginBottom: "10px",
                   }}
                 >
-                  {step.icon}
+                  {iconMap[step.icon]}
                 </div>
 
                 <h4

@@ -5,38 +5,21 @@ import {
   FaPhoneAlt,
   FaGlobe,
 } from "react-icons/fa";
-
+import { useEffect, useState } from "react";
 function GatewayPSTN() {
-  const flow = [
-    {
-      title: "CUCM",
-      desc: "Central Call Control",
-      bg: "#F8C8DC",
-      border: "#E91E63",
-      icon: <FaServer size={28} />,
-    },
-    {
-      title: "SIP Trunk",
-      desc: "VoIP Signaling Connection",
-      bg: "#D6EAF8",
-      border: "#3498DB",
-      icon: <FaNetworkWired size={28} />,
-    },
-    {
-      title: "Cisco CUBE",
-      desc: "Session Border Controller",
-      bg: "#E8F8F5",
-      border: "#2ECC71",
-      icon: <FaPhoneAlt size={28} />,
-    },
-    {
-      title: "PSTN",
-      desc: "Public Telephone Network",
-      bg: "#FDEBD0",
-      border: "#F39C12",
-      icon: <FaGlobe size={28} />,
-    },
-  ];
+  const [flow, setFlow] = useState([]);
+  useEffect(() => {
+  fetch("http://localhost:5000/api/gateway")
+    .then((res) => res.json())
+    .then((data) => setFlow(data))
+    .catch((err) => console.log(err));
+  }, []);
+  const iconMap = {
+    server: <FaServer size={28} />,
+    network: <FaNetworkWired size={28} />,
+    phone: <FaPhoneAlt size={28} />,
+    globe: <FaGlobe size={28} />,
+  };
 
   return (
     <section style={{ padding: "60px 0" }} id="gateway-pstn">
@@ -79,7 +62,7 @@ function GatewayPSTN() {
                   border: `2px solid ${item.border}`,
                 }}
               >
-                <div style={{ color: "#2C3E50" }}>{item.icon}</div>
+                <div style={{ color: "#2C3E50" }}>{iconMap[item.icon]}</div>
 
                 <h3 className="gatewayTitle">{item.title}</h3>
 

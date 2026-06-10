@@ -2,37 +2,37 @@ import { useEffect, useRef, useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 
 function CallFlow() {
-  const flow = [
-    { name: "Telecom", bg: "#EAF2F8", size: "15px" },
-    { name: "Voice Gateway", bg: "#FDEBD0", size: "15px" },
-    { name: "CUCM", bg: "#D6EAF8", size: "16px", weight: "800" },
-    { name: "IP Endpoints", bg: "#E8F4F8", size: "14px" },
-    { name: "CMS", bg: "#EDE7F6", size: "14px" },
-  ];
+    const [flow, setFlow] = useState([]);
+    useEffect(() => {
+        fetch("http://localhost:5000/api/callflow")
+        .then((res) => res.json())
+        .then((data) => setFlow(data))
+        .catch((err) => console.log(err));
+    }, []);
 
   const ref = useRef([]);
   const [visible, setVisible] = useState([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const index = entry.target.getAttribute("data-index");
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const index = entry.target.getAttribute("data-index");
 
-          if (entry.isIntersecting) {
-            setVisible((prev) => [...new Set([...prev, Number(index)])]);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+        if (entry.isIntersecting) {
+          setVisible((prev) => [...new Set([...prev, Number(index)])]);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
-    ref.current.forEach((el) => {
-      if (el) observer.observe(el);
-    });
+  ref.current.forEach((el) => {
+    if (el) observer.observe(el);
+  });
 
-    return () => observer.disconnect();
-  }, []);
+  return () => observer.disconnect();
+}, [flow]);
 
   return (
     <section id="call-flow" style={{ padding: "50px 0" }}>
@@ -95,9 +95,9 @@ function CallFlow() {
               style={{
                 background: item.bg,
                 border: "1.5px solid rgba(0,0,0,0.08)",
-                padding: "16px 24px",
+                padding: "22px 32px",
                 borderRadius: "16px",
-                minWidth: "180px",
+                minWidth: "220px",
                 textAlign: "center",
                 color: "#2C3E50",
                 fontSize: item.size,

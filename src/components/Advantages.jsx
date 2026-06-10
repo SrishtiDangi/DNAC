@@ -1,26 +1,24 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 
 function Advantages() {
-  const items = [
-    {
-      title: "High Availability",
-      color: "#D6EAF8",
-      border: "#85C1E9",
-      desc: "System remains operational even during failures",
-    },
-    {
-      title: "Scalability",
-      color: "#E8F8F5",
-      border: "#76D7C4",
-      desc: "Easily expand users and infrastructure",
-    },
-    {
-      title: "Redundancy",
-      color: "#FDEBD0",
-      border: "#F5CBA7",
-      desc: "Backup systems ensure zero downtime",
-    },
-  ];
+  const [data, setData] = useState(null);
+
+  // ✅ FETCH BACKEND
+  useEffect(() => {
+    fetch("http://localhost:5000/api/advantages")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Advantages...
+      </section>
+    );
+  }
 
   const baseStyle = {
     width: "240px",
@@ -41,6 +39,8 @@ function Advantages() {
   return (
     <section id="advantages" style={{ padding: "60px 0" }}>
       <Reveal>
+
+        {/* TITLE */}
         <h2
           style={{
             textAlign: "center",
@@ -50,9 +50,10 @@ function Advantages() {
             color: "#2C3E50",
           }}
         >
-          Key Business Benefits
+          {data.title}
         </h2>
 
+        {/* CARDS */}
         <div
           style={{
             display: "flex",
@@ -61,7 +62,7 @@ function Advantages() {
             flexWrap: "wrap",
           }}
         >
-          {items.map((item, i) => (
+          {data.items.map((item, i) => (
             <div
               key={i}
               style={{
@@ -73,7 +74,8 @@ function Advantages() {
                 Object.assign(e.currentTarget.style, hoverStyle);
               }}
               onMouseLeave={(e) => {
-                Object.assign(e.currentTarget.style, baseStyle, {
+                Object.assign(e.currentTarget.style, {
+                  ...baseStyle,
                   background: `linear-gradient(135deg, ${item.color}, #ffffff)`,
                   border: `2px solid ${item.border}`,
                 });
@@ -82,12 +84,14 @@ function Advantages() {
               <h3 style={{ fontSize: "18px", fontWeight: "800" }}>
                 {item.title}
               </h3>
+
               <p style={{ fontSize: "13px", color: "#5D6D7E" }}>
                 {item.desc}
               </p>
             </div>
           ))}
         </div>
+
       </Reveal>
     </section>
   );

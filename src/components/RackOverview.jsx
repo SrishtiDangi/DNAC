@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
 import { FaServer } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 function RackComparison() {
-  const rackA = ["Voice Gateway", "CMS", "2 PBX", "16 PRI Lines"];
-  const rackB = ["Voice Gateway", "2 PBX", "16 PRI Lines"];
+  const [rackData, setRackData] = useState(null);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/rack")
+    .then(res => res.json())
+    .then(data => setRackData(data))
+    .catch(err => console.log(err));
+}, []);
+
+if (!rackData?.items?.length) return <div>Loading...</div>;
 
   const cardStyle = (bg, border) => ({
     width: "300px",
@@ -89,7 +97,7 @@ function RackComparison() {
           <FaServer size={38} color="#B9770E" />
 
           <h3 style={{ marginTop: "12px", color: "#7E5109" }}>
-            Rack A{" "}
+            {rackData?.items?.[0]?.name}{" "}
             <span
               style={{
                 fontSize: "12px",
@@ -113,7 +121,7 @@ function RackComparison() {
               justifyContent: "center",
             }}
           >
-            {rackA.map((item, i) => (
+            {rackData?.items?.[0]?.features.map((item, i) => (
               <span
                 key={i}
                 style={{
@@ -189,7 +197,7 @@ function RackComparison() {
               justifyContent: "center",
             }}
           >
-            {rackB.map((item, i) => (
+            {rackData?.items?.[1]?.features.map((item, i) => (
               <span
                 key={i}
                 style={{

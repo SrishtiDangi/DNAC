@@ -1,26 +1,34 @@
+import { useState, useEffect } from "react";
 import { FaVolumeUp, FaSignal } from "react-icons/fa";
 
 function CodecQoS() {
-  const codecs = [
-    { codec: "G.711", bitrate: "64 Kbps", mos: "4.4", notes: "High Quality" },
-    { codec: "G.722", bitrate: "64 Kbps HD", mos: "4.5", notes: "HD Voice" },
-    { codec: "G.729", bitrate: "8 Kbps", mos: "3.9", notes: "Bandwidth Saving" },
-    { codec: "Opus", bitrate: "Variable", mos: "4.5+", notes: "Modern Codec" },
-  ];
+  const [data, setData] = useState(null);
 
-  const qos = [
-    { traffic: "Voice RTP", dscp: "EF / 46" },
-    { traffic: "Call Signaling", dscp: "CS3 / 24" },
-    { traffic: "Video", dscp: "AF41 / 34" },
-  ];
+  const iconMap = {
+    volume: <FaVolumeUp size={28} color="#2C3E50" />,
+    signal: <FaSignal />,
+  };
+
+  // ✅ FETCH BACKEND DATA
+  useEffect(() => {
+    fetch("http://localhost:5000/api/codecQoS")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Codec & QoS...
+      </section>
+    );
+  }
 
   return (
-    <section
-      id="codecc"
-      style={{
-        padding: "60px 0",
-      }}
-    >
+    <section id="codecc" style={{ padding: "60px 0" }}>
+
+      {/* HEADER */}
       <div
         style={{
           display: "flex",
@@ -30,19 +38,13 @@ function CodecQoS() {
           marginBottom: "40px",
         }}
       >
-        <FaVolumeUp size={28} color="#2C3E50" />
-        <h2
-          style={{
-            fontSize: "26px",
-            fontWeight: "900",
-            margin: 0,
-            color: "#2C3E50",
-          }}
-        >
-          Codec & QoS Reference
+        {iconMap[data.icon]}
+        <h2 style={{ fontSize: "26px", fontWeight: "900", margin: 0, color: "#2C3E50" }}>
+          {data.title}
         </h2>
       </div>
 
+      {/* GRID */}
       <div
         style={{
           display: "grid",
@@ -50,7 +52,8 @@ function CodecQoS() {
           gap: "25px",
         }}
       >
-        {/* Codec Card */}
+
+        {/* CODEC TABLE */}
         <div
           style={{
             background: "#fff",
@@ -61,43 +64,39 @@ function CodecQoS() {
         >
           <div
             style={{
-              background: "#D6EAF8",
+              background: data.codecs.headerColor,
               padding: "18px",
               fontWeight: "800",
             }}
           >
-            Voice Codecs
+            {data.codecs.title}
           </div>
 
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ padding: "12px" }}>Codec</th>
-                <th style={{ padding: "12px" }}>Bitrate</th>
-                <th style={{ padding: "12px" }}>MOS</th>
-                <th style={{ padding: "12px" }}>Purpose</th>
+                {data.codecs.columns.map((col, i) => (
+                  <th key={i} style={header}>
+                    {col}
+                  </th>
+                ))}
               </tr>
             </thead>
 
             <tbody>
-              {codecs.map((c, i) => (
+              {data.codecs.rows.map((c, i) => (
                 <tr key={i}>
-                  <td style={{ padding: "12px", textAlign: "center" }}>{c.codec}</td>
-                  <td style={{ padding: "12px", textAlign: "center" }}>{c.bitrate}</td>
-                  <td style={{ padding: "12px", textAlign: "center" }}>{c.mos}</td>
-                  <td style={{ padding: "12px", textAlign: "center" }}>{c.notes}</td>
+                  <td style={cell}>{c.codec}</td>
+                  <td style={cell}>{c.bitrate}</td>
+                  <td style={cell}>{c.mos}</td>
+                  <td style={cell}>{c.notes}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* QoS Card */}
+        {/* QOS TABLE */}
         <div
           style={{
             background: "#fff",
@@ -108,7 +107,7 @@ function CodecQoS() {
         >
           <div
             style={{
-              background: "#FADBD8",
+              background: data.qos.headerColor,
               padding: "18px",
               fontWeight: "800",
               display: "flex",
@@ -116,36 +115,26 @@ function CodecQoS() {
               gap: "10px",
             }}
           >
-            <FaSignal />
-            QoS DSCP Markings
+            {iconMap.signal}
+            {data.qos.title}
           </div>
 
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-            }}
-          >
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ padding: "12px" }}>Traffic</th>
-                <th style={{ padding: "12px" }}>DSCP</th>
+                {data.qos.columns.map((col, i) => (
+                  <th key={i} style={header}>
+                    {col}
+                  </th>
+                ))}
               </tr>
             </thead>
 
             <tbody>
-              {qos.map((q, i) => (
+              {data.qos.rows.map((q, i) => (
                 <tr key={i}>
-                  <td style={{ padding: "12px", textAlign: "center" }}>
-                    {q.traffic}
-                  </td>
-                  <td
-                    style={{
-                      padding: "12px",
-                      textAlign: "center",
-                      fontWeight: "800",
-                    }}
-                  >
+                  <td style={cell}>{q.traffic}</td>
+                  <td style={{ ...cell, fontWeight: "800" }}>
                     {q.dscp}
                   </td>
                 </tr>
@@ -153,9 +142,25 @@ function CodecQoS() {
             </tbody>
           </table>
         </div>
+
       </div>
     </section>
   );
 }
+
+const header = {
+  padding: "12px",
+  textAlign: "center",
+  fontWeight: "800",
+  color: "#2C3E50",
+};
+
+const cell = {
+  padding: "12px",
+  textAlign: "center",
+  borderBottom: "1px solid #eee",
+  color: "#555",
+  fontSize: "14px",
+};
 
 export default CodecQoS;

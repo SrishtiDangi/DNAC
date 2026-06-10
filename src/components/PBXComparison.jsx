@@ -1,12 +1,27 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaPhone, FaCloud } from "react-icons/fa";
 
 function PBXComparison() {
+  const [data, setData] = useState(null);
+
+  const iconMap = {
+    phone: <FaPhone size={42} />,
+    cloud: <FaCloud size={42} />,
+  };
+
+  // ✅ FETCH FROM BACKEND
+  useEffect(() => {
+    fetch("http://localhost:5000/api/pbxComparison")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) return null;
+
   return (
-    <section 
-      style={{ padding: "60px 0" }}
-      id="pbx-comparison"
-    >
+    <section style={{ padding: "60px 0" }} id="pbx-comparison">
 
       {/* HEADER */}
       <div
@@ -19,7 +34,7 @@ function PBXComparison() {
         }}
       >
         <h2 style={{ fontSize: "26px", fontWeight: "900" }}>
-          PBX vs CUCM
+          {data.title}
         </h2>
       </div>
 
@@ -33,40 +48,34 @@ function PBXComparison() {
         }}
       >
 
-        {/* PBX */}
+        {/* LEFT BOX */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           style={{
             width: "350px",
-            background: "#FDEBD0",
+            background: data.left.bg,
             borderRadius: "18px",
             padding: "28px",
             boxShadow: "0 12px 28px rgba(0,0,0,0.10)",
-            border: "2px solid #F5CBA7",
+            border: `2px solid ${data.left.border}`,
             textAlign: "center",
           }}
         >
-          <FaPhone size={42} color="#B9770E" />
+          {iconMap[data.left.icon]}
 
           <h3
             style={{
               margin: "14px 0 18px 0",
-              color: "#7E5109",
+              color: data.left.color,
               fontSize: "20px",
               fontWeight: "800",
             }}
           >
-            Traditional PBX
+            {data.left.title}
           </h3>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {[
-              "Hardware Based",
-              "Limited Scalability",
-              "Basic Availability",
-              "Manual Expansion",
-              "Higher Maintenance",
-            ].map((t, i) => (
+            {data.left.items.map((t, i) => (
               <div
                 key={i}
                 style={{
@@ -75,7 +84,7 @@ function PBXComparison() {
                   borderRadius: "12px",
                   fontSize: "14px",
                   color: "#5D4037",
-                  border: "1px solid #F5CBA7",
+                  border: `1px solid ${data.left.border}`,
                   fontWeight: "500",
                 }}
               >
@@ -85,40 +94,34 @@ function PBXComparison() {
           </div>
         </motion.div>
 
-        {/* CUCM */}
+        {/* RIGHT BOX */}
         <motion.div
           whileHover={{ scale: 1.05 }}
           style={{
             width: "350px",
-            background: "#D6EAF8",
+            background: data.right.bg,
             borderRadius: "18px",
             padding: "28px",
             boxShadow: "0 12px 28px rgba(0,0,0,0.10)",
-            border: "2px solid #85C1E9",
+            border: `2px solid ${data.right.border}`,
             textAlign: "center",
           }}
         >
-          <FaCloud size={42} color="#1B4F72" />
+          {iconMap[data.right.icon]}
 
           <h3
             style={{
               margin: "14px 0 18px 0",
-              color: "#1B4F72",
+              color: data.right.color,
               fontSize: "20px",
               fontWeight: "800",
             }}
           >
-            CUCM
+            {data.right.title}
           </h3>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-            {[
-              "IP Based Communication",
-              "Highly Scalable",
-              "Redundant Architecture",
-              "Centralized Management",
-              "Enterprise Ready",
-            ].map((t, i) => (
+            {data.right.items.map((t, i) => (
               <div
                 key={i}
                 style={{
@@ -127,7 +130,7 @@ function PBXComparison() {
                   borderRadius: "12px",
                   fontSize: "14px",
                   color: "#1B4F72",
-                  border: "1px solid #85C1E9",
+                  border: `1px solid ${data.right.border}`,
                   fontWeight: "500",
                 }}
               >

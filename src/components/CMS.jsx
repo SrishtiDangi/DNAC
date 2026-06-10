@@ -1,32 +1,16 @@
 import { FaHeadset, FaMicrophone, FaChartBar } from "react-icons/fa";
-
+import { useEffect, useState } from "react";
 function CMS() {
-  const features = [
-    {
-      icon: <FaMicrophone size={38} />,
-      title: "Call Recording",
-      desc: "Records customer interactions.",
-      bg: "#FDEBD0",
-      border: "#B9770E",
-      color: "#7E5109",
-    },
-    {
-      icon: <FaHeadset size={38} />,
-      title: "Monitoring",
-      desc: "Real-time supervision and support.",
-      bg: "#D6EAF8",
-      border: "#2E86C1",
-      color: "#1B4F72",
-    },
-    {
-      icon: <FaChartBar size={38} />,
-      title: "Reporting",
-      desc: "Detailed analytics and reports.",
-      bg: "#E8F4F8",
-      border: "#7D3C98",
-      color: "#4A235A",
-    },
-  ];
+  const [cmsData, setCmsData] = useState(null);
+
+useEffect(() => {
+  fetch("http://localhost:5000/api/cms")
+    .then(res => res.json())
+    .then(data => setCmsData(data))
+    .catch(err => console.log(err));
+}, []);
+
+if (!cmsData) return <div>Loading...</div>;
 
   const base = {
     transform: "translateY(0) scale(1)",
@@ -37,6 +21,11 @@ function CMS() {
     transform: "translateY(-10px) scale(1.05)",
     boxShadow: "0 18px 40px rgba(0,0,0,0.18)",
   };
+  const iconMap = {
+    microphone: <FaMicrophone size={38} />,
+    headset: <FaHeadset size={38} />,
+    chart: <FaChartBar size={38} />
+};
 
   return (
     <section style={{ padding: "60px 0" }} id="cms">
@@ -71,7 +60,7 @@ function CMS() {
             gap: "25px",
           }}
         >
-          {features.slice(0, 2).map((item, i) => (
+          {cmsData?.features?.slice(0, 2).map((item, i) => (
             <div
               key={i}
               style={{
@@ -92,7 +81,7 @@ function CMS() {
               }
             >
               <div style={{ color: item.color, marginBottom: "10px" }}>
-                {item.icon}
+                {iconMap[item.icon]}
               </div>
 
               <h3
@@ -116,8 +105,8 @@ function CMS() {
         {/* BOTTOM CARD */}
         <div
           style={{
-            background: `linear-gradient(135deg, ${features[2].bg}, #ffffff)`,
-            border: `2px solid ${features[2].border}`,
+            background: `linear-gradient(135deg, ${cmsData?.features?.[2]?.bg}, #ffffff)`,
+            border: `2px solid ${cmsData?.features?.[2]?.border}`,
             borderRadius: "16px",
             padding: "24px",
             textAlign: "center",
@@ -133,23 +122,23 @@ function CMS() {
             Object.assign(e.currentTarget.style, base)
           }
         >
-          <div style={{ color: features[2].color, marginBottom: "10px" }}>
-            {features[2].icon}
+          <div style={{ color: cmsData?.features?.[2]?.color, marginBottom: "10px" }}>
+            {iconMap[cmsData?.features?.[2]?.icon]}
           </div>
 
           <h3
             style={{
               marginBottom: "6px",
-              color: features[2].color,
+              color: cmsData?.features?.[2]?.color,
               fontSize: "18px",
               fontWeight: "800",
             }}
           >
-            {features[2].title}
+            {cmsData?.features?.[2]?.title}
           </h3>
 
           <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
-            {features[2].desc}
+            {cmsData?.features?.[2]?.desc}
           </p>
         </div>
 

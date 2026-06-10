@@ -1,13 +1,16 @@
 import Reveal from "./Reveal";
 import { FaNetworkWired, FaServer } from "react-icons/fa";
-
+import { useEffect, useState } from "react";
 function Architecture() {
-  const subscribers = [
-    { title: "Subscriber 1", desc: "Call Processing", color: "#D6EAF8", border: "#2E86C1" },
-    { title: "Subscriber 2", desc: "Redundancy", color: "#E8F4F8", border: "#7D3C98" },
-    { title: "Subscriber 3", desc: "High Availability", color: "#D5F5E3", border: "#1E8449" },
-    { title: "Subscriber 4", desc: "Failover Node", color: "#FDEBD0", border: "#B9770E" },
-  ];
+  const [architecture, setArchitecture] = useState(null);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/architecture")
+    .then((res) => res.json())
+    .then((data) => setArchitecture(data))
+    .catch((err) => console.log(err));
+}, []);
+
+if (!architecture) return null;
 
   return (
     <section
@@ -79,11 +82,11 @@ function Architecture() {
             <FaServer size={40} color="#C0392B" />
 
             <h3 style={{ margin: "10px 0 5px", fontSize: "18px", fontWeight: "800" }}>
-              Publisher Server
+              {architecture.publisher.title}
             </h3>
 
             <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
-              Database & Configuration
+              {architecture.publisher.desc}
             </p>
             <div
             style={{
@@ -111,7 +114,7 @@ function Architecture() {
               margin: "10px 0",
             }}
           >
-            {["MOH 1", "MOH 2", "TFTP 1", "TFTP 2"].map((t, i) => (
+            {architecture.infra.map((t, i) => (
               <div
                 key={i}
                 style={{
@@ -145,7 +148,7 @@ function Architecture() {
               justifyContent: "center",
             }}
           >
-            {subscribers.map((s, i) => (
+            {architecture.subscribers.map((s, i) => (
               <div
                 key={i}
                 style={{

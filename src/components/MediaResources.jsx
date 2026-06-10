@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 import {
   FaExchangeAlt,
@@ -8,43 +9,31 @@ import {
 } from "react-icons/fa";
 
 function MediaResources() {
-  const resources = [
-    {
-      icon: <FaExchangeAlt size={30} />,
-      title: "Transcoder",
-      desc: "Converts between incompatible codecs such as G.711 and G.729.",
-      color: "#D6EAF8",
-      border: "#3498DB",
-    },
-    {
-      icon: <FaUsers size={30} />,
-      title: "Conference Bridge",
-      desc: "Enables multi-party audio conferencing between endpoints.",
-      color: "#E8F8F5",
-      border: "#2ECC71",
-    },
-    {
-      icon: <FaMusic size={30} />,
-      title: "Music on Hold",
-      desc: "Streams audio to callers placed on hold.",
-      color: "#FDEBD0",
-      border: "#F39C12",
-    },
-    {
-      icon: <FaBullhorn size={30} />,
-      title: "Annunciator",
-      desc: "Plays prerecorded system announcements and prompts.",
-      color: "#FADBD8",
-      border: "#E74C3C",
-    },
-    {
-      icon: <FaRandom size={30} />,
-      title: "MTP",
-      desc: "Media Termination Point for SIP and H.323 interoperability.",
-      color: "#E8DFF5",
-      border: "#8E44AD",
-    },
-  ];
+  const [data, setData] = useState(null);
+
+  const iconMap = {
+    exchange: <FaExchangeAlt size={30} />,
+    users: <FaUsers size={30} />,
+    music: <FaMusic size={30} />,
+    bullhorn: <FaBullhorn size={30} />,
+    random: <FaRandom size={30} />,
+  };
+
+  // ✅ FETCH BACKEND DATA
+  useEffect(() => {
+    fetch("http://localhost:5000/api/mediaResources")
+      .then((res) => res.json())
+      .then((data) => setData(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  if (!data) {
+    return (
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
+        Loading Media Resources...
+      </section>
+    );
+  }
 
   const normal = (borderColor) => ({
     transform: "translateY(0) scale(1)",
@@ -78,11 +67,11 @@ function MediaResources() {
               marginBottom: "10px",
             }}
           >
-            Media Resources
+            {data.title}
           </h2>
 
           <p style={{ color: "#5D6D7E", fontSize: "14px" }}>
-            Core CUCM media services used during call processing
+            {data.subtitle}
           </p>
         </div>
 
@@ -94,7 +83,7 @@ function MediaResources() {
             gap: "22px",
           }}
         >
-          {resources.map((item, index) => (
+          {data.items.map((item, index) => (
             <div
               key={index}
               style={{
@@ -120,7 +109,7 @@ function MediaResources() {
               }}
             >
               <div style={{ color: "#2C3E50", marginBottom: "15px" }}>
-                {item.icon}
+                {iconMap[item.icon]}
               </div>
 
               <h3

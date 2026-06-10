@@ -1,0 +1,41 @@
+{
+  "title": "High Availability & Disaster Recovery",
+  "subtitle": "CUCM redundancy, failover and business continuity architecture",
+  "items": [
+    {
+      "icon": "server",
+      "title": "Publisher",
+      "desc": "Primary node handling configuration and database writes in CUCM cluster.",
+      "color": "#D6EAF8",
+      "border": "#3498DB"
+    },
+    {
+      "icon": "database",
+      "title": "Subscribers",
+      "desc": "Handle call processing and provide redundancy and load balancing.",
+      "color": "#E8F8F5",
+      "border": "#2ECC71"
+    },
+    {
+      "icon": "shield",
+      "title": "SRST",
+      "desc": "Enables branch survivability during WAN or CUCM connectivity failure.",
+      "color": "#FDEBD0",
+      "border": "#F39C12"
+    },
+    {
+      "icon": "sync",
+      "title": "DRS Backup",
+      "desc": "Disaster Recovery System used for CUCM backup and restore operations.",
+      "color": "#FADBD8",
+      "border": "#E74C3C"
+    },
+    {
+      "icon": "globe",
+      "title": "Geographic Redundancy",
+      "desc": "Cluster deployment across multiple sites for maximum availability.",
+      "color": "#E8DFF5",
+      "border": "#8E44AD"
+    }
+  ]
+}
