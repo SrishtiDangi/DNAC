@@ -2,41 +2,43 @@ import { useEffect, useRef, useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 
 function CallFlow() {
-    const [flow, setFlow] = useState([]);
-    useEffect(() => {
-        fetch("http://localhost:5000/api/callflow")
-        .then((res) => res.json())
-        .then((data) => setFlow(data))
-        .catch((err) => console.log(err));
-    }, []);
+  const [flow, setFlow] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/callflow")
+      .then((res) => res.json())
+      .then((data) => setFlow(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const ref = useRef([]);
   const [visible, setVisible] = useState([]);
 
   useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const index = entry.target.getAttribute("data-index");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = entry.target.getAttribute("data-index");
 
-        if (entry.isIntersecting) {
-          setVisible((prev) => [...new Set([...prev, Number(index)])]);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
+          if (entry.isIntersecting) {
+            setVisible((prev) => [
+              ...new Set([...prev, Number(index)]),
+            ]);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-  ref.current.forEach((el) => {
-    if (el) observer.observe(el);
-  });
+    ref.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
 
-  return () => observer.disconnect();
-}, [flow]);
+    return () => observer.disconnect();
+  }, [flow]);
 
   return (
     <section id="call-flow" style={{ padding: "50px 0" }}>
-
       {/* HEADER */}
       <div
         style={{
@@ -81,13 +83,13 @@ function CallFlow() {
               alignItems: "center",
               gap: "12px",
 
-              // 🍏 APPLE STYLE ANIMATION
               opacity: visible.includes(index) ? 1 : 0,
               transform: visible.includes(index)
                 ? "translateY(0px) scale(1)"
                 : "translateY(25px) scale(0.96)",
 
-              transition: "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
+              transition:
+                "all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)",
             }}
           >
             {/* NODE */}
@@ -104,6 +106,21 @@ function CallFlow() {
                 fontWeight: item.weight || "600",
                 boxShadow: "0 10px 20px rgba(0,0,0,0.06)",
                 cursor: "pointer",
+
+                // ⭐ HOVER ADDED (SAFE)
+                transition: "all 0.25s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(-6px) scale(1.03)";
+                e.currentTarget.style.boxShadow =
+                  "0 18px 35px rgba(0,0,0,0.15)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform =
+                  "translateY(0px) scale(1)";
+                e.currentTarget.style.boxShadow =
+                  "0 10px 20px rgba(0,0,0,0.06)";
               }}
             >
               {item.name}
@@ -135,7 +152,6 @@ function CallFlow() {
           }
         `}
       </style>
-
     </section>
   );
 }

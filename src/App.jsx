@@ -1,5 +1,4 @@
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
 import Overview from "./components/Overview";
 import Architecture from "./components/Architecture";
 import RackOverview from "./components/RackOverview";
@@ -25,7 +24,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <Hero />
 
       {/* OVERVIEW */}
       <Overview />

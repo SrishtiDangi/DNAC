@@ -8,23 +8,25 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 import { useState, useEffect } from "react";
-function PhoneRegistration() {
-    const [steps, setSteps] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:5000/api/phoneRegistration")
-        .then((res) => res.json())
-        .then((data) => setSteps(data))
-        .catch((err) => console.log(err));
-    }, []);
-    const iconMap = {
-        phone: <FaPhone />,
-        network: <FaNetworkWired />,
-        download: <FaFileDownload />,
-        server: <FaServer />,
-        database: <FaDatabase />,
-        check: <FaCheckCircle />,
-};
+function PhoneRegistration() {
+  const [steps, setSteps] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/phoneRegistration")
+      .then((res) => res.json())
+      .then((data) => setSteps(data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const iconMap = {
+    phone: <FaPhone />,
+    network: <FaNetworkWired />,
+    download: <FaFileDownload />,
+    server: <FaServer />,
+    database: <FaDatabase />,
+    check: <FaCheckCircle />,
+  };
 
   return (
     <Reveal>
@@ -45,8 +47,6 @@ function PhoneRegistration() {
           >
             IP Phone Registration Flow
           </h2>
-
-          
         </div>
 
         {/* FLOW */}
@@ -115,6 +115,7 @@ function PhoneRegistration() {
                 </p>
               </div>
 
+              {/* 🔥 ANIMATED ARROW */}
               {index !== steps.length - 1 && (
                 <div
                   style={{
@@ -122,6 +123,8 @@ function PhoneRegistration() {
                     margin: "0 8px",
                     color: "#34495E",
                     fontWeight: "800",
+                    display: "inline-block",
+                    animation: "flowArrow 1.2s infinite ease-in-out",
                   }}
                 >
                   →
@@ -131,12 +134,29 @@ function PhoneRegistration() {
           ))}
         </div>
 
-        {/* ONLY HOVER CSS */}
+        {/* HOVER + ARROW ANIMATION CSS */}
         <style>
           {`
             .regCard:hover {
               transform: translateY(-10px) scale(1.05);
               box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+            }
+
+            @keyframes flowArrow {
+              0% {
+                transform: translateX(0px);
+                opacity: 0.3;
+              }
+
+              50% {
+                transform: translateX(10px);
+                opacity: 1;
+              }
+
+              100% {
+                transform: translateX(18px);
+                opacity: 0.2;
+              }
             }
           `}
         </style>

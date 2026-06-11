@@ -8,6 +8,35 @@ import {
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
+function EcosystemCard({ bg, icon, title }) {
+  const [hover, setHover] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        background: bg,
+        padding: hover ? "18px" : "16px",
+        borderRadius: "16px",
+        textAlign: "center",
+        minWidth: "160px",
+        boxShadow: hover
+          ? "0 15px 30px rgba(0,0,0,0.15)"
+          : "0 10px 20px rgba(0,0,0,0.08)",
+        transform: hover ? "translateY(-6px)" : "translateY(0)",
+        transition: "all 0.25s ease",
+        fontWeight: "700",
+        color: "#2C3E50",
+        cursor: "pointer",
+      }}
+    >
+      {icon}
+      <div style={{ marginTop: "8px" }}>{title}</div>
+    </div>
+  );
+}
+
 function Ecosystem() {
   const [ecosystem, setEcosystem] = useState(null);
 
@@ -27,29 +56,10 @@ function Ecosystem() {
     globe: <FaGlobe size={28} />,
   };
 
-  const cardStyle = (bg) => ({
-    background: bg,
-    padding: "16px",
-    borderRadius: "16px",
-    textAlign: "center",
-    minWidth: "160px",
-    boxShadow: "0 10px 20px rgba(0,0,0,0.08)",
-    fontWeight: "700",
-    color: "#2C3E50",
-  });
-
   return (
-    <section
-      id="ecosystem"
-      style={{ padding: "60px 0" }}
-    >
+    <section id="ecosystem" style={{ padding: "60px 0" }}>
       <Reveal>
-        <div
-          style={{
-            textAlign: "center",
-            marginBottom: "50px",
-          }}
-        >
+        <div style={{ textAlign: "center", marginBottom: "50px" }}>
           <h2
             style={{
               fontSize: "26px",
@@ -83,12 +93,11 @@ function Ecosystem() {
           }}
         >
           {/* TOP */}
-          <div style={cardStyle(ecosystem.nodes[0].color)}>
-            {iconMap[ecosystem.nodes[0].icon]}
-            <div style={{ marginTop: "8px" }}>
-              {ecosystem.nodes[0].title}
-            </div>
-          </div>
+          <EcosystemCard
+            bg={ecosystem.nodes[0].color}
+            icon={iconMap[ecosystem.nodes[0].icon]}
+            title={ecosystem.nodes[0].title}
+          />
 
           {/* MIDDLE */}
           <div
@@ -100,21 +109,15 @@ function Ecosystem() {
               alignItems: "center",
             }}
           >
-            <div style={cardStyle(ecosystem.nodes[1].color)}>
-              {iconMap[ecosystem.nodes[1].icon]}
-              <div style={{ marginTop: "8px" }}>
-                {ecosystem.nodes[1].title}
-              </div>
-            </div>
+            <EcosystemCard
+              bg={ecosystem.nodes[1].color}
+              icon={iconMap[ecosystem.nodes[1].icon]}
+              title={ecosystem.nodes[1].title}
+            />
 
             <motion.div
-              animate={{
-                y: [0, -8, 0],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-              }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
               style={{
                 background:
                   "linear-gradient(135deg,#F8C8DC,#E8DFF5)",
@@ -123,8 +126,7 @@ function Ecosystem() {
                 minWidth: "180px",
                 textAlign: "center",
                 border: "2px solid #E91E63",
-                boxShadow:
-                  "0 15px 30px rgba(0,0,0,0.12)",
+                boxShadow: "0 15px 30px rgba(0,0,0,0.12)",
               }}
             >
               {iconMap[ecosystem.nodes[2].icon]}
@@ -139,12 +141,11 @@ function Ecosystem() {
               </h3>
             </motion.div>
 
-            <div style={cardStyle(ecosystem.nodes[3].color)}>
-              {iconMap[ecosystem.nodes[3].icon]}
-              <div style={{ marginTop: "8px" }}>
-                {ecosystem.nodes[3].title}
-              </div>
-            </div>
+            <EcosystemCard
+              bg={ecosystem.nodes[3].color}
+              icon={iconMap[ecosystem.nodes[3].icon]}
+              title={ecosystem.nodes[3].title}
+            />
           </div>
 
           {/* LOWER */}
@@ -156,19 +157,17 @@ function Ecosystem() {
               justifyContent: "center",
             }}
           >
-            <div style={cardStyle(ecosystem.nodes[4].color)}>
-              {iconMap[ecosystem.nodes[4].icon]}
-              <div style={{ marginTop: "8px" }}>
-                {ecosystem.nodes[4].title}
-              </div>
-            </div>
+            <EcosystemCard
+              bg={ecosystem.nodes[4].color}
+              icon={iconMap[ecosystem.nodes[4].icon]}
+              title={ecosystem.nodes[4].title}
+            />
 
-            <div style={cardStyle(ecosystem.nodes[5].color)}>
-              {iconMap[ecosystem.nodes[5].icon]}
-              <div style={{ marginTop: "8px" }}>
-                {ecosystem.nodes[5].title}
-              </div>
-            </div>
+            <EcosystemCard
+              bg={ecosystem.nodes[5].color}
+              icon={iconMap[ecosystem.nodes[5].icon]}
+              title={ecosystem.nodes[5].title}
+            />
           </div>
         </div>
       </Reveal>

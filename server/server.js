@@ -11,7 +11,6 @@ import dialplan from "./data/dialplan.json" with { type: "json" };
 import rack from "./data/rack.json" with { type: "json" };
 import cms from "./data/cms.json" with { type: "json" };
 import navbar from "./data/navbar.json" with { type: "json" };
-import hero from "./data/hero.json" with { type: "json" };
 import pbxComparison from "./data/pbxComparison.json" with { type: "json" };
 import protocols from "./data/protocols.json" with { type: "json" };
 import codecQoS from "./data/codecQoS.json" with {type:"json"};
@@ -72,10 +71,6 @@ app.get("/api/cms", (req, res) => {
 
 app.get("/api/navbar", (req, res) => {
   res.json(navbar);
-});
-
-app.get("/api/hero", (req, res) => {
-  res.json(hero);
 });
 
 app.get("/api/pbxComparison", (req, res) => {
