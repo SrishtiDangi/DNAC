@@ -6,37 +6,85 @@
       "title": "Access Point Boots",
       "desc": "The Access Point powers on using PoE and obtains an IP address from DHCP.",
       "color": "linear-gradient(135deg,#FBE5D6,#FFF4EC)",
-      "border": "#E8B89C"
+      "border": "#E8B89C",
+      "details": [
+        "AP receives power through PoE-enabled switch",
+        "Hardware initialization process begins",
+        "AP loads operating system and firmware",
+        "DHCP request is sent to obtain an IP address",
+        "Network parameters such as gateway and DNS are assigned",
+        "AP becomes ready for controller discovery"
+      ]
     },
     {
       "title": "WLC Discovery",
       "desc": "The AP discovers the Wireless LAN Controller using DHCP Option 43, DNS, or broadcast discovery.",
       "color": "linear-gradient(135deg,#D6EAF8,#EEF7FD)",
-      "border": "#85C1E9"
+      "border": "#85C1E9",
+      "details": [
+        "AP searches for available Wireless LAN Controllers",
+        "DHCP Option 43 may provide controller IP addresses",
+        "DNS lookup for CISCO-CAPWAP-CONTROLLER can be used",
+        "Layer 2 broadcast discovery may occur on local networks",
+        "Previously configured controller information can be used",
+        "Best available controller is selected"
+      ]
     },
     {
       "title": "CAPWAP Join",
       "desc": "The AP establishes a secure CAPWAP tunnel and joins the controller.",
       "color": "linear-gradient(135deg,#E8DFF5,#F4ECF7)",
-      "border": "#C39BD3"
+      "border": "#C39BD3",
+      "details": [
+        "AP initiates CAPWAP control connection",
+        "Certificate validation is performed",
+        "Secure CAPWAP tunnel is established",
+        "Controller downloads configuration to AP",
+        "Firmware compatibility is verified",
+        "AP successfully joins and registers with the WLC"
+      ]
     },
     {
       "title": "SSID Broadcast",
       "desc": "The AP starts advertising configured WLANs and SSIDs to nearby clients.",
       "color": "linear-gradient(135deg,#D5F5E3,#EAFAF1)",
-      "border": "#7DCEA0"
+      "border": "#7DCEA0",
+      "details": [
+        "Controller pushes WLAN configuration to AP",
+        "SSID beacon frames begin transmission",
+        "Wireless clients can detect available networks",
+        "Security and VLAN policies are applied",
+        "Radio parameters become active",
+        "Coverage becomes available for users"
+      ]
     },
     {
       "title": "Client Authentication",
       "desc": "Wireless clients authenticate using PSK, WPA2/WPA3 Enterprise, or 802.1X.",
       "color": "linear-gradient(135deg,#FDEDEC,#FFF5F5)",
-      "border": "#F1948A"
+      "border": "#F1948A",
+      "details": [
+        "Client selects and joins the SSID",
+        "Authentication process begins",
+        "PSK or Enterprise credentials are validated",
+        "RADIUS server may participate in authentication",
+        "Authorization policies are applied",
+        "Client receives network access permissions"
+      ]
     },
     {
       "title": "Traffic Forwarding",
       "desc": "User traffic is forwarded through the AP and controller according to WLAN policies.",
       "color": "linear-gradient(135deg,#FCF3CF,#FEF9E7)",
-      "border": "#F7DC6F"
+      "border": "#F7DC6F",
+      "details": [
+        "Client traffic enters the AP",
+        "Traffic is encapsulated through CAPWAP when required",
+        "Controller applies QoS and security policies",
+        "Traffic is forwarded to the destination network",
+        "Monitoring and analytics continue in real time",
+        "Users access enterprise resources and internet services"
+      ]
     }
   ]
 }

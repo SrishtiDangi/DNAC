@@ -18,19 +18,19 @@ function FlowCard({
         borderRadius: "20px",
         padding: "22px",
         boxShadow: "0 12px 28px rgba(0,0,0,0.08)",
-        border:`2px solid ${border}`,
+        border: `2px solid ${border}`,
         transition: "all 0.3s ease",
         cursor: "pointer",
-        
+
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "translateY(-8px)";
-        e.currentTarget.style.boxShadow ="0 18px 35px rgba(0,0,0,0.15)";
-    }}
-    onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "0 18px 35px rgba(0,0,0,0.15)";
+      }}
+      onMouseLeave={(e) => {
         e.currentTarget.style.transform = "translateY(0px)";
-        e.currentTarget.style.boxShadow ="0 12px 28px rgba(0,0,0,0.08)";
-    }}
+        e.currentTarget.style.boxShadow = "0 12px 28px rgba(0,0,0,0.08)";
+      }}
     >
       <h3
         style={{
@@ -62,14 +62,7 @@ function FlowCard({
 
       {steps.map((step, index) => (
         <div key={index}>
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "24px",
-              margin: "10px 0",
-              color: "#5D6D7E",
-            }}
-          >
+          <div className="flowArrow">
             ↓
           </div>
 
@@ -108,14 +101,7 @@ function FlowCard({
         </div>
       ))}
 
-      <div
-        style={{
-          textAlign: "center",
-          fontSize: "24px",
-          margin: "10px 0",
-          color: "#5D6D7E",
-        }}
-      >
+      <div className="flowArrow">
         ↓
       </div>
 
@@ -145,17 +131,17 @@ function DiagnosticFieldGuide() {
   const [guide, setGuide] = useState(null);
   useEffect(() => {
     fetch("http://localhost:5000/api/diagnosticFieldGuide")
-    .then((res) => res.json())
-    .then((data) => setGuide(data))
-    .catch((err) => console.log(err));
-}, []);
-if (!guide) {
+      .then((res) => res.json())
+      .then((data) => setGuide(data))
+      .catch((err) => console.log(err));
+  }, []);
+  if (!guide) {
     return (
-    <section style={{ padding: "60px 0", textAlign: "center" }}>
+      <section style={{ padding: "60px 0", textAlign: "center" }}>
         Loading Diagnostic Guide...
-    </section>
-  );
-}
+      </section>
+    );
+  }
 
   return (
     <section
@@ -164,6 +150,33 @@ if (!guide) {
         padding: "70px 0",
       }}
     >
+      <style>
+        {`
+    .flowArrow{
+      text-align:center;
+      font-size:28px;
+      margin:14px 0;
+      color:#2C3E50;
+      font-weight:700;
+      animation:flowMove 1.3s infinite ease-in-out;
+    }
+
+    @keyframes flowMove{
+      0%{
+        transform:translateY(-4px);
+        opacity:0.4;
+      }
+      50%{
+        transform:translateY(6px);
+        opacity:1;
+      }
+      100%{
+        transform:translateY(12px);
+        opacity:0.4;
+      }
+    }
+  `}
+      </style>
       <Reveal>
         <div
           style={{

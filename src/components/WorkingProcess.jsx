@@ -11,7 +11,7 @@ import {
 
 function WorkingProcess() {
   const [data, setData] = useState(null);
-
+  const [selectedItem, setSelectedItem] = useState(null);
   useEffect(() => {
     fetch("http://localhost:5000/api/workingProcess")
       .then((res) => res.json())
@@ -35,6 +35,13 @@ function WorkingProcess() {
     <FaUserShield size={26} />,
     <FaExchangeAlt size={26} />,
   ];
+  const arrowAnimation = `
+  @keyframes arrowMove {
+            0% { transform: translateX(-4px); opacity: 0.4; }
+            50% { transform: translateX(6px); opacity: 1; }
+            100% { transform: translateX(12px); opacity: 0.4; }
+            }
+            `;
 
   return (
     <section
@@ -43,6 +50,7 @@ function WorkingProcess() {
         padding: "70px 0",
       }}
     >
+      <style>{arrowAnimation}</style>
       <Reveal>
         <div
           style={{
@@ -84,6 +92,7 @@ function WorkingProcess() {
           {data.steps.map((step, index) => (
             <div
               key={index}
+              onClick={() => setSelectedItem(step)}
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -153,6 +162,7 @@ function WorkingProcess() {
                     margin: "0 12px",
                     color: "#5D6D7E",
                     fontWeight: "700",
+                    animation: "arrowMove 1.5s infinite ease-in-out",
                   }}
                 >
                   →
@@ -162,6 +172,77 @@ function WorkingProcess() {
           ))}
         </div>
       </Reveal>
+      {selectedItem && (
+        <div
+          onClick={() => setSelectedItem(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(0,0,0,0.55)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: "600px",
+              maxWidth: "92%",
+              background: "#fff",
+              borderRadius: "24px",
+              padding: "30px",
+              boxShadow: "0 25px 60px rgba(0,0,0,0.25)",
+            }}
+          >
+            <h2
+              style={{
+                color: "#2C3E50",
+                marginBottom: "12px",
+              }}
+            >
+              {selectedItem.title}
+            </h2>
+
+            <p
+              style={{
+                color: "#666",
+                marginBottom: "20px",
+              }}
+            >
+              {selectedItem.desc}
+            </p>
+
+            <ul
+              style={{
+                lineHeight: "1.9",
+                color: "#444",
+                paddingLeft: "22px",
+              }}
+            >
+              {selectedItem.details?.map((detail, index) => (
+                <li key={index}>{detail}</li>
+              ))}
+            </ul>
+
+            <button
+              onClick={() => setSelectedItem(null)}
+              style={{
+                marginTop: "20px",
+                padding: "10px 20px",
+                border: "none",
+                borderRadius: "10px",
+                background: "#2C3E50",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

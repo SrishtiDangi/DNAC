@@ -27,6 +27,22 @@ function CAPWAP() {
     download: <FaDownload />,
     ready: <FaCheckCircle />,
   };
+  const arrowAnimation = `
+  @keyframes apArrow {
+  0% {
+    transform: translateX(-4px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(12px);
+    opacity: 0.4;
+  }
+}
+`;
 
   return (
     <Reveal>
@@ -36,6 +52,7 @@ function CAPWAP() {
           padding: "70px 0",
         }}
       >
+        <style>{arrowAnimation}</style>
         <div
           style={{
             textAlign: "center",
@@ -135,6 +152,7 @@ function CAPWAP() {
                     margin: "0 8px",
                     color: "#34495E",
                     fontWeight: "800",
+                    animation: "apArrow 1.5s infinite ease-in-out",
                   }}
                 >
                   →

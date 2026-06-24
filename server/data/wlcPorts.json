@@ -7,42 +7,90 @@
       "desc": "Primary interface used for controller management, AP communication, and WLAN services.",
       "port": "HTTPS / SSH",
       "color": "linear-gradient(135deg,#D6EAF8,#EEF7FD)",
-      "border": "#85C1E9"
+      "border": "#85C1E9",
+      "details": [
+        "Used for WLC GUI and CLI administration",
+        "Carries AP management and join traffic",
+        "Configured with the controller management IP",
+        "Supports HTTPS web access",
+        "Supports SSH remote administration",
+        "Must be reachable by access points and network administrators"
+      ]
     },
     {
       "title": "CAPWAP Control",
       "desc": "Access Points communicate with the controller using CAPWAP control messages.",
       "port": "UDP 5246",
       "color": "linear-gradient(135deg,#E8DFF5,#F4ECF7)",
-      "border": "#C39BD3"
+      "border": "#C39BD3",
+      "details": [
+        "Used during AP discovery and join process",
+        "Transfers AP configuration information",
+        "Maintains AP-controller control communication",
+        "Supports AP status and heartbeat messages",
+        "Required for centralized AP management",
+        "Uses UDP port 5246"
+      ]
     },
     {
       "title": "CAPWAP Data",
       "desc": "Wireless client traffic is tunneled between APs and the controller.",
       "port": "UDP 5247",
       "color": "linear-gradient(135deg,#D5F5E3,#EAFAF1)",
-      "border": "#7DCEA0"
+      "border": "#7DCEA0",
+      "details": [
+        "Carries wireless client data traffic",
+        "Encapsulates client packets between AP and WLC",
+        "Supports centralized traffic forwarding",
+        "Works together with CAPWAP control channel",
+        "Provides secure AP-to-controller communication",
+        "Uses UDP port 5247"
+      ]
     },
     {
       "title": "RADIUS Authentication",
       "desc": "Used for 802.1X and enterprise wireless authentication.",
       "port": "UDP 1812 / 1813",
       "color": "linear-gradient(135deg,#FBE5D6,#FFF4EC)",
-      "border": "#E8B89C"
+      "border": "#E8B89C",
+      "details": [
+        "Authenticates enterprise wireless users",
+        "Supports WPA2-Enterprise and WPA3-Enterprise",
+        "Integrates with AAA servers",
+        "Provides authentication and accounting services",
+        "Validates user credentials before network access",
+        "Uses UDP ports 1812 and 1813"
+      ]
     },
     {
       "title": "DHCP Services",
       "desc": "Provides IP addressing and network parameters to wireless clients.",
       "port": "UDP 67 / 68",
       "color": "linear-gradient(135deg,#FDEDEC,#FFF5F5)",
-      "border": "#F1948A"
+      "border": "#F1948A",
+      "details": [
+        "Assigns IP addresses to wireless clients",
+        "Provides subnet mask information",
+        "Supplies default gateway configuration",
+        "Provides DNS server information",
+        "Supports automatic client network configuration",
+        "Uses UDP ports 67 and 68"
+      ]
     },
     {
       "title": "DNS Resolution",
       "desc": "Allows AP discovery and hostname resolution within the network.",
       "port": "UDP/TCP 53",
       "color": "linear-gradient(135deg,#FCF3CF,#FEF9E7)",
-      "border": "#F7DC6F"
+      "border": "#F7DC6F",
+      "details": [
+        "Resolves hostnames into IP addresses",
+        "Supports DNS-based AP discovery methods",
+        "Required for many controller services",
+        "Improves network accessibility and usability",
+        "Uses both UDP and TCP communication",
+        "Operates on port 53"
+      ]
     }
   ]
 }
