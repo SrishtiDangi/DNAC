@@ -45,7 +45,7 @@ const icons=[
 
 return(
 
-<section id="coreconcepts" style={{padding:"70px 0"}}>
+<section id="core-concepts" style={{padding:"70px 0"}}>
 
 
 <Reveal>

@@ -79,11 +79,12 @@
     {
       "title": "Pass VRF / Virtual Networks",
       "steps": [
-        "Check underlay routing and L3 connectivity",
-        "Create Virtual Network in Design settings",
-        "Assign VRF, VLAN and VNID mapping",
-        "Deploy to sites",
-        "Verify using Assurance"
+        "Prerequisite: Ensure underlay routing and L3 connectivity between DNA Center and fabric devices, and that VRFs are defined on edge/border nodes.",
+        "UI: Go to Design > Network Settings > Virtual Networks. Create or map a Virtual Network and associate the required VRF name and routing domain.",
+        "Assign: Map subnets and VLANs to the Virtual Network, add path endpoints and ensure proper Segment IDs (VNID/VXLAN) if using overlay.",
+        "Deploy: Apply the virtual network to site(s) via the provisioning workflow (Design > Provision). Select edge/border nodes for routing.",
+        "Verify: Use Assurance > Network Health and the inventory to confirm devices report the correct VRF/virtual network and that routes are present on border nodes.",
+        "Rollback: Remove mapping or revert the provisioning snapshot in DNA Center and validate route withdrawal on edge devices."
       ]
     },
 
@@ -91,10 +92,12 @@
     {
       "title": "Configure Policy",
       "steps": [
-        "Create SGT or identity groups",
-        "Define allow or deny rules",
-        "Apply intent based policy",
-        "Verify policy compliance"
+        "UI: Navigate to Policy > Groups > Host/Endpoint Groups. Create Scalable Group Tags (SGTs) or identity groups as required.",
+        "Define Policies: Under Policy > Policy Profiles, create rules (source group, destination group, services/ports, action allow/deny).",
+        "Apply Intent: Use intent-based templates to map policy to sites, virtual networks, or device groups. Save and commit.",
+        "Automation: Optionally use the DNA Center API to push policies programmatically: POST /dna/intent/api/v1/policy (use proper API payload and authentication).",
+        "Verify: Use Assurance > Policy Compliance and live flow tracing to confirm enforcement. Run sample access flows from test endpoints.",
+        "Rollback: Disable or revert policy from the policy history view, and re-run traces to confirm expected behavior."
       ]
     },
 
@@ -102,9 +105,11 @@
     {
       "title": "Download Syslog",
       "steps": [
-        "Open Assurance Events",
-        "Filter logs",
-        "Export CSV/JSON"
+        "Locate Logs: In DNA Center go to Assurance > Events > Logs or Maintenance > Tools > System Logs depending on version.",
+        "Filter: Use timeframe, device, severity, and category filters to narrow results (e.g., auth, interface, OSPF, BGP).",
+        "Export: Use the export or download icon to save logs as CSV/JSON. Alternatively use the API: GET /dna/intent/api/v1/event with query params.",
+        "Relevant Fields: Typical syslog entries include timestamp, device name/IP, severity, facility, process, message. For network forensic purposes capture correlation IDs, interface names, and session identifiers.",
+        "Retention & Storage: Ensure backups of exported logs are stored in a secure, versioned archive for audits."
       ]
     },
 
@@ -112,10 +117,11 @@
     {
       "title": "Packet Capture",
       "steps": [
-        "Select device and interface",
-        "Start packet capture",
-        "Download PCAP",
-        "Analyze using Wireshark"
+        "UI Tool: Use Assurance > Troubleshooting > Packet Capture (path differs by version). Select device, interface, capture filters (src/dst IP, ports), and capture duration.",
+        "Start Capture: Begin the capture and reproduce the issue (or run test traffic). Stop when sufficient packets are collected.",
+        "Download & Analyze: Download the pcap and open in Wireshark. Look for TCP handshake, retransmits, latency, and application-layer issues.",
+        "API: Use DNA Center packet-capture APIs where available to trigger captures programmatically and retrieve PCAPs.",
+        "Security Note: Mask or sanitize sensitive payloads before sharing externally; keep pcaps in secured storage."
       ]
     },
 
@@ -123,10 +129,12 @@
     {
       "title": "802.1X Authentication",
       "steps": [
-        "Configure ISE integration",
-        "Create authentication policy",
-        "Assign port profiles",
-        "Verify client authentication"
+        "Prerequisites: ISE integration with DNA Center, valid certificates, radius profiles, and switch ports configured for dot1x or MAB fallback.",
+        "ISE Setup: Create authentication and authorization policies in ISE (policy sets, identity sources, profiling rules).",
+        "DNA Center: Under Platform > Identity Services (or similar), add ISE as a northbound service (pxGrid/REST) and ensure shared secrets and certificates match.",
+        "Port Profiles: Create port profiles or templates in DNA Center that enable 802.1X with required VLANs for authenticated guests/devices.",
+        "Test Flow: Connect a test client; observe authentication steps in ISE and the endpoint details appearing in DNA Center (identity, SGT assignment).",
+        "Troubleshoot: Use live logs in ISE (Authentication logs) and DNA Center assurance traces. Verify RADIUS accounting and EAP method compatibility."
       ]
     },
 
@@ -134,10 +142,12 @@
     {
       "title": "SD Access Implementation",
       "steps": [
-        "Plan underlay and overlay",
-        "Create fabric",
-        "Configure VXLAN",
-        "Validate endpoints"
+        "Design: Plan underlay IP addressing, seed nodes, border nodes, and virtual network mapping. Document VRFs, VLANs, and SGT strategy.",
+        "Prechecks: Validate device compatibility, software image levels, and ensure network connectivity between DNA Center and devices.",
+        "Fabric Creation: In DNA Center use Design > SD-Access > Fabric to create a new fabric, select seed nodes, and define control plane parameters.",
+        "Underlay & Overlay: Configure underlay routing (OSPF/BGP), then enable overlay (VXLAN) and assign sites to the fabric.",
+        "ISE Integration: Ensure SGTs, policy sets, and pxGrid connectivity are configured so ISE can provide identity mapping to DNA Center.",
+        "Validation: Use topology and assurance dashboards to verify endpoint registration, SGT propagation, and path traces across fabric nodes."
       ]
     },
 
@@ -145,10 +155,12 @@
     {
       "title": "Provision Switch",
       "steps": [
-        "Discover device",
-        "Add to inventory",
-        "Apply templates",
-        "Verify configuration"
+        "Prechecks: Ensure device is reachable (management IP), proper credentials exist in DNA Center, and device is supported.",
+        "Discovery: Go to Provision > Discovery, add IP ranges or use Plug-and-Play to discover the device.",
+        "Inventory: Confirm device appears in Inventory > Devices. Check model, OS version, and hardware details.",
+        "Template Assignment: Create or select a provisioning template (feature templates or CLI templates) that includes interface, VLAN, port-channel, and management settings.",
+        "Provision: Use the Provision workflow to assign roles (edge, access), push templates, and apply site mappings. Monitor the provisioning task for success or errors.",
+        "Verify: Run device tests (ping, config diff, show run checks) in DNA Center and use Assurance to confirm traffic flows as intended."
       ]
     }
 

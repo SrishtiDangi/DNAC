@@ -64,7 +64,7 @@ const icons=[
 return(
 
 
-<section id="whyitmatters" style={{padding:"70px 0"}}>
+<section id="why-it-matters" style={{padding:"70px 0"}}>
 
 
 
