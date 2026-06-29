@@ -22,7 +22,7 @@ function Overview() {
     ];
 
     return (
-        <section style={{ padding: "70px 0" }}>
+        <section id="overview" style={{ padding: "70px 0" }}>
 
             {/* HERO */}
             <Reveal>
@@ -152,20 +152,7 @@ function Overview() {
                             </ul>
                         )}
 
-                        <button
-                            onClick={() => setSelected(null)}
-                            style={{
-                                marginTop: "25px",
-                                padding: "12px 22px",
-                                border: "none",
-                                borderRadius: "14px",
-                                background: "linear-gradient(135deg,#667eea,#764ba2)",
-                                color: "#fff",
-                                cursor: "pointer"
-                            }}
-                        >
-                            ✖ Close
-                        </button>
+                        cc
                     </div>
                 </div>
             )}

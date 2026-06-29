@@ -1,229 +1,229 @@
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
 
 import {
-FaNetworkWired,
-FaWifi,
-FaRoute,
-FaServer,
-FaLaptop
+    FaNetworkWired,
+    FaWifi,
+    FaRoute,
+    FaServer,
+    FaLaptop
 } from "react-icons/fa";
 
 
-function Devices(){
+function Devices() {
 
-const [data,setData]=useState(null);
-const [selected,setSelected]=useState(null);
+    const [data, setData] = useState(null);
+    const [selected, setSelected] = useState(null);
 
 
-useEffect(()=>{
+    useEffect(() => {
 
-fetch("http://localhost:5000/api/devices")
-.then(res=>res.json())
-.then(data=>setData(data))
-.catch(err=>console.log(err))
+        fetch("http://localhost:5000/api/devices")
+            .then(res => res.json())
+            .then(data => setData(data))
+            .catch(err => console.log(err))
 
-},[]);
+    }, []);
 
 
 
-if(!data)
-return <h2>Loading Devices...</h2>
+    if (!data)
+        return <h2>Loading Devices...</h2>
 
 
 
-const icons=[
-<FaNetworkWired size={30}/>,
-<FaWifi size={30}/>,
-<FaRoute size={30}/>,
-<FaServer size={30}/>,
-<FaLaptop size={30}/>
-];
+    const icons = [
+        <FaNetworkWired size={30} />,
+        <FaWifi size={30} />,
+        <FaRoute size={30} />,
+        <FaServer size={30} />,
+        <FaLaptop size={30} />
+    ];
 
 
 
-return(
+    return (
 
-<section id="devices" style={{padding:"70px 0"}}>
+        <section id="devices" style={{ padding: "70px 0" }}>
 
 
-<Reveal>
+            <Reveal>
 
-<div style={{
-textAlign:"center",
-marginBottom:"45px"
-}}>
+                <div style={{
+                    textAlign: "center",
+                    marginBottom: "45px"
+                }}>
 
 
-<h2 style={{
-fontSize:"30px",
-fontWeight:"900",
-color:"#2C3E50"
-}}>
+                    <h2 style={{
+                        fontSize: "30px",
+                        fontWeight: "900",
+                        color: "#2C3E50"
+                    }}>
 
-{data.title}
+                        {data.title}
 
-</h2>
+                    </h2>
 
 
-<p style={{color:"#666"}}>
-{data.subtitle}
-</p>
+                    <p style={{ color: "#666" }}>
+                        {data.subtitle}
+                    </p>
 
 
-</div>
+                </div>
 
-</Reveal>
+            </Reveal>
 
 
 
 
 
-<div style={{
-display:"flex",
-justifyContent:"center",
-gap:"25px",
-flexWrap:"wrap"
-}}>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "25px",
+                flexWrap: "wrap"
+            }}>
 
 
-{
+                {
 
-data.cards.map((card,index)=>(
+                    data.cards.map((card, index) => (
 
 
-<div
+                        <div
 
-key={index}
+                            key={index}
 
-onClick={()=>setSelected(card)}
+                            onClick={() => setSelected(card)}
 
 
-style={{
+                            style={{
 
-width:"240px",
+                                width: "240px",
 
-background:card.color,
+                                background: card.color,
 
-padding:"25px",
+                                padding: "25px",
 
-borderRadius:"25px",
+                                borderRadius: "25px",
 
-textAlign:"center",
+                                textAlign: "center",
 
-cursor:"pointer",
+                                cursor: "pointer",
 
-boxShadow:
-"0 12px 30px rgba(0,0,0,.1)",
+                                boxShadow:
+                                    "0 12px 30px rgba(0,0,0,.1)",
 
-transition:"0.3s"
+                                transition: "0.3s"
 
-}}
+                            }}
 
 
-onMouseEnter={(e)=>
-e.currentTarget.style.transform=
-"translateY(-10px)"
-}
+                            onMouseEnter={(e) =>
+                                e.currentTarget.style.transform =
+                                "translateY(-10px)"
+                            }
 
 
-onMouseLeave={(e)=>
-e.currentTarget.style.transform=
-"translateY(0)"
-}
+                            onMouseLeave={(e) =>
+                                e.currentTarget.style.transform =
+                                "translateY(0)"
+                            }
 
->
+                        >
 
 
-{icons[index]}
+                            {icons[index]}
 
 
-<h3>
-{card.title}
-</h3>
+                            <h3>
+                                {card.title}
+                            </h3>
 
 
-<p>
-{card.desc}
-</p>
+                            <p>
+                                {card.desc}
+                            </p>
 
 
-</div>
+                        </div>
 
 
-))
+                    ))
 
-}
+                }
 
 
-</div>
+            </div>
 
 
 
 
 
-<h2 style={{
-textAlign:"center",
-margin:"60px 0 30px"
-}}>
-Device Lifecycle
-</h2>
+            <h2 style={{
+                textAlign: "center",
+                margin: "60px 0 30px"
+            }}>
+                Device Lifecycle
+            </h2>
 
 
 
-<div style={{
-display:"flex",
-justifyContent:"center",
-gap:"20px",
-flexWrap:"wrap"
-}}>
+            <div style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "20px",
+                flexWrap: "wrap"
+            }}>
 
 
-{
+                {
 
-data.flow.map((item,index)=>(
+                    data.flow.map((item, index) => (
 
 
-<div
+                        <div
 
-key={index}
+                            key={index}
 
-style={{
+                            style={{
 
-background:"#f5f5ff",
+                                background: "#f5f5ff",
 
-padding:"20px",
+                                padding: "20px",
 
-borderRadius:"20px",
+                                borderRadius: "20px",
 
-width:"200px",
+                                width: "200px",
 
-textAlign:"center"
+                                textAlign: "center"
 
-}}
+                            }}
 
->
+                        >
 
 
-<h3>
-{item.name}
-</h3>
+                            <h3>
+                                {item.name}
+                            </h3>
 
 
-<p>
-{item.desc}
-</p>
+                            <p>
+                                {item.desc}
+                            </p>
 
 
-</div>
+                        </div>
 
 
-))
+                    ))
 
-}
+                }
 
 
-</div>
+            </div>
 
 
 
@@ -231,99 +231,124 @@ textAlign:"center"
 
 
 
-{
+            {
 
-selected &&
+                selected &&
 
-<div
+                <div
 
-onClick={()=>setSelected(null)}
+                    onClick={() => setSelected(null)}
 
-style={{
+                    style={{
 
-position:"fixed",
+                        position: "fixed",
 
-inset:0,
+                        inset: 0,
 
-background:"rgba(0,0,0,.5)",
+                        background: "rgba(0,0,0,.5)",
 
-display:"flex",
+                        display: "flex",
 
-justifyContent:"center",
+                        justifyContent: "center",
 
-alignItems:"center",
+                        alignItems: "center",
 
-zIndex:9999
+                        zIndex: 9999
 
-}}
+                    }}
 
->
+                >
 
 
-<div
+                    <div
 
-onClick={(e)=>e.stopPropagation()}
+                        onClick={(e) => e.stopPropagation()}
 
-style={{
+                        style={{
 
-background:"#fff",
+                            background: "#fff",
 
-width:"600px",
+                            width: "600px",
 
-maxWidth:"90%",
+                            maxWidth: "90%",
 
-padding:"35px",
+                            padding: "35px",
 
-borderRadius:"30px"
+                            borderRadius: "30px"
 
-}}
+                        }}
 
->
+                    >
 
 
-<h2>
-{selected.title}
-</h2>
+                        <h2>
+                            {selected.title}
+                        </h2>
 
 
-<p>
-{selected.desc}
-</p>
+                        <p>
+                            {selected.desc}
+                        </p>
 
 
-<ul>
+                        <ul>
 
-{
+                            {
 
-selected.details.map((d,i)=>(
+                                selected.details.map((d, i) => (
 
-<li key={i}>
-{d}
-</li>
+                                    <li key={i}>
+                                        {d}
+                                    </li>
 
-))
+                                ))
 
-}
+                            }
 
-</ul>
+                        </ul>
 
 
-<button onClick={()=>setSelected(null)}>
-Close
-</button>
+                        <button
 
+                            onClick={() => setSelected(null)}
 
-</div>
+                            style={{
+                                marginTop: "20px",
+                                padding: "10px 25px",
+                                border: "none",
+                                borderRadius: "20px",
+                                background: "#2C3E50",
+                                color: "white",
+                                fontSize: "15px",
+                                fontWeight: "600",
+                                cursor: "pointer",
+                                transition: "0.3s"
+                            }}
 
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "scale(1.05)";
+                            }}
 
-</div>
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "scale(1)";
+                            }}
 
-}
+                        >
+                            Close
+                        </button>
 
 
-</section>
+                    </div>
 
-)
+
+                </div>
+
+            }
+
+
+        </section>
+
+    )
 
 }
 

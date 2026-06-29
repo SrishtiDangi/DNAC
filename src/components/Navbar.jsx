@@ -38,7 +38,7 @@ function Navbar() {
           fontWeight: "800",
         }}
       >
-        Wireless LAN Controller
+        DNAC
       </h2>
 
       <div

@@ -1,332 +1,176 @@
-import {useState,useEffect} from "react";
+import { useState, useEffect } from "react";
 import Reveal from "./Reveal";
+import { FaProjectDiagram } from "react-icons/fa";
 
-import {
-FaServer,
-FaNetworkWired,
-FaShieldAlt,
-FaRobot,
-FaProjectDiagram
-} from "react-icons/fa";
+function Architecture() {
 
+    const [data, setData] = useState(null);
+    const [selected, setSelected] = useState(null);
 
-function Architecture(){
+    useEffect(() => {
+        fetch("http://localhost:5000/api/architecture")
+            .then(res => res.json())
+            .then(data => setData(data))
+            .catch(err => console.log(err));
+    }, []);
 
-const [data,setData]=useState(null);
-const [selected,setSelected]=useState(null);
+    if (!data)
+        return <h2>Loading Architecture...</h2>;
 
+    return (
 
-useEffect(()=>{
+        <section id="architecture" style={{ padding: "70px 0" }}>
 
-fetch("http://localhost:5000/api/architecture")
-.then(res=>res.json())
-.then(data=>setData(data))
-.catch(err=>console.log(err))
-
-},[]);
-
-
-
-if(!data)
-return <h2>Loading Architecture...</h2>
-
-
-
-const icons=[
-<FaServer size={30}/>,
-<FaNetworkWired size={30}/>,
-<FaShieldAlt size={30}/>,
-<FaRobot size={30}/>
-];
+            <Reveal>
+                <div style={{ textAlign: "center", marginBottom: "40px" }}>
+                    <h2 style={{ fontSize: "30px", fontWeight: "900", color: "#2C3E50" }}>
+                        {data.title}
+                    </h2>
+                    <p style={{ color: "#666" }}>
+                        {data.subtitle}
+                    </p>
+                </div>
+            </Reveal>
 
 
+            {/* FLOW DIAGRAM STYLE */}
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "18px"
+            }}>
 
-return(
+                {data.cards.map((card, index) => (
+                    <div key={index} style={{ position: "relative", width: "60%" }}>
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+                        {/* BOX */}
+                        <div
+                            onClick={() => setSelected(card)}
+                            style={{
+                                background: card.color,
+                                padding: "20px",
+                                borderRadius: "18px",
+                                textAlign: "center",
+                                cursor: "pointer",
+                                boxShadow: "0 10px 25px rgba(0,0,0,0.3)",
+                                transition: "0.3s"
+                            }}
 
+                            onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.03)"}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}
+                        >
 
-<Reveal>
+                            <h3>{card.title}</h3>
+                            <p>{card.desc}</p>
 
-<div style={{
-textAlign:"center",
-marginBottom:"45px"
-}}>
+                        </div>
 
+                        {/* ARROW */}
+                        {index !== data.cards.length - 1 && (
+                            <div className="arch-arrow"></div>
+                        )}
 
-<h2 style={{
-fontSize:"30px",
-fontWeight:"900",
-color:"#2C3E50"
-}}>
-
-{data.title}
-
-</h2>
-
-
-<p style={{color:"#666"}}>
-{data.subtitle}
-</p>
-
-
-</div>
-
-</Reveal>
-
-
-
-
-
-<div style={{
-display:"flex",
-justifyContent:"center",
-gap:"25px",
-flexWrap:"wrap"
-}}>
+                    </div>
+                ))}
+            </div>
 
 
-{
-
-data.cards.map((card,index)=>(
 
 
-<div
 
-key={index}
+            {/* POPUP */}
+            {selected && (
 
-onClick={()=>setSelected(card)}
+                <div
+                    onClick={() => setSelected(null)}
+                    style={{
+                        position: "fixed",
+                        inset: 0,
+                        background: "rgba(0,0,0,.7)",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        zIndex: 9999
+                    }}
+                >
 
+                    <div
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                            background: "#fff",
+                            width: "600px",
+                            maxWidth: "90%",
+                            padding: "30px",
+                            borderRadius: "20px"
+                        }}
+                    >
 
-style={{
+                        <h2>{selected.title}</h2>
+                        <p>{selected.desc}</p>
 
-width:"240px",
+                        <ul>
+                            {selected.details.map((d, i) => (
+                                <li key={i}>{d}</li>
+                            ))}
+                        </ul>
 
-background:card.color,
+                        <div style={{ textAlign: "right" }}>
+                            <button
+                                onClick={() => setSelected(null)}
+                                style={{
+                                    marginTop: "15px",
+                                    padding: "10px 18px",
+                                    borderRadius: "15px",
+                                    border: "none",
+                                    background: "#2C3E50",
+                                    color: "#fff",
+                                    cursor: "pointer"
+                                }}
+                            >
+                                Close
+                            </button>
+                        </div>
 
-padding:"25px",
+                    </div>
 
-borderRadius:"25px",
+                </div>
 
-textAlign:"center",
-
-cursor:"pointer",
-
-boxShadow:
-"0 12px 30px rgba(0,0,0,.1)",
-
-transition:"0.3s"
-
-}}
-
-
-onMouseEnter={(e)=>
-e.currentTarget.style.transform=
-"translateY(-10px)"
+            )}
+            <style>{`
+        @keyframes floatArrow {
+        0% { opacity: 0.3; transform: translateY(-8px); }
+  50% { opacity: 1; transform: translateY(0px); }
+  100% { opacity: 0.3; transform: translateY(8px); }
 }
 
-
-onMouseLeave={(e)=>
-e.currentTarget.style.transform=
-"translateY(0)"
+.arch-arrow {
+  width: 3px;
+  height: 45px;
+  margin: 6px auto;
+  position: relative;
+  background: linear-gradient(to bottom, #3f587b, transparent);
+  animation: floatArrow 1.2s infinite ease-in-out;
+  transform-origin: center;
 }
 
->
+.arch-arrow::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: -4px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #94a3b8;
+  border-bottom: 2px solid #94a3b8;
+  transform: rotate(45deg);
+}
+      `}</style>
 
+        </section>
 
-{icons[index]}
-
-
-<h3>
-{card.title}
-</h3>
-
-
-<p>
-{card.desc}
-</p>
-
-
-</div>
-
-
-))
+    )
 
 }
-
-
-</div>
-
-
-
-
-
-<h2 style={{
-textAlign:"center",
-margin:"60px 0 30px"
-}}>
-Architecture Workflow
-</h2>
-
-
-
-<div style={{
-display:"flex",
-justifyContent:"center",
-gap:"20px",
-flexWrap:"wrap"
-}}>
-
-
-{
-
-data.flow.map((item,index)=>(
-
-
-<div
-
-key={index}
-
-style={{
-
-background:"#f5f5ff",
-
-padding:"20px",
-
-borderRadius:"20px",
-
-width:"200px",
-
-textAlign:"center"
-
-}}
-
->
-
-
-<FaProjectDiagram size={25}/>
-
-
-<h3>
-{item.name}
-</h3>
-
-
-<p>
-{item.desc}
-</p>
-
-
-</div>
-
-
-))
-
-}
-
-
-</div>
-
-
-
-
-
-
-{
-
-selected &&
-
-<div
-
-onClick={()=>setSelected(null)}
-
-style={{
-
-position:"fixed",
-
-inset:0,
-
-background:"rgba(0,0,0,.5)",
-
-display:"flex",
-
-justifyContent:"center",
-
-alignItems:"center",
-
-zIndex:9999
-
-}}
-
->
-
-
-<div
-
-onClick={(e)=>e.stopPropagation()}
-
-style={{
-
-background:"#fff",
-
-width:"600px",
-
-maxWidth:"90%",
-
-padding:"35px",
-
-borderRadius:"30px"
-
-}}
-
->
-
-
-<h2>
-{selected.title}
-</h2>
-
-
-<p>
-{selected.desc}
-</p>
-
-
-<ul>
-
-{
-
-selected.details.map((d,i)=>(
-
-<li key={i}>
-{d}
-</li>
-
-))
-
-}
-
-</ul>
-
-
-<button onClick={()=>setSelected(null)}>
-Close
-</button>
-
-
-</div>
-
-
-</div>
-
-}
-
-
-</section>
-
-)
-
-}
-
 
 export default Architecture;
