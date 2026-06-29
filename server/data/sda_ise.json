@@ -1,0 +1,99 @@
+{
+  "title":"SDA & ISE Integration",
+  "subtitle":"Secure enterprise networking using Software Defined Access and Identity Services Engine.",
+
+  "cards":[
+
+    {
+      "title":"SD-Access Fabric",
+      "desc":"Automated network fabric for campus and branch environments.",
+      "color":"#dff3ff",
+      "details":[
+        "Creates automated underlay and overlay network",
+        "Uses VXLAN for scalable segmentation",
+        "Provides centralized fabric management",
+        "Automates edge and border deployment"
+      ]
+    },
+
+
+    {
+      "title":"Cisco ISE",
+      "desc":"Identity based access control and security platform.",
+      "color":"#ffdff0",
+      "details":[
+        "User and device authentication",
+        "Endpoint profiling",
+        "Guest access management",
+        "Policy enforcement"
+      ]
+    },
+
+
+    {
+      "title":"SGT Segmentation",
+      "desc":"Control access using Scalable Group Tags.",
+      "color":"#ddffe5",
+      "details":[
+        "Identity based segmentation",
+        "Controls communication between groups",
+        "Reduces dependency on VLAN based security"
+      ]
+    },
+
+
+    {
+      "title":"Policy Automation",
+      "desc":"Apply security policies automatically across fabric.",
+      "color":"#fff0d8",
+      "details":[
+        "Intent based policy creation",
+        "Automated policy deployment",
+        "Consistent access rules"
+      ]
+    },
+
+
+    {
+      "title":"pxGrid Integration",
+      "desc":"Share identity information between Cisco platforms.",
+      "color":"#eee2ff",
+      "details":[
+        "ISE and DNA Center communication",
+        "Real time identity sharing",
+        "Improved security visibility"
+      ]
+    }
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Identity",
+      "desc":"Identify users and devices"
+    },
+
+
+    {
+      "name":"Policy",
+      "desc":"Apply access rules"
+    },
+
+
+    {
+      "name":"Fabric",
+      "desc":"Enforce segmentation"
+    },
+
+
+    {
+      "name":"Assurance",
+      "desc":"Monitor and verify traffic"
+
+    }
+
+  ]
+
+}

@@ -1,0 +1,101 @@
+{
+  "title":"Why Cisco DNA Center Matters",
+  "subtitle":"Why modern enterprises need centralized automation, security and intelligent network management.",
+
+  "cards":[
+
+    {
+      "title":"Simplified Management",
+      "desc":"Manage complex enterprise networks from a single platform.",
+      "color":"#dff3ff",
+      "details":[
+        "Centralized network visibility",
+        "Single control plane for devices",
+        "Reduces manual configuration",
+        "Improves operational efficiency"
+      ]
+    },
+
+
+    {
+      "title":"Automation",
+      "desc":"Replace repetitive manual tasks with intelligent workflows.",
+      "color":"#ffdff0",
+      "details":[
+        "Zero touch provisioning",
+        "Template based deployment",
+        "API driven automation",
+        "Faster network changes"
+      ]
+    },
+
+
+    {
+      "title":"Better Security",
+      "desc":"Provide secure access using identity and policies.",
+      "color":"#ddffe5",
+      "details":[
+        "ISE integration",
+        "Identity based access control",
+        "SGT segmentation",
+        "Policy enforcement"
+      ]
+    },
+
+
+    {
+      "title":"Real Time Visibility",
+      "desc":"Understand network health and user experience instantly.",
+      "color":"#fff0d8",
+      "details":[
+        "Live dashboards",
+        "Telemetry monitoring",
+        "Client experience analysis",
+        "Fast issue detection"
+      ]
+    },
+
+
+    {
+      "title":"Scalable Future",
+      "desc":"Build networks ready for future growth.",
+      "color":"#eee2ff",
+      "details":[
+        "Supports large enterprise environments",
+        "SD-Access ready architecture",
+        "Cloud and AI driven improvements",
+        "Future network expansion"
+      ]
+    }
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Traditional Network",
+      "desc":"Manual configuration and limited visibility"
+    },
+
+
+    {
+      "name":"DNA Center",
+      "desc":"Centralized automation and control"
+    },
+
+
+    {
+      "name":"Secure Network",
+      "desc":"Identity based access and segmentation"
+    },
+
+
+    {
+      "name":"Smart Operations",
+      "desc":"Analytics driven optimization"
+    }
+
+  ]
+
+}

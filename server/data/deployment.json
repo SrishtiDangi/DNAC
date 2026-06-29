@@ -1,0 +1,95 @@
+{
+  "title":"Cisco DNA Center Deployment",
+  "subtitle":"Automated deployment of enterprise networks using templates, provisioning and intent based workflows.",
+
+  "cards":[
+
+    {
+      "title":"Device Discovery",
+      "desc":"Discover and add network devices into DNA Center.",
+      "color":"#dff3ff",
+      "details":[
+        "Add devices using IP ranges",
+        "Use Plug and Play discovery",
+        "Verify device inventory and credentials"
+      ]
+    },
+
+
+    {
+      "title":"Provisioning",
+      "desc":"Deploy configurations automatically to devices.",
+      "color":"#ffdff0",
+      "details":[
+        "Assign device roles",
+        "Apply templates and configurations",
+        "Push software images",
+        "Monitor deployment status"
+      ]
+    },
+
+
+    {
+      "title":"Template Deployment",
+      "desc":"Use reusable templates for consistent configuration.",
+      "color":"#ddffe5",
+      "details":[
+        "Create CLI and feature templates",
+        "Configure VLAN, interfaces and policies",
+        "Reduce manual configuration errors"
+      ]
+    },
+
+
+    {
+      "title":"SD Access Deployment",
+      "desc":"Automate fabric deployment using DNA Center.",
+      "color":"#fff0d8",
+      "details":[
+        "Configure underlay network",
+        "Create fabric sites",
+        "Enable VXLAN overlay",
+        "Integrate with ISE"
+      ]
+    },
+
+
+    {
+      "title":"Verification",
+      "desc":"Validate network performance after deployment.",
+      "color":"#eee2ff",
+      "details":[
+        "Check device status",
+        "Run assurance checks",
+        "Verify traffic flow"
+      ]
+    }
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Discover",
+      "desc":"Find supported network devices"
+    },
+
+    {
+      "name":"Configure",
+      "desc":"Apply templates and policies"
+    },
+
+    {
+      "name":"Deploy",
+      "desc":"Push changes automatically"
+    },
+
+    {
+      "name":"Verify",
+      "desc":"Check health and compliance"
+    }
+
+  ]
+
+}

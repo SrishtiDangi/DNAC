@@ -1,0 +1,99 @@
+{
+  "title":"Cisco DNA Center Devices",
+  "subtitle":"Manage, monitor and automate wired, wireless and network infrastructure devices from one platform.",
+
+  "cards":[
+
+    {
+      "title":"Switches",
+      "desc":"Manage Catalyst switches and campus network devices.",
+      "color":"#dff3ff",
+      "details":[
+        "Device discovery and inventory",
+        "Configuration management",
+        "Interface and VLAN monitoring",
+        "Automated provisioning"
+      ]
+    },
+
+
+    {
+      "title":"Wireless Access Points",
+      "desc":"Control wireless access points and client connectivity.",
+      "color":"#ffdff0",
+      "details":[
+        "AP monitoring and management",
+        "Wireless coverage analysis",
+        "Client experience tracking",
+        "RF optimization"
+      ]
+    },
+
+
+    {
+      "title":"Routers",
+      "desc":"Manage branch and edge routing infrastructure.",
+      "color":"#ddffe5",
+      "details":[
+        "Routing configuration",
+        "WAN connectivity monitoring",
+        "Performance analytics"
+      ]
+    },
+
+
+    {
+      "title":"Controllers",
+      "desc":"Centralized management of network controllers.",
+      "color":"#fff0d8",
+      "details":[
+        "Policy management",
+        "Network automation",
+        "High availability support"
+      ]
+    },
+
+
+    {
+      "title":"Endpoints",
+      "desc":"Monitor connected users and devices.",
+      "color":"#eee2ff",
+      "details":[
+        "Endpoint visibility",
+        "Identity information",
+        "Security policy assignment"
+      ]
+    }
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Discover",
+      "desc":"Find devices in the network"
+    },
+
+
+    {
+      "name":"Inventory",
+      "desc":"Collect device information"
+    },
+
+
+    {
+      "name":"Configure",
+      "desc":"Apply policies and templates"
+    },
+
+
+    {
+      "name":"Monitor",
+      "desc":"Track device health"
+
+    }
+
+  ]
+
+}

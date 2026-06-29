@@ -6,31 +6,38 @@
       "id": "overview",
       "label": "Overview"
     },
-    
+    {
+        "id": "why-it-matters",
+        "label":"Why it Matters ?"
+    },
     {
       "id": "architecture",
       "label": "Architecture"
     },
+    {
+        "id":"core-concepts",
+        "label":"Core Concepts"
+    },
+    {
+        "id":"deployment",
+        "label":"Deployment"
+    },
 
     {
-      "id": "protocols",
-      "label": "Protocols"
+      "id": "sda",
+      "label": "SDA & ISE"
     },
     {
-      "id": "advantages",
-      "label": "Benefits"
+      "id": "operations",
+      "label": "Operations"
     },
     {
-      "id": "media-resources",
-      "label": "Services"
+      "id": "devices",
+      "label": "Devices"
     },
     {
-      "id": "troubleshooting",
-      "label": "Troubleshooting"
-    },
-    {
-      "id": "diagnostic-guide",
-      "label": "Diagnostic Guide"
+      "id": "roadmap",
+      "label": "Roadmap"
     }
   ]
 }

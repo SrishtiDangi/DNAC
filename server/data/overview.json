@@ -1,0 +1,157 @@
+{
+  "hero": {
+    "title": "What is Cisco DNA Center?",
+    "subtitle": "Central management and orchestration platform for modern enterprise networks",
+    "description": "Cisco DNA Center unifies device inventory, policy, automation, and assurance so network teams can operate with intent-based accuracy and speed."
+  },
+
+
+  "cards": [
+    {
+      "title": "Enterprise",
+      "desc": "Campus, branch and edge networks in one control plane",
+      "color": "#ffddec",
+      "details": [
+        "Centralized network design and topology",
+        "Device inventory management",
+        "Campus and branch network control"
+      ]
+    },
+
+
+    {
+      "title": "Automated",
+      "desc": "Provisioning, policy and assurance with intent based workflows",
+      "color": "#dff3ff",
+      "details": [
+        "Zero touch provisioning",
+        "Template based deployment",
+        "Software image management",
+        "Automated workflows"
+      ]
+    },
+
+
+    {
+      "title": "Secure",
+      "desc": "ISE identity integration and segmentation for every device",
+      "color": "#ddffe5",
+      "details": [
+        "Identity based access control",
+        "SGT driven policies",
+        "Guest access and profiling"
+      ]
+    }
+  ],
+
+
+  "workflow": [
+    {
+      "title": "Design",
+      "desc": "Create topology, segmentation and wireless policies"
+    },
+
+    {
+      "title": "Provision",
+      "desc": "Deploy devices using templates and automation"
+    },
+
+    {
+      "title": "Assurance",
+      "desc": "Monitor health using telemetry and analytics"
+    },
+
+    {
+      "title": "Security",
+      "desc": "Integrate ISE for identity based access"
+    }
+  ],
+
+
+  "operations": {
+    "title": "Live Operations in One View",
+    "desc": "Visualize device health, fabric policy and client experience instantly."
+  },
+
+
+  "sops": [
+
+    {
+      "title": "Pass VRF / Virtual Networks",
+      "steps": [
+        "Check underlay routing and L3 connectivity",
+        "Create Virtual Network in Design settings",
+        "Assign VRF, VLAN and VNID mapping",
+        "Deploy to sites",
+        "Verify using Assurance"
+      ]
+    },
+
+
+    {
+      "title": "Configure Policy",
+      "steps": [
+        "Create SGT or identity groups",
+        "Define allow or deny rules",
+        "Apply intent based policy",
+        "Verify policy compliance"
+      ]
+    },
+
+
+    {
+      "title": "Download Syslog",
+      "steps": [
+        "Open Assurance Events",
+        "Filter logs",
+        "Export CSV/JSON"
+      ]
+    },
+
+
+    {
+      "title": "Packet Capture",
+      "steps": [
+        "Select device and interface",
+        "Start packet capture",
+        "Download PCAP",
+        "Analyze using Wireshark"
+      ]
+    },
+
+
+    {
+      "title": "802.1X Authentication",
+      "steps": [
+        "Configure ISE integration",
+        "Create authentication policy",
+        "Assign port profiles",
+        "Verify client authentication"
+      ]
+    },
+
+
+    {
+      "title": "SD Access Implementation",
+      "steps": [
+        "Plan underlay and overlay",
+        "Create fabric",
+        "Configure VXLAN",
+        "Validate endpoints"
+      ]
+    },
+
+
+    {
+      "title": "Provision Switch",
+      "steps": [
+        "Discover device",
+        "Add to inventory",
+        "Apply templates",
+        "Verify configuration"
+      ]
+    }
+
+  ]
+
+}

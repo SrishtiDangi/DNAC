@@ -2,48 +2,52 @@ import {useState,useEffect} from "react";
 import Reveal from "./Reveal";
 
 import {
-FaServer,
-FaNetworkWired,
-FaShieldAlt,
+FaFlag,
 FaRobot,
-FaProjectDiagram
+FaShieldAlt,
+FaNetworkWired,
+FaBrain
 } from "react-icons/fa";
 
 
-function Architecture(){
+function Roadmap(){
 
 const [data,setData]=useState(null);
 const [selected,setSelected]=useState(null);
 
 
+
 useEffect(()=>{
 
-fetch("http://localhost:5000/api/architecture")
+fetch("http://localhost:5000/api/roadmap")
 .then(res=>res.json())
 .then(data=>setData(data))
-.catch(err=>console.log(err))
+.catch(err=>console.log(err));
 
 },[]);
 
 
 
 if(!data)
-return <h2>Loading Architecture...</h2>
+return <h2>Loading Roadmap...</h2>
 
 
 
 const icons=[
-<FaServer size={30}/>,
-<FaNetworkWired size={30}/>,
+
+<FaFlag size={30}/>,
+<FaRobot size={30}/>,
 <FaShieldAlt size={30}/>,
-<FaRobot size={30}/>
+<FaNetworkWired size={30}/>,
+<FaBrain size={30}/>
+
 ];
 
 
 
 return(
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+<section id="roadmap" style={{padding:"70px 0"}}>
 
 
 <Reveal>
@@ -86,6 +90,7 @@ flexWrap:"wrap"
 }}>
 
 
+
 {
 
 data.cards.map((card,index)=>(
@@ -120,16 +125,20 @@ transition:"0.3s"
 }}
 
 
-onMouseEnter={(e)=>
+onMouseEnter={(e)=>{
+
 e.currentTarget.style.transform=
 "translateY(-10px)"
-}
+
+}}
 
 
-onMouseLeave={(e)=>
+onMouseLeave={(e)=>{
+
 e.currentTarget.style.transform=
 "translateY(0)"
-}
+
+}}
 
 >
 
@@ -161,12 +170,15 @@ e.currentTarget.style.transform=
 
 
 
+
+
 <h2 style={{
 textAlign:"center",
 margin:"60px 0 30px"
 }}>
-Architecture Workflow
+Future Growth Flow
 </h2>
+
 
 
 
@@ -204,9 +216,6 @@ textAlign:"center"
 >
 
 
-<FaProjectDiagram size={25}/>
-
-
 <h3>
 {item.name}
 </h3>
@@ -232,9 +241,11 @@ textAlign:"center"
 
 
 
+
 {
 
 selected &&
+
 
 <div
 
@@ -259,6 +270,7 @@ zIndex:9999
 }}
 
 >
+
 
 
 <div
@@ -319,6 +331,7 @@ Close
 
 </div>
 
+
 }
 
 
@@ -329,4 +342,4 @@ Close
 }
 
 
-export default Architecture;
+export default Roadmap;

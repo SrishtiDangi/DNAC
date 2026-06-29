@@ -5,15 +5,14 @@ function Navbar() {
 
   const links = [
     { id: "overview", label: "Overview" },
+    {id: "why-it-matters", label: "Why it Matters ?" },
     { id: "architecture", label: "Architecture" },
-  
-    {id: "protocols", label: "Protocols" },
+    { id: "core-concepts", label: "Core Concepts" },
     
-    { id: "media-resources", label: "Services" },
-    
-    { id: "advantages", label: "Benefits" },  
-    { id: "troubleshooting", label: "Troubleshooting" },
-    { id: "diagnostic-guide", label: "Diagnostic Guide" },
+    { id: "deployment", label: "Deployment" },  
+    { id: "sda-ise", label: "SDA & ISE" },
+    { id: "devices", label: "Devices" },
+    {id: "roadmap", label: "Roadmap"},
   ];
 
   return (

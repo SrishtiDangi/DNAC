@@ -1,0 +1,101 @@
+{
+  "title":"Cisco DNA Center Roadmap",
+  "subtitle":"Future evolution of enterprise networking through automation, security and intelligence.",
+
+  "cards":[
+
+    {
+      "title":"Phase 1: Foundation",
+      "desc":"Build basic network visibility and centralized management.",
+      "color":"#dff3ff",
+      "details":[
+        "Add devices into DNA Center",
+        "Create network inventory",
+        "Configure basic site hierarchy",
+        "Enable monitoring"
+      ]
+    },
+
+
+    {
+      "title":"Phase 2: Automation",
+      "desc":"Move from manual configuration to automated workflows.",
+      "color":"#ffdff0",
+      "details":[
+        "Use templates for deployment",
+        "Automate device provisioning",
+        "Implement zero touch workflows",
+        "Use APIs for automation"
+      ]
+    },
+
+
+    {
+      "title":"Phase 3: Security",
+      "desc":"Implement identity based access and segmentation.",
+      "color":"#ddffe5",
+      "details":[
+        "Integrate Cisco ISE",
+        "Deploy SGT policies",
+        "Enable secure segmentation",
+        "Control user access"
+      ]
+    },
+
+
+    {
+      "title":"Phase 4: SD Access",
+      "desc":"Deploy software defined enterprise networking.",
+      "color":"#fff0d8",
+      "details":[
+        "Create fabric architecture",
+        "Configure underlay and overlay",
+        "Enable VXLAN",
+        "Automate edge and border nodes"
+      ]
+    },
+
+
+    {
+      "title":"Phase 5: AI Driven Network",
+      "desc":"Use intelligence for predictive operations.",
+      "color":"#eee2ff",
+      "details":[
+        "Advanced analytics",
+        "Predictive issue detection",
+        "Self optimizing networks",
+        "Improved user experience"
+      ]
+    }
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Discover",
+      "desc":"Understand current network environment"
+    },
+
+
+    {
+      "name":"Automate",
+      "desc":"Reduce manual configuration"
+    },
+
+
+    {
+      "name":"Secure",
+      "desc":"Apply identity based policies"
+    },
+
+
+    {
+      "name":"Optimize",
+      "desc":"Improve performance continuously"
+    }
+
+  ]
+
+}

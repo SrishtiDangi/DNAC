@@ -1,0 +1,98 @@
+{
+  "title":"Cisco DNA Center Operations",
+  "subtitle":"Monitor, troubleshoot and manage enterprise networks through centralized operational visibility.",
+
+  "cards":[
+
+    {
+      "title":"Network Assurance",
+      "desc":"Monitor real time network health and performance.",
+      "color":"#dff3ff",
+      "details":[
+        "Collect telemetry from devices",
+        "Monitor device and client health",
+        "Identify network issues automatically",
+        "Use analytics for troubleshooting"
+      ]
+    },
+
+
+    {
+      "title":"Live Dashboard",
+      "desc":"View complete network status from one place.",
+      "color":"#ffdff0",
+      "details":[
+        "Device health overview",
+        "Client experience monitoring",
+        "Topology visualization",
+        "Policy status tracking"
+      ]
+    },
+
+
+    {
+      "title":"Troubleshooting",
+      "desc":"Quickly identify and resolve network problems.",
+      "color":"#ddffe5",
+      "details":[
+        "Path trace analysis",
+        "Packet capture support",
+        "Issue detection and diagnosis"
+      ]
+    },
+
+
+    {
+      "title":"Policy Management",
+      "desc":"Control access and security policies.",
+      "color":"#fff0d8",
+      "details":[
+        "Create security policies",
+        "Manage SGT based access",
+        "Integrate with ISE"
+      ]
+    },
+
+
+    {
+      "title":"Automation",
+      "desc":"Reduce manual operations using workflows.",
+      "color":"#eee2ff",
+      "details":[
+        "API based automation",
+        "Scheduled tasks",
+        "Template driven operations"
+      ]
+    }
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Collect",
+      "desc":"Gather device telemetry and data"
+    },
+
+
+    {
+      "name":"Analyze",
+      "desc":"Process data using analytics"
+    },
+
+
+    {
+      "name":"Act",
+      "desc":"Apply fixes and policies"
+    },
+
+
+    {
+      "name":"Optimize",
+      "desc":"Improve network performance"
+    }
+
+  ]
+
+}

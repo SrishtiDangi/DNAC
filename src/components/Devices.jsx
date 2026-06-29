@@ -2,15 +2,15 @@ import {useState,useEffect} from "react";
 import Reveal from "./Reveal";
 
 import {
-FaServer,
 FaNetworkWired,
-FaShieldAlt,
-FaRobot,
-FaProjectDiagram
+FaWifi,
+FaRoute,
+FaServer,
+FaLaptop
 } from "react-icons/fa";
 
 
-function Architecture(){
+function Devices(){
 
 const [data,setData]=useState(null);
 const [selected,setSelected]=useState(null);
@@ -18,7 +18,7 @@ const [selected,setSelected]=useState(null);
 
 useEffect(()=>{
 
-fetch("http://localhost:5000/api/architecture")
+fetch("http://localhost:5000/api/devices")
 .then(res=>res.json())
 .then(data=>setData(data))
 .catch(err=>console.log(err))
@@ -28,22 +28,23 @@ fetch("http://localhost:5000/api/architecture")
 
 
 if(!data)
-return <h2>Loading Architecture...</h2>
+return <h2>Loading Devices...</h2>
 
 
 
 const icons=[
-<FaServer size={30}/>,
 <FaNetworkWired size={30}/>,
-<FaShieldAlt size={30}/>,
-<FaRobot size={30}/>
+<FaWifi size={30}/>,
+<FaRoute size={30}/>,
+<FaServer size={30}/>,
+<FaLaptop size={30}/>
 ];
 
 
 
 return(
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+<section id="devices" style={{padding:"70px 0"}}>
 
 
 <Reveal>
@@ -165,7 +166,7 @@ e.currentTarget.style.transform=
 textAlign:"center",
 margin:"60px 0 30px"
 }}>
-Architecture Workflow
+Device Lifecycle
 </h2>
 
 
@@ -204,9 +205,6 @@ textAlign:"center"
 >
 
 
-<FaProjectDiagram size={25}/>
-
-
 <h3>
 {item.name}
 </h3>
@@ -226,6 +224,7 @@ textAlign:"center"
 
 
 </div>
+
 
 
 
@@ -329,4 +328,4 @@ Close
 }
 
 
-export default Architecture;
+export default Devices;

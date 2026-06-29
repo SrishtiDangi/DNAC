@@ -1,101 +1,81 @@
 {
-  "title": "Wireless LAN Controller Architecture",
-  "subtitle": "Centralized wireless management architecture in enterprise networks",
+  "title":"Cisco DNA Center Architecture",
+  "subtitle":"A centralized intent-based architecture connecting network design, automation, assurance and security.",
 
-  "controller": {
-    "title": "Wireless LAN Controller (WLC)",
-    "desc": "Central brain of the wireless network managing Access Points, WLANs, security policies and client mobility.",
+  "cards":[
 
-    "details": [
-      "Centralized configuration and management of Access Points.",
-      "Maintains WLAN profiles and security policies.",
-      "Handles client authentication and roaming.",
-      "Provides RF optimization and channel management.",
-      "Supports mobility and high availability services."
-    ],
-
-    "protocols": [
-      "CAPWAP",
-      "802.11",
-      "RADIUS",
-      "DHCP"
-    ]
-  },
-
-  "components": [
     {
-      "title": "CAPWAP Control",
-      "desc": "Manages AP registration, configuration and monitoring."
+      "title":"DNA Center",
+      "desc":"Central management and orchestration platform",
+      "color":"#dff3ff",
+      "details":[
+        "Acts as the central control plane",
+        "Manages design, policy and automation",
+        "Provides network visibility and assurance"
+      ]
     },
+
+
     {
-      "title": "CAPWAP Data",
-      "desc": "Carries wireless client traffic through the controller."
+      "title":"Network Fabric",
+      "desc":"Connects wired, wireless and branch environments",
+      "color":"#ffdff0",
+      "details":[
+        "Campus and branch connectivity",
+        "Underlay and overlay network",
+        "VXLAN based fabric communication"
+      ]
     },
+
+
     {
-      "title": "RF Management",
-      "desc": "Optimizes channels, power levels and interference handling."
+      "title":"ISE Integration",
+      "desc":"Identity based security and segmentation",
+      "color":"#ddffe5",
+      "details":[
+        "Authentication and authorization",
+        "SGT based policy enforcement",
+        "Endpoint profiling"
+      ]
     },
+
+
     {
-      "title": "Mobility Services",
-      "desc": "Supports roaming and client session continuity."
+      "title":"Automation Layer",
+      "desc":"Intent based workflows and provisioning",
+      "color":"#fff0d8",
+      "details":[
+        "Zero touch provisioning",
+        "Template deployment",
+        "API based automation"
+      ]
     }
+
   ],
 
-  "devices": [
-    {
-      "title": "Access Point 1",
-      "desc": "Provides wireless coverage and forwards traffic through CAPWAP.",
-      "color": "#D6EAF8",
-      "border": "#85C1E9",
 
-      "details": [
-        "Broadcasts SSIDs.",
-        "Handles client association.",
-        "Sends traffic to WLC using CAPWAP.",
-        "Applies RF settings received from WLC."
-      ]
+  "flow":[
+
+    {
+      "name":"Design",
+      "desc":"Create topology, sites and policies"
     },
 
     {
-      "title": "Access Point 2",
-      "desc": "Extends wireless coverage while centrally managed by the WLC.",
-      "color": "#E8DFF5",
-      "border": "#C39BD3",
-
-      "details": [
-        "Provides additional coverage area.",
-        "Supports client roaming.",
-        "Receives centralized policies from WLC.",
-        "Maintains CAPWAP connectivity."
-      ]
+      "name":"Provision",
+      "desc":"Deploy devices and configurations"
     },
 
     {
-      "title": "Wireless Clients",
-      "desc": "Laptops, phones and tablets connecting through enterprise WLANs.",
-      "color": "#D5F5E3",
-      "border": "#7DCEA0",
-
-      "details": [
-        "Authenticate using WLAN security.",
-        "Receive IP addresses via DHCP.",
-        "Roam between APs without session loss.",
-        "Access enterprise applications."
-      ]
+      "name":"Assurance",
+      "desc":"Monitor health and performance"
     },
 
     {
-      "title": "Mobility Group",
-      "desc": "Supports seamless roaming between access points and controllers.",
-      "color": "#FBE5D6",
-      "border": "#E8B89C",
-
-      "details": [
-        "Shares client information between controllers.",
-        "Maintains session persistence.",
-        "Supports inter-controller roaming.",
-        "Reduces client reconnection delays."
-      ]
+      "name":"Security",
+      "desc":"Apply identity based access rules"
     }
+
   ]
+
 }

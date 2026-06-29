@@ -1,0 +1,98 @@
+{
+  "title":"Core Concepts of Cisco DNA Center",
+  "subtitle":"Understanding the key building blocks behind intent-based networking.",
+
+  "cards":[
+
+    {
+      "title":"Intent Based Networking",
+      "desc":"Network operations driven by business intent and automation.",
+      "color":"#ffdff0",
+      "details":[
+        "Translates business requirements into network policies",
+        "Reduces manual configuration work",
+        "Provides consistent network behavior"
+      ]
+    },
+
+
+    {
+      "title":"Network Design",
+      "desc":"Graphical design of sites, topology and policies.",
+      "color":"#dff3ff",
+      "details":[
+        "Create hierarchical site structure",
+        "Configure wireless and wired networks",
+        "Define network settings and templates"
+      ]
+    },
+
+
+    {
+      "title":"Provisioning",
+      "desc":"Automated deployment of network devices.",
+      "color":"#ddffe5",
+      "details":[
+        "Zero touch provisioning",
+        "Template based configuration",
+        "Software image management"
+      ]
+    },
+
+
+    {
+      "title":"Assurance",
+      "desc":"Real time monitoring and analytics.",
+      "color":"#fff0d8",
+      "details":[
+        "Collects telemetry data",
+        "Monitors device and client health",
+        "Provides troubleshooting insights"
+      ]
+    },
+
+
+    {
+      "title":"Policy & Segmentation",
+      "desc":"Secure access using identity and policies.",
+      "color":"#eee2ff",
+      "details":[
+        "Integrates with Cisco ISE",
+        "Uses SGT based segmentation",
+        "Controls user and device access"
+      ]
+    }
+
+
+  ],
+
+
+  "flow":[
+
+    {
+      "name":"Discover",
+      "desc":"Find and add network devices"
+    },
+
+
+    {
+      "name":"Design",
+      "desc":"Create topology and policies"
+    },
+
+
+    {
+      "name":"Deploy",
+      "desc":"Push configurations automatically"
+    },
+
+
+    {
+      "name":"Monitor",
+      "desc":"Analyze network performance"
+
+    }
+
+  ]
+
+}

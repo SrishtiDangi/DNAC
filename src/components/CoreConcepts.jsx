@@ -2,23 +2,24 @@ import {useState,useEffect} from "react";
 import Reveal from "./Reveal";
 
 import {
-FaServer,
-FaNetworkWired,
-FaShieldAlt,
-FaRobot,
-FaProjectDiagram
+FaSearch,
+FaProjectDiagram,
+FaRocket,
+FaChartLine,
+FaShieldAlt
 } from "react-icons/fa";
 
 
-function Architecture(){
+function CoreConcepts(){
 
 const [data,setData]=useState(null);
 const [selected,setSelected]=useState(null);
 
 
+
 useEffect(()=>{
 
-fetch("http://localhost:5000/api/architecture")
+fetch("http://localhost:5000/api/coreconcepts")
 .then(res=>res.json())
 .then(data=>setData(data))
 .catch(err=>console.log(err))
@@ -28,22 +29,23 @@ fetch("http://localhost:5000/api/architecture")
 
 
 if(!data)
-return <h2>Loading Architecture...</h2>
+return <h2>Loading Core Concepts...</h2>
 
 
 
 const icons=[
-<FaServer size={30}/>,
-<FaNetworkWired size={30}/>,
-<FaShieldAlt size={30}/>,
-<FaRobot size={30}/>
+<FaSearch size={30}/>,
+<FaProjectDiagram size={30}/>,
+<FaRocket size={30}/>,
+<FaChartLine size={30}/>,
+<FaShieldAlt size={30}/>
 ];
 
 
 
 return(
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+<section id="coreconcepts" style={{padding:"70px 0"}}>
 
 
 <Reveal>
@@ -120,6 +122,7 @@ transition:"0.3s"
 }}
 
 
+
 onMouseEnter={(e)=>
 e.currentTarget.style.transform=
 "translateY(-10px)"
@@ -154,7 +157,6 @@ e.currentTarget.style.transform=
 
 }
 
-
 </div>
 
 
@@ -165,8 +167,9 @@ e.currentTarget.style.transform=
 textAlign:"center",
 margin:"60px 0 30px"
 }}>
-Architecture Workflow
+Core Workflow
 </h2>
+
 
 
 
@@ -202,9 +205,6 @@ textAlign:"center"
 }}
 
 >
-
-
-<FaProjectDiagram size={25}/>
 
 
 <h3>
@@ -269,13 +269,13 @@ style={{
 
 background:"#fff",
 
-width:"600px",
-
-maxWidth:"90%",
-
 padding:"35px",
 
-borderRadius:"30px"
+borderRadius:"30px",
+
+width:"600px",
+
+maxWidth:"90%"
 
 }}
 
@@ -329,4 +329,4 @@ Close
 }
 
 
-export default Architecture;
+export default CoreConcepts;

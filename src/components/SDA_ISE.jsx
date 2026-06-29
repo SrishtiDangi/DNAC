@@ -2,15 +2,15 @@ import {useState,useEffect} from "react";
 import Reveal from "./Reveal";
 
 import {
-FaServer,
 FaNetworkWired,
-FaShieldAlt,
-FaRobot,
-FaProjectDiagram
+FaUserShield,
+FaTags,
+FaCogs,
+FaExchangeAlt
 } from "react-icons/fa";
 
 
-function Architecture(){
+function SDA_ISE(){
 
 const [data,setData]=useState(null);
 const [selected,setSelected]=useState(null);
@@ -18,32 +18,34 @@ const [selected,setSelected]=useState(null);
 
 useEffect(()=>{
 
-fetch("http://localhost:5000/api/architecture")
+fetch("http://localhost:5000/api/sda_ise")
 .then(res=>res.json())
 .then(data=>setData(data))
-.catch(err=>console.log(err))
+.catch(err=>console.log(err));
 
 },[]);
 
 
 
 if(!data)
-return <h2>Loading Architecture...</h2>
+return <h2>Loading SDA & ISE...</h2>
 
 
 
 const icons=[
-<FaServer size={30}/>,
-<FaNetworkWired size={30}/>,
-<FaShieldAlt size={30}/>,
-<FaRobot size={30}/>
-];
 
+<FaNetworkWired size={30}/>,
+<FaUserShield size={30}/>,
+<FaTags size={30}/>,
+<FaCogs size={30}/>,
+<FaExchangeAlt size={30}/>
+
+];
 
 
 return(
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+<section id="sda-ise" style={{padding:"70px 0"}}>
 
 
 <Reveal>
@@ -66,7 +68,9 @@ color:"#2C3E50"
 
 
 <p style={{color:"#666"}}>
+
 {data.subtitle}
+
 </p>
 
 
@@ -79,10 +83,15 @@ color:"#2C3E50"
 
 
 <div style={{
+
 display:"flex",
+
 justifyContent:"center",
+
 gap:"25px",
+
 flexWrap:"wrap"
+
 }}>
 
 
@@ -120,16 +129,20 @@ transition:"0.3s"
 }}
 
 
-onMouseEnter={(e)=>
+onMouseEnter={(e)=>{
+
 e.currentTarget.style.transform=
 "translateY(-10px)"
-}
+
+}}
 
 
-onMouseLeave={(e)=>
+onMouseLeave={(e)=>{
+
 e.currentTarget.style.transform=
 "translateY(0)"
-}
+
+}}
 
 >
 
@@ -161,20 +174,34 @@ e.currentTarget.style.transform=
 
 
 
+
+
 <h2 style={{
+
 textAlign:"center",
+
 margin:"60px 0 30px"
+
 }}>
-Architecture Workflow
+
+SDA & ISE Workflow
+
 </h2>
 
 
 
+
+
 <div style={{
+
 display:"flex",
+
 justifyContent:"center",
+
 gap:"20px",
+
 flexWrap:"wrap"
+
 }}>
 
 
@@ -202,9 +229,6 @@ textAlign:"center"
 }}
 
 >
-
-
-<FaProjectDiagram size={25}/>
 
 
 <h3>
@@ -236,6 +260,7 @@ textAlign:"center"
 
 selected &&
 
+
 <div
 
 onClick={()=>setSelected(null)}
@@ -259,6 +284,7 @@ zIndex:9999
 }}
 
 >
+
 
 
 <div
@@ -319,6 +345,7 @@ Close
 
 </div>
 
+
 }
 
 
@@ -329,4 +356,4 @@ Close
 }
 
 
-export default Architecture;
+export default SDA_ISE;

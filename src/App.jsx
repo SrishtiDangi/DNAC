@@ -1,79 +1,54 @@
 import Navbar from "./components/Navbar";
-import Over from "./components/Over";
 
-/* INTRODUCTION */
-
-import Ecosystem from "./components/Ecosystem";
-
-/* WLC CORE */
+import Overview from "./components/Overview";
+import WhyItMatters from "./components/WhyItMatters";
 import Architecture from "./components/Architecture";
-import WlanDeployment from "./components/WlanDeployment";
-import WorkingProcess from "./components/WorkingProcess";
-import ApJoin from "./components/ApJoin";
-import Capwap from "./components/Capwap";
-
-/* NETWORK */
-import NetworkLines from "./components/NetworkLines";
-import WlcPorts from "./components/WlcPorts";
-import Protocols from "./components/Protocols";
-
-/* ENTERPRISE FEATURES */
-import Mobility from "./components/Mobility";
-import MediaResources from "./components/MediaResources";
-import HighAvailibility from "./components/HighAvailibilty";
-import Advantages from "./components/Advantages";
-
-/* TROUBLESHOOTING */
-import Troubleshooting from "./components/Troubleshooting";
-import DiagnosticFieldGuide from "./components/DiagnosticFieldGuide";
-
-/* OPTIONAL */
-import RackOverview from "./components/RackOverview";
+import CoreConcepts from "./components/CoreConcepts";
+import Deployment from "./components/Deployment";
+import SDA_ISE from "./components/SDA_ISE";
+import Operations from "./components/Operations";
+import Devices from "./components/Devices";
+import Roadmap from "./components/Roadmap";
 
 import Footer from "./components/Footer";
-import Security from "./components/Security";
 
-function App() {
-  return (
-    <>
-      <Navbar />
 
-      {/* HERO */}
-      <Over />
+function App(){
 
-      {/* WHAT IS WLC */}
-      
-      <Ecosystem />
+return(
 
-      {/* HOW WLC WORKS */}
-      <Architecture />
-      <WlanDeployment />
-      <WorkingProcess />
-      <ApJoin />
-      <Capwap />
+<>
 
-      {/* NETWORK COMMUNICATION */}
-      <NetworkLines />
-      <WlcPorts />
-      <Protocols />
+<Navbar />
 
-      {/* ENTERPRISE FEATURES */}
-      <Mobility />
-      <MediaResources />
-      <Security/>
-      <HighAvailibility />
-      <Advantages />
 
-      {/* TROUBLESHOOTING */}
-      <Troubleshooting />
-      <DiagnosticFieldGuide />
+<Overview />
 
-      {/* OPTIONAL */}
-      <RackOverview />
+<WhyItMatters />
 
-      <Footer />
-    </>
-  );
+<Architecture />
+
+<CoreConcepts />
+
+<Deployment />
+
+<SDA_ISE />
+
+<Operations />
+
+<Devices />
+
+<Roadmap />
+
+
+<Footer />
+
+
+</>
+
+)
+
 }
+
 
 export default App;

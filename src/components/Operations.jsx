@@ -2,15 +2,15 @@ import {useState,useEffect} from "react";
 import Reveal from "./Reveal";
 
 import {
-FaServer,
-FaNetworkWired,
+FaHeartbeat,
+FaChartLine,
+FaTools,
 FaShieldAlt,
-FaRobot,
-FaProjectDiagram
+FaRobot
 } from "react-icons/fa";
 
 
-function Architecture(){
+function Operations(){
 
 const [data,setData]=useState(null);
 const [selected,setSelected]=useState(null);
@@ -18,32 +18,31 @@ const [selected,setSelected]=useState(null);
 
 useEffect(()=>{
 
-fetch("http://localhost:5000/api/architecture")
+fetch("http://localhost:5000/api/operations")
 .then(res=>res.json())
 .then(data=>setData(data))
-.catch(err=>console.log(err))
+.catch(err=>console.log(err));
 
 },[]);
 
 
-
 if(!data)
-return <h2>Loading Architecture...</h2>
+return <h2>Loading Operations...</h2>
 
 
 
 const icons=[
-<FaServer size={30}/>,
-<FaNetworkWired size={30}/>,
+<FaHeartbeat size={30}/>,
+<FaChartLine size={30}/>,
+<FaTools size={30}/>,
 <FaShieldAlt size={30}/>,
 <FaRobot size={30}/>
 ];
 
 
-
 return(
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+<section id="operations" style={{padding:"70px 0"}}>
 
 
 <Reveal>
@@ -59,9 +58,7 @@ fontSize:"30px",
 fontWeight:"900",
 color:"#2C3E50"
 }}>
-
 {data.title}
-
 </h2>
 
 
@@ -76,8 +73,6 @@ color:"#2C3E50"
 
 
 
-
-
 <div style={{
 display:"flex",
 justifyContent:"center",
@@ -87,49 +82,33 @@ flexWrap:"wrap"
 
 
 {
-
 data.cards.map((card,index)=>(
 
 
 <div
-
 key={index}
-
 onClick={()=>setSelected(card)}
 
-
 style={{
-
 width:"240px",
-
 background:card.color,
-
 padding:"25px",
-
 borderRadius:"25px",
-
 textAlign:"center",
-
 cursor:"pointer",
-
-boxShadow:
-"0 12px 30px rgba(0,0,0,.1)",
-
+boxShadow:"0 12px 30px rgba(0,0,0,.1)",
 transition:"0.3s"
-
 }}
 
 
-onMouseEnter={(e)=>
-e.currentTarget.style.transform=
-"translateY(-10px)"
-}
+onMouseEnter={(e)=>{
+e.currentTarget.style.transform="translateY(-10px)";
+}}
 
 
-onMouseLeave={(e)=>
-e.currentTarget.style.transform=
-"translateY(0)"
-}
+onMouseLeave={(e)=>{
+e.currentTarget.style.transform="translateY(0)";
+}}
 
 >
 
@@ -154,7 +133,6 @@ e.currentTarget.style.transform=
 
 }
 
-
 </div>
 
 
@@ -165,8 +143,9 @@ e.currentTarget.style.transform=
 textAlign:"center",
 margin:"60px 0 30px"
 }}>
-Architecture Workflow
+Operations Workflow
 </h2>
+
 
 
 
@@ -184,27 +163,16 @@ data.flow.map((item,index)=>(
 
 
 <div
-
 key={index}
 
 style={{
-
 background:"#f5f5ff",
-
 padding:"20px",
-
 borderRadius:"20px",
-
 width:"200px",
-
 textAlign:"center"
-
 }}
-
 >
-
-
-<FaProjectDiagram size={25}/>
 
 
 <h3>
@@ -233,7 +201,6 @@ textAlign:"center"
 
 
 {
-
 selected &&
 
 <div
@@ -243,17 +210,11 @@ onClick={()=>setSelected(null)}
 style={{
 
 position:"fixed",
-
 inset:0,
-
 background:"rgba(0,0,0,.5)",
-
 display:"flex",
-
 justifyContent:"center",
-
 alignItems:"center",
-
 zIndex:9999
 
 }}
@@ -268,13 +229,9 @@ onClick={(e)=>e.stopPropagation()}
 style={{
 
 background:"#fff",
-
 width:"600px",
-
 maxWidth:"90%",
-
 padding:"35px",
-
 borderRadius:"30px"
 
 }}
@@ -295,11 +252,10 @@ borderRadius:"30px"
 <ul>
 
 {
+selected.details.map((item,index)=>(
 
-selected.details.map((d,i)=>(
-
-<li key={i}>
-{d}
+<li key={index}>
+{item}
 </li>
 
 ))
@@ -309,7 +265,9 @@ selected.details.map((d,i)=>(
 </ul>
 
 
-<button onClick={()=>setSelected(null)}>
+<button
+onClick={()=>setSelected(null)}
+>
 Close
 </button>
 
@@ -329,4 +287,4 @@ Close
 }
 
 
-export default Architecture;
+export default Operations;

@@ -2,15 +2,15 @@ import {useState,useEffect} from "react";
 import Reveal from "./Reveal";
 
 import {
+FaSearch,
 FaServer,
+FaFileCode,
 FaNetworkWired,
-FaShieldAlt,
-FaRobot,
-FaProjectDiagram
+FaCheckCircle
 } from "react-icons/fa";
 
 
-function Architecture(){
+function Deployment(){
 
 const [data,setData]=useState(null);
 const [selected,setSelected]=useState(null);
@@ -18,7 +18,7 @@ const [selected,setSelected]=useState(null);
 
 useEffect(()=>{
 
-fetch("http://localhost:5000/api/architecture")
+fetch("http://localhost:5000/api/deployment")
 .then(res=>res.json())
 .then(data=>setData(data))
 .catch(err=>console.log(err))
@@ -28,22 +28,23 @@ fetch("http://localhost:5000/api/architecture")
 
 
 if(!data)
-return <h2>Loading Architecture...</h2>
+return <h2>Loading Deployment...</h2>
 
 
 
 const icons=[
+<FaSearch size={30}/>,
 <FaServer size={30}/>,
+<FaFileCode size={30}/>,
 <FaNetworkWired size={30}/>,
-<FaShieldAlt size={30}/>,
-<FaRobot size={30}/>
+<FaCheckCircle size={30}/>
 ];
 
 
 
 return(
 
-<section id ="architecture" style={{padding:"70px 0"}}>
+<section id="deployment" style={{padding:"70px 0"}}>
 
 
 <Reveal>
@@ -131,6 +132,7 @@ e.currentTarget.style.transform=
 "translateY(0)"
 }
 
+
 >
 
 
@@ -165,7 +167,7 @@ e.currentTarget.style.transform=
 textAlign:"center",
 margin:"60px 0 30px"
 }}>
-Architecture Workflow
+Deployment Workflow
 </h2>
 
 
@@ -202,10 +204,6 @@ textAlign:"center"
 }}
 
 >
-
-
-<FaProjectDiagram size={25}/>
-
 
 <h3>
 {item.name}
@@ -329,4 +327,4 @@ Close
 }
 
 
-export default Architecture;
+export default Deployment;
